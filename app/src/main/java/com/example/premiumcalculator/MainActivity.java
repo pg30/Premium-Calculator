@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Item(R.drawable.pcicon,"Five year Two Wheeler"));
         list.add(new Item(R.drawable.pcicon,"Private Car"));
         list.add(new Item(R.drawable.pcicon,"Three Years Private Car"));
-        list.add(new Item(R.drawable.pcicon,"Goods Carrying Vehicles Public"));
-        list.add(new Item(R.drawable.pcicon,"Goods Carrying Vehicles Private"));
+        list.add(new Item(R.drawable.pcicon,"GCV Public"));
+        list.add(new Item(R.drawable.pcicon,"GCV Private"));
         list.add(new Item(R.drawable.pcicon,"Taxi upto 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"Bus more than 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"School Bus"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler Goods Carrying Vehicles - Public"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler Goods Carrying Vehicles - Private"));
+        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV - Public"));
+        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV - Private"));
         list.add(new Item(R.drawable.pcicon,"Three Wheeler PCV upto 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"Miscellaneous vehicle"));
         homeView.setAdapter(adapter);
