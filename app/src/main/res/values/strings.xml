@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Premium Calculator</string>
+    <string name="two_wheeler_insurance">Two Wheeler Insurance</string>
+    <string name="last_year_idv">Last Year IDV</string>
+    <string name="depreciation">Depreciation(%)</string>
+    <string name="year_of_manufacture">Year of Manufacture</string>
+    <string name="zone">Zone</string>
+    <string name="cubic_capacity">Cubic Capacity</string>
+    <string name="discount_on_od">Discount on OD(%)</string>
+    <string name="accessories_value">Accessories Value</string>
+    <string name="no_claim_bonus">No Claim Bonus(%)</string>
+    <string name="zero_depreciation">Zero Depreciation</string>
+    <string name="pa_to_owner_driver">PA to Owner Driver</string>
+    <string name="ll_to_paid_driver">LL to Paid Driver</string>
+    <string name="pa_to_unnamed_passenger">PA to Unnamed Passenger</string>
+    <string name="calculate">Calculate</string>
 </resources>
