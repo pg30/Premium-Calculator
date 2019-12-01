@@ -12,13 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import java.util.Calendar;
 
-import java.time.Year;
-
 public class two_wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner zone_spin,ncb_spin;
     EditText idv_edit,depreciation_edit,year_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
-    Double idv=0.0,dep=0.0,cc=0.0,discount=0.0,elec=0.0,nonelec=0.0,ncb=0.0,zerodep=0.0,patodriver=0.0,lltodriver=0.0,patounnamedpassenger=0.0;
+    Double idv,dep,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
     long yearofmanufacture;
     Button calculate;
     String zone;
