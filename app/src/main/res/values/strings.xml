@@ -7,11 +7,25 @@
     <string name="zone">Zone</string>
     <string name="cubic_capacity">Cubic Capacity</string>
     <string name="discount_on_od">Discount on OD(%)</string>
-    <string name="accessories_value">Accessories Value</string>
+    <string name="electrical_accessories_value">Electrical Accessories Value</string>
+    <string name="nonelectrical_accessories_value">Non-Electrical Accessories Value</string>
     <string name="no_claim_bonus">No Claim Bonus(%)</string>
     <string name="zero_depreciation">Zero Depreciation</string>
     <string name="pa_to_owner_driver">PA to Owner Driver</string>
     <string name="ll_to_paid_driver">LL to Paid Driver</string>
     <string name="pa_to_unnamed_passenger">PA to Unnamed Passenger</string>
     <string name="calculate">Calculate</string>
+    <string-array name="zone_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="ncb_array">
+        <item>0</item>
+        <item>20</item>
+        <item>25</item>
+        <item>35</item>
+        <item>45</item>
+        <item>50</item>
+    </string-array>
 </resources>

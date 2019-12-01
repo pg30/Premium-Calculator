@@ -171,20 +171,20 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discount"
-            app:layout_constraintBottom_toTopOf="@id/accessories"/>
+            app:layout_constraintBottom_toTopOf="@id/electrical_accessories"/>
         <TextView
-            android:id="@+id/accessories"
+            android:id="@+id/electrical_accessories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/left_margin"
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/accessories_value"
+            android:text="@string/electrical_accessories_value"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discount_value"
-            app:layout_constraintBottom_toTopOf="@id/accessories_value"/>
+            app:layout_constraintBottom_toTopOf="@id/electrical_accessories_value"/>
         <EditText
-            android:id="@+id/accessories_value"
+            android:id="@+id/electrical_accessories_value"
             android:layout_width="@dimen/edittext_width"
             android:layout_height="@dimen/edittext_height"
             android:layout_marginStart="@dimen/left_margin"
@@ -193,7 +193,30 @@
             android:ems="10"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accessories"
+            app:layout_constraintTop_toBottomOf="@id/electrical_accessories"
+            app:layout_constraintBottom_toTopOf="@id/nonelectrical_accessories"/>
+        <TextView
+            android:id="@+id/nonelectrical_accessories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:text="@string/nonelectrical_accessories_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/electrical_accessories_value"
+            app:layout_constraintBottom_toTopOf="@id/nonelectrical_accessories_value"/>
+        <EditText
+            android:id="@+id/nonelectrical_accessories_value"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nonelectrical_accessories"
             app:layout_constraintBottom_toTopOf="@id/ncb"/>
         <TextView
             android:id="@+id/ncb"
@@ -204,7 +227,7 @@
             android:layout_marginTop="@dimen/vertical_distance"
             android:text="@string/no_claim_bonus"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accessories_value"
+            app:layout_constraintTop_toBottomOf="@id/nonelectrical_accessories_value"
             app:layout_constraintBottom_toTopOf="@id/ncb_value"/>
 
         <Spinner
