@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import java.util.Calendar;
 
@@ -19,8 +20,11 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     Double idv,dep,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
     long yearofmanufacture;
     Button calculate;
-    String zone;
-    Double finalPremium,odPremium,tpPremium,gst;
+    Zone zone;
+    Rate mrate = new Rate();
+    Vehicle currVehicle = Vehicle.TWOWHEELER;
+    Double finalPremium,odPremium,tpPremium,gst,rate;
+    RadioButton yes,no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
         paunnamedpassenger_edit = (EditText) findViewById(R.id.patounnamedpassenger_value);
         calculate = (Button) findViewById(R.id.calculate);
+        yes = (RadioButton) findViewById(R.id.yes);
+        no = (RadioButton) findViewById(R.id.no);
 
         zone_spin = (Spinner) findViewById(R.id.zone_value);
         ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,R.array.zone_array,R.layout.support_simple_spinner_dropdown_item);
@@ -67,6 +73,8 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
                 yearofmanufacture = ParseLong(year_edit.getText().toString());
                 Log.d("debug",""+yearofmanufacture);
 
+                Log.d("debug",zone+" "+currVehicle+" "+cc+" "+yearofmanufacture);
+                rate = mrate.getRate(zone,currVehicle,cc,yearofmanufacture);
                 odPremium = calculateOD();
                 Log.d("debug","final od premium is "+odPremium);
                 tpPremium = calculateTP();
@@ -90,7 +98,12 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         }
         if(parent.getId()==R.id.zone_value)
         {
-            zone = parent.getItemAtPosition(position).toString();
+            if(position==0)
+                zone = Zone.A;
+            else if(position==1)
+                zone = Zone.B;
+            else if(position==2)
+                zone = Zone.C;
         }
         Log.d("debug",ncb+" "+zone);
     }
@@ -124,12 +137,41 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     //od premium
     Double calculateOD()
     {
-        return  0.0;
+        idv-=dep*idv;
+        Log.d("debug","IDV is "+idv);
+        Log.d("debug","rate applied is "+rate);
+        double basicOD = idv*rate;
+        Log.d("debug","basicOD is "+basicOD);
+        basicOD+=zerodep*basicOD;
+        Log.d("debug","after zero dep is "+basicOD);
+        elec=elec*0.04;
+        nonelec=nonelec*rate;
+        Log.d("debug","cost of electrical accessories is "+elec);
+        Log.d("debug","cost of non-electrical accessories is "+nonelec);
+        basicOD+=elec+nonelec;
+        Log.d("debug","new OD is "+basicOD);
+        double ncbdisc = basicOD*(ncb/100);
+        Log.d("debug","ncb discount is "+ncbdisc);
+        basicOD-=ncbdisc;
+        Log.d("debug","new OD is "+basicOD);
+        double oddisc = basicOD*(discount/100);
+        Log.d("debug","od discount is "+oddisc);
+        basicOD-=oddisc;
+        Log.d("debug","new OD is "+basicOD);
+
+        return  basicOD;
     }
 
     //tp premium
     Double calculateTP()
     {
-        return  0.0;
+        double basicTP = mrate.getTP(currVehicle,cc);
+        Log.d("debug","basic TP is "+basicTP);
+        basicTP+=patodriver+lltodriver+patounnamedpassenger;
+        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
+        if(yes.isChecked())
+            basicTP-=50;
+        Log.d("debug","TP after restricted TP option is "+basicTP);
+        return basicTP;
     }
 }

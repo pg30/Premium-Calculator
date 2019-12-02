@@ -19,9 +19,11 @@ public class Rate {
     private Zone zone;
     private Vehicle vehicle;
     private Carrier carrier;
-    private long cc,year,curryear = Calendar.getInstance().get(Calendar.YEAR);
+    private long year,curryear = Calendar.getInstance().get(Calendar.YEAR);
+    private double cc;
 
-    Double getRate(Zone mzone,Vehicle mvehicle,long mcc,long myear)
+    //for twowheeler,privatecar and taxilessthan6
+    Double getRate(Zone mzone,Vehicle mvehicle,double mcc,long myear)
     {
         this.zone = mzone;
         this.vehicle = mvehicle;
@@ -176,19 +178,48 @@ public class Rate {
             case TAXILESSTHAN6:
                 break;
 
-            case AUTORICKSHAW:
+        }
+        return 0.0;
+    }
+
+
+    //for twowheeler,privatecar and taxilessthan6
+    Double getTP(Vehicle mvehicle,double mcc)
+    {
+        this.vehicle=mvehicle;
+        this.cc=mcc;
+        switch (vehicle)
+        {
+            case TWOWHEELER:
+            {
+                if(cc<=75)
+                {
+                    return 482.0;
+                }
+                else if(cc>=76 && cc<=150)
+                {
+                    return 752.0;
+                }
+                else if(cc>=151 && cc<=350)
+                {
+                    return 1193.0;
+                }
+                else if(cc>350)
+                {
+                    return 2323.0;
+                }
+            }
                 break;
 
-            case GOODSVEHICLE:
+            case PRIVATECAR:
+            {
+            }
                 break;
 
-            case GOODSVEHICLE3WHEELER:
-                break;
+            case TAXILESSTHAN6:
+            {
 
-            case MAXIORBUSOVER6:
-                break;
-
-            case MISCVEHICLE:
+            }
                 break;
 
         }

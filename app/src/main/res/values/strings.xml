@@ -15,6 +15,7 @@
     <string name="ll_to_paid_driver">LL to Paid Driver</string>
     <string name="pa_to_unnamed_passenger">PA to Unnamed Passenger</string>
     <string name="calculate">Calculate</string>
+    <string name="restrict_tppd">Restrict TPPD?</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>
