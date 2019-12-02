@@ -58,7 +58,7 @@
             android:layout_marginBottom="8dp"
             android:autofillHints=""
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintBottom_toTopOf="@+id/yearofmanufacture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idv" />
@@ -73,7 +73,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/idv_value"
             app:layout_constraintTop_toBottomOf="@+id/dep" />
@@ -98,7 +98,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/yearofmanufacture"
             app:layout_constraintBottom_toTopOf="@id/zone"/>
@@ -168,7 +168,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discount"
             app:layout_constraintBottom_toTopOf="@id/electrical_accessories"/>
@@ -191,7 +191,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/electrical_accessories"
             app:layout_constraintBottom_toTopOf="@id/nonelectrical_accessories"/>
@@ -214,7 +214,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nonelectrical_accessories"
             app:layout_constraintBottom_toTopOf="@id/ncb"/>
@@ -259,7 +259,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/zerodep"
             app:layout_constraintBottom_toTopOf="@id/patoownerdriver"/>
@@ -282,7 +282,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patoownerdriver"
             app:layout_constraintBottom_toTopOf="@id/lltopaiddriver"/>
@@ -305,7 +305,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lltopaiddriver"
             app:layout_constraintBottom_toTopOf="@id/patounnamedpassenger"/>
@@ -328,7 +328,7 @@
             android:layout_marginLeft="@dimen/left_margin"
             android:layout_marginTop="@dimen/vertical_distance"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patounnamedpassenger"
             app:layout_constraintBottom_toTopOf="@id/restricttppd"/>

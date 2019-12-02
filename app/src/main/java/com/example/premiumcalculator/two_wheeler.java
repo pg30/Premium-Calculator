@@ -143,12 +143,12 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         idv-=dep*idv;
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
-        double basicOD = idv*rate;
+        double basicOD = idv*(rate/100);
         Log.d("debug","basicOD is "+basicOD);
-        basicOD+=zerodep*basicOD;
+        basicOD+=(zerodep/100)*basicOD;
         Log.d("debug","after zero dep is "+basicOD);
         elec=elec*0.04;
-        nonelec=nonelec*rate;
+        nonelec=nonelec*(rate/100);
         Log.d("debug","cost of electrical accessories is "+elec);
         Log.d("debug","cost of non-electrical accessories is "+nonelec);
         basicOD+=elec+nonelec;
