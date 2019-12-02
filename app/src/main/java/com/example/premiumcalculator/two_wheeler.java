@@ -20,6 +20,7 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     long yearofmanufacture;
     Button calculate;
     String zone;
+    Double finalPremium,odPremium,tpPremium,gst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,17 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
                 patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
                 yearofmanufacture = ParseLong(year_edit.getText().toString());
                 Log.d("debug",""+yearofmanufacture);
+
+                odPremium = calculateOD();
+                Log.d("debug","final od premium is "+odPremium);
+                tpPremium = calculateTP();
+                Log.d("debug","final tp premium is "+tpPremium);
+                finalPremium = odPremium+tpPremium;
+                Log.d("debug","final premium without gst is "+finalPremium);
+                gst = 0.18*finalPremium;
+                Log.d("debug","gst is "+gst);
+                finalPremium+=gst;
+                Log.d("debug","final premium with gst is "+finalPremium);
             }
         });
     }
@@ -97,6 +109,8 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         else
             return 0.0;
     }
+
+    //used for yearofmanufacture
     long ParseLong(String str)
     {
         if(str!=null && str.trim().length()>0)
@@ -105,5 +119,17 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         }
         else
             return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    //od premium
+    Double calculateOD()
+    {
+        return  0.0;
+    }
+
+    //tp premium
+    Double calculateTP()
+    {
+        return  0.0;
     }
 }
