@@ -140,7 +140,7 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     //od premium
     Double calculateOD()
     {
-        idv-=dep*idv;
+        idv-=(dep*idv)/100;
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
         double basicOD = idv*(rate/100);
