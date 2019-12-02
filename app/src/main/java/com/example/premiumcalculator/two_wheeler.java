@@ -170,7 +170,7 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         basicTP+=patodriver+lltodriver+patounnamedpassenger;
         Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
         if(yes.isChecked())
-            basicTP-=50;
+            basicTP = basicTP-50;
         Log.d("debug","TP after restricted TP option is "+basicTP);
         return basicTP;
     }
