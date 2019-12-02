@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.util.Calendar;
 
 public class two_wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -85,6 +87,7 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
                 Log.d("debug","gst is "+gst);
                 finalPremium+=gst;
                 Log.d("debug","final premium with gst is "+finalPremium);
+                Toast.makeText(getApplicationContext(),"final premium is "+finalPremium,Toast.LENGTH_LONG).show();
             }
         });
     }

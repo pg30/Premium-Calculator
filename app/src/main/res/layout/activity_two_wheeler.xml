@@ -342,7 +342,7 @@
             android:text="@string/restrict_tppd"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patounnamedpassenger_value"
-            app:layout_constraintBottom_toTopOf="@id/calculate"/>
+            app:layout_constraintBottom_toTopOf="@id/restricttppd_value"/>
         <RadioGroup
             android:id="@+id/restricttppd_value"
             android:layout_width="wrap_content"
