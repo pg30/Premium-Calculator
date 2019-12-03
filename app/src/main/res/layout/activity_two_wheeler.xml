@@ -33,20 +33,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading" />
 
-        <TextView
-            android:id="@+id/dep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/depreciation"
-            app:layout_constraintBottom_toTopOf="@+id/dep_value"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.68"
-            app:layout_constraintStart_toEndOf="@+id/idv"
-            app:layout_constraintTop_toBottomOf="@+id/heading" />
 
         <EditText
             android:id="@+id/idv_value"
@@ -63,20 +49,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idv" />
 
-        <EditText
-            android:id="@+id/dep_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="80dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/idv_value"
-            app:layout_constraintTop_toBottomOf="@+id/dep" />
 
         <TextView
             android:id="@+id/yearofmanufacture"

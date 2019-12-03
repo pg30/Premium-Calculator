@@ -18,8 +18,8 @@ import java.util.Calendar;
 public class two_wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner zone_spin,ncb_spin;
-    EditText idv_edit,depreciation_edit,year_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
-    Double idv,dep,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
+    EditText idv_edit,year_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
+    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
     long yearofmanufacture;
     Button calculate;
     Zone zone;
@@ -34,7 +34,6 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_two_wheeler);
 
         idv_edit = (EditText) findViewById(R.id.idv_value);
-        depreciation_edit = (EditText) findViewById(R.id.dep_value);
         year_edit = (EditText) findViewById(R.id.yearofmanufacture_value);
         cc_edit = (EditText) findViewById(R.id.cubicapacity_value);
         discount_edit = (EditText) findViewById(R.id.discount_value);
@@ -63,7 +62,6 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
             public void onClick(View v) {
                 Log.d("debug","button clicked");
                 idv = ParseDouble(idv_edit.getText().toString());
-                dep = ParseDouble(depreciation_edit.getText().toString());
                 cc = ParseDouble(cc_edit.getText().toString());
                 discount = ParseDouble(discount_edit.getText().toString());
                 elec = ParseDouble(elec_edit.getText().toString());
@@ -140,13 +138,13 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     //od premium
     Double calculateOD()
     {
-        idv-=(dep*idv)/100;
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
         double basicOD = idv*(rate/100);
         Log.d("debug","basicOD is "+basicOD);
-        basicOD+=(zerodep/100)*basicOD;
-        Log.d("debug","after zero dep is "+basicOD);
+        double zerodepprem = (zerodep/100)*idv;
+//        basicOD+=(zerodep/100)*basicOD;
+        Log.d("debug","zero dep is "+zerodepprem);
         elec=elec*0.04;
         nonelec=nonelec*(rate/100);
         Log.d("debug","cost of electrical accessories is "+elec);
@@ -160,6 +158,7 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
         double oddisc = basicOD*(discount/100);
         Log.d("debug","od discount is "+oddisc);
         basicOD-=oddisc;
+        basicOD+=zerodepprem;
         Log.d("debug","new OD is "+basicOD);
 
         return  basicOD;
