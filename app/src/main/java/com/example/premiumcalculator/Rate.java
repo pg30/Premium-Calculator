@@ -461,4 +461,24 @@ public class Rate {
         }
         return 0.0;
     }
+
+    Double getPerPassenger(Vehicle mvehicle,double mcc)
+    {
+        this.vehicle = mvehicle;
+        this.cc = mcc;
+        switch (vehicle)
+        {
+            case TAXILESSTHAN6:
+            {
+                if(cc<=1000)
+                    return 1110.0;
+                else if(cc>=1001 && cc<=1500)
+                    return 934.0;
+                else if(cc>1500)
+                    return 1067.0;
+            }
+            break;
+        }
+        return 0.0;
+    }
 }

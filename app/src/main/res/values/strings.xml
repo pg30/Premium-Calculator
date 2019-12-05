@@ -18,6 +18,8 @@
     <string name="pa_to_unnamed_passenger">PA to Unnamed Passenger</string>
     <string name="calculate">Calculate</string>
     <string name="restrict_tppd">Restrict TPPD?</string>
+    <string name="imt_23">IMT 23?</string>
+    <string name="no_of_passengers">No of Passengers</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>

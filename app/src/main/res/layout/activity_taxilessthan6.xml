@@ -120,6 +120,29 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cubicapacity"
+            app:layout_constraintBottom_toTopOf="@id/passenger"/>
+        <TextView
+            android:id="@+id/passenger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:text="@string/no_of_passengers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cubicapacity_value"
+            app:layout_constraintBottom_toTopOf="@id/passenger_value"/>
+        <EditText
+            android:id="@+id/passenger_value"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passenger"
             app:layout_constraintBottom_toTopOf="@id/discount"/>
         <TextView
             android:id="@+id/discount"
@@ -130,7 +153,7 @@
             android:layout_marginTop="@dimen/vertical_distance"
             android:text="@string/discount_on_od"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cubicapacity_value"
+            app:layout_constraintTop_toBottomOf="@id/passenger_value"
             app:layout_constraintBottom_toTopOf="@id/discount_value"/>
         <EditText
             android:id="@+id/discount_value"
@@ -325,7 +348,7 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/restricttppd"
-            app:layout_constraintBottom_toTopOf="@id/calculate">
+            app:layout_constraintBottom_toTopOf="@id/imt23">
             <RadioButton
                 android:id="@+id/yes"
                 android:layout_width="100dp"
@@ -339,13 +362,48 @@
                 android:checked="true"></RadioButton>
 
         </RadioGroup>
+        <TextView
+            android:id="@+id/imt23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:text="@string/imt_23"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/restricttppd_value"
+            app:layout_constraintBottom_toTopOf="@id/imt23_value"/>
+        <RadioGroup
+            android:id="@+id/imt23_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/left_margin"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="@dimen/vertical_distance"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imt23"
+            app:layout_constraintBottom_toTopOf="@id/calculate">
+            <RadioButton
+                android:id="@+id/yes_imt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"></RadioButton>
+            <RadioButton
+                android:id="@+id/no_imt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:checked="true"></RadioButton>
+
+        </RadioGroup>
         <Button
             android:id="@+id/calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/calculate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/restricttppd_value"
+            app:layout_constraintTop_toBottomOf="@id/imt23_value"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/vertical_distance"/>
