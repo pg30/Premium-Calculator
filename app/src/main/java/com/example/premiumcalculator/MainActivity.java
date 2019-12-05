@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 6:
+                    {
+                        Intent intent = new Intent(getBaseContext(), taxilessthan6.class);
+                        startActivity(intent);
+                        break;
+                    }
                     default:
                         throw new IllegalStateException("Unexpected value: " + pos);
                 }
