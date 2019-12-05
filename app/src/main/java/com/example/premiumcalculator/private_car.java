@@ -174,7 +174,7 @@ public class private_car extends AppCompatActivity implements AdapterView.OnItem
         Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
         if(yes.isChecked())
             basicTP = basicTP-100;
-        Log.d("debug","TP after restricted TP option is "+basicTP);
+        Log.d("debug","TP after restricted TP option "+basicTP);
         return basicTP;
     }
 }
