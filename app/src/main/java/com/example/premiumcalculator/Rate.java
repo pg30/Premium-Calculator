@@ -173,11 +173,224 @@ public class Rate {
             /* two wheeler case ends....... */
 
             case PRIVATECAR:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        if(cc<=1000)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.127;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.283;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.362;
+                            }
+                        }
+                        else if(cc>=1001 && cc<=1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.283;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.447;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.529;
+                            }
+                        }
+                        else if(cc>1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.440;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.612;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.698;
+                            }
+                        }
+                    }
+                    break;
+                    //case A ends......
+                    case B:
+                    {
+                        if(cc<=1000)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.039;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.191;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.267;
+                            }
+                        }
+                        else if(cc>=1001 && cc<=1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.191;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.351;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.430;
+                            }
+                        }
+                        else if(cc>1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.343;
+                            }
+                            else if(time>5 && time<=10)
+                            {
+                                return 3.510;
+                            }
+                            else if(time>10)
+                            {
+                                return 3.594;
+                            }
+                        }
+                    }
+                    break;
+                    /* case B ends......... */
+                }
+                /* zone switch ends....... */
+            }
                 break;
+            /* private car case ends....... */
 
             case TAXILESSTHAN6:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        if(cc<=1000)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.284;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.366;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.448;
+                            }
+                        }
+                        else if(cc>=1001 && cc<=1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.448;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.534;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.620;
+                            }
+                        }
+                        else if(cc>1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.612;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.703;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.793;
+                            }
+                        }
+                    }
+                    break;
+                    //case A ends......
+                    case B:
+                    {
+                        if(cc<=1000)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.191;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.271;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.351;
+                            }
+                        }
+                        else if(cc>=1001 && cc<=1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.351;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.435;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.519;
+                            }
+                        }
+                        else if(cc>1500)
+                        {
+                            if(time<=5)
+                            {
+                                return 3.510;
+                            }
+                            else if(time>5 && time<=7)
+                            {
+                                return 3.598;
+                            }
+                            else if(time>7)
+                            {
+                                return 3.686;
+                            }
+                        }
+                    }
+                    break;
+                    /* case B ends......... */
+                }
+                /* zone switch ends....... */
+            }
                 break;
-
+            /* taxilessthan6 case ends....... */
         }
         return 0.0;
     }
@@ -213,12 +426,35 @@ public class Rate {
 
             case PRIVATECAR:
             {
+                if(cc<=1000)
+                {
+                    return 2072.0;
+                }
+                else if(cc>=1001 && cc<=1500)
+                {
+                    return 3221.0;
+                }
+                else if(cc>1500)
+                {
+                    return 7890.0;
+                }
             }
                 break;
 
             case TAXILESSTHAN6:
             {
-
+                if(cc<=1000)
+                {
+                    return 5769.0;
+                }
+                else if(cc>=1001 && cc<=1500)
+                {
+                    return 7584.0;
+                }
+                else if(cc>1500)
+                {
+                    return 10051.0;
+                }
             }
                 break;
 

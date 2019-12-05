@@ -46,10 +46,17 @@ public class MainActivity extends AppCompatActivity {
                 int pos = position;
                 switch (pos)
                 {
-                    case 0:
-                        Intent intent = new Intent(getBaseContext(),two_wheeler.class);
+                    case 0:{
+                        Intent intent = new Intent(getBaseContext(), two_wheeler.class);
                         startActivity(intent);
                         break;
+                    }
+                    case 2:
+                    {
+                        Intent intent = new Intent(getBaseContext(), private_car.class);
+                        startActivity(intent);
+                        break;
+                    }
                     default:
                         throw new IllegalStateException("Unexpected value: " + pos);
                 }

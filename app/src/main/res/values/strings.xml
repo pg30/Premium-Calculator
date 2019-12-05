@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Premium Calculator</string>
     <string name="two_wheeler_insurance">Two Wheeler Insurance</string>
+    <string name="private_car_insurance">Private Car Insurance</string>
     <string name="last_year_idv">Last Year IDV</string>
     <string name="depreciation">Depreciation(%)</string>
     <string name="year_of_manufacture">Year of Manufacture</string>
