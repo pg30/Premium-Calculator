@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".taxilessthan6"></activity>
+        <activity android:name=".two_wheeler_breakup"></activity>
+        <activity android:name=".taxilessthan6" />
         <activity android:name=".private_car" />
         <activity android:name=".two_wheeler" />
         <activity android:name=".MainActivity">
