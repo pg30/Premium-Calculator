@@ -438,7 +438,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/total_premium_table"
             app:layout_constraintEnd_toStartOf="@id/share_button"
-            app:layout_constraintBottom_toTopOf="@id/commision_button"/>
+            app:layout_constraintBottom_toTopOf="@id/commission_button"/>
 
         <Button
             android:id="@+id/share_button"
@@ -449,10 +449,10 @@
             app:layout_constraintStart_toEndOf="@id/save_button"
             app:layout_constraintTop_toBottomOf="@id/total_premium_table"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/commision_button"/>
+            app:layout_constraintBottom_toTopOf="@id/commission_button"/>
 
         <Button
-            android:id="@+id/commision_button"
+            android:id="@+id/commission_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Know Your Commision"

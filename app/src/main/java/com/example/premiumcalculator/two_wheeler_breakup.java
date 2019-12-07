@@ -1,10 +1,16 @@
 package com.example.premiumcalculator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +35,13 @@ public class two_wheeler_breakup extends AppCompatActivity {
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     DecimalFormat df = new DecimalFormat("0.00");
+    //buttons
+    Button save,share,knowyourcommission;
+    //
+    Spinner company_spinner;
+    //
+    String company_name="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +119,41 @@ public class two_wheeler_breakup extends AppCompatActivity {
         zerodepdisplay=(TextView) findViewById(R.id.zerodepdisplay);
 
         setDisplayData();
+
+        save = (Button) findViewById(R.id.save_button);
+        share = (Button) findViewById(R.id.share_button);
+        knowyourcommission = (Button) findViewById(R.id.commission_button);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder company_builder = new AlertDialog.Builder(two_wheeler_breakup.this);
+                View company_view = getLayoutInflater().inflate(R.layout.company_spinner_dialog,null);
+                company_builder.setTitle("Choose Insurer");
+                company_spinner = (Spinner) company_view.findViewById(R.id.company_spinner);
+                ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(two_wheeler_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
+                company_spinner.setAdapter(company_adapter);
+                company_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(!company_spinner.getSelectedItem().toString().equalsIgnoreCase("Choose an insurer…")) {
+                            company_name = company_spinner.getSelectedItem().toString();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                company_builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                company_builder.setView(company_view);
+                AlertDialog dialog = company_builder.create();
+                dialog.show();
+            }
+        });
     }
 
     //od premium

@@ -33,4 +33,32 @@
         <item>45</item>
         <item>50</item>
     </string-array>
+    <string-array name="company_list">
+        <item>Choose an insurer…</item>
+        <item>Acko General Insurance Co. Ltd.</item>
+        <item>Bajaj Allianz General Insurance Co. Ltd.</item>
+        <item>Bharti Axa General Insurance Co. Ltd.</item>
+        <item>Cholamandalam MS General Insurance Co. Ltd.</item>
+        <item>DHFL General Insurance Co. Ltd.</item>
+        <item>Edelweiss General Insurance Co. Ltd.</item>
+        <item>Future Generali India Insurance Co. Ltd.</item>
+        <item>Go Digit General Insurance Ltd.</item>
+        <item>HDFC Ergo Insurance Co. Ltd.</item>
+        <item>ICICI Lombard General Insurance Co. Ltd.</item>
+        <item>Iffco Tokio General Insurance Co. Ltd.</item>
+        <item>Kotak Mahindra Insurance Co. Ltd.</item>
+        <item>Liberty General Insurance Co. Ltd.</item>
+        <item>Magma HDI General Insurance Co. Ltd.</item>
+        <item>National Insurance Co. Ltd.</item>
+        <item>Raheja QBE General Insurance Co. Ltd.</item>
+        <item>Reliance General Insurance Co. Ltd.</item>
+        <item>Royal Sundaram General Insurance Co. Ltd.</item>
+        <item>SBI General Insurance Co. Ltd.</item>
+        <item>Shriram General Insurance Co. Ltd.</item>
+        <item>Tata AIG General Insurance Co. Ltd.</item>
+        <item>The New India Assurance Co. Ltd.</item>
+        <item>The Oriental Insurance Co. Ltd.</item>
+        <item>United India Insurance Co. Ltd.</item>
+        <item>Universal Sompo General Insurance Co. Ltd.</item>
+    </string-array>
 </resources>
