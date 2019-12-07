@@ -2,6 +2,7 @@ package com.example.premiumcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,9 +24,10 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
     long yearofmanufacture;
     Button calculate;
     Zone zone;
-    Rate mrate = new Rate();
+//    Rate mrate = new Rate();
     Vehicle currVehicle = Vehicle.TWOWHEELER;
     Double finalPremium,odPremium,tpPremium,gst,rate;
+    double basicTP;
     RadioButton yes,no;
 
     @Override
@@ -74,18 +76,43 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
                 Log.d("debug",""+yearofmanufacture);
 
                 Log.d("debug",zone+" "+currVehicle+" "+cc+" "+yearofmanufacture);
-                rate = mrate.getRate(zone,currVehicle,cc,yearofmanufacture);
-                odPremium = calculateOD();
-                Log.d("debug","final od premium is "+odPremium);
-                tpPremium = calculateTP();
-                Log.d("debug","final tp premium is "+tpPremium);
-                finalPremium = odPremium+tpPremium;
-                Log.d("debug","final premium without gst is "+finalPremium);
-                gst = 0.18*finalPremium;
-                Log.d("debug","gst is "+gst);
-                finalPremium+=gst;
-                Log.d("debug","final premium with gst is "+finalPremium);
-                Toast.makeText(getApplicationContext(),"final premium is "+finalPremium,Toast.LENGTH_LONG).show();
+//                rate = mrate.getRate(zone,currVehicle,cc,yearofmanufacture);
+//                basicTP=mrate.getTP(currVehicle,cc);
+                Intent intent = new Intent(getBaseContext(), two_wheeler_breakup.class);
+                Bundle b = new Bundle();
+                b.putDouble("idv",idv);
+                b.putDouble("cc",cc);
+                b.putDouble("discount",discount);
+                b.putDouble("elec",elec);
+                b.putDouble("nonelec",nonelec);
+                b.putDouble("zerodep",zerodep);
+                b.putDouble("patodriver",patodriver);
+                b.putDouble("lltodriver",lltodriver);
+                b.putDouble("patounnamedpassenger",patounnamedpassenger);
+                b.putDouble("ncb",ncb);
+                if(yes.isChecked())
+                    b.putBoolean("restrict_tppd",true);
+                else
+                    b.putBoolean("restrict_tppd",false);
+                b.putSerializable("zone",zone);
+//                b.putDouble("rate",rate);
+//                b.putDouble("basicTP",basicTP);
+                b.putLong("yearofmanufacture",yearofmanufacture);
+                intent.putExtra("two_wheeler_breakup_bundle",b);
+                startActivity(intent);
+
+//                odPremium = calculateOD();
+//                Log.d("debug","final od premium is "+odPremium);
+//                tpPremium = calculateTP();
+//                Log.d("debug","final tp premium is "+tpPremium);
+//                finalPremium = odPremium+tpPremium;
+//                Log.d("debug","final premium without gst is "+finalPremium);
+//                gst = 0.18*finalPremium;
+//                Log.d("debug","gst is "+gst);
+//                finalPremium+=gst;
+//                Log.d("debug","final premium with gst is "+finalPremium);
+//                Toast.makeText(getApplicationContext(),"final premium is "+finalPremium,Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -135,45 +162,44 @@ public class two_wheeler extends AppCompatActivity implements AdapterView.OnItem
             return Calendar.getInstance().get(Calendar.YEAR);
     }
 
-    //od premium
-    Double calculateOD()
-    {
-        Log.d("debug","IDV is "+idv);
-        Log.d("debug","rate applied is "+rate);
-        double basicOD = idv*(rate/100);
-        Log.d("debug","basicOD is "+basicOD);
-        double zerodepprem = (zerodep/100)*idv;
-//        basicOD+=(zerodep/100)*basicOD;
-        Log.d("debug","zero dep is "+zerodepprem);
-        elec=elec*0.04;
-        nonelec=nonelec*(rate/100);
-        Log.d("debug","cost of electrical accessories is "+elec);
-        Log.d("debug","cost of non-electrical accessories is "+nonelec);
-        basicOD+=elec+nonelec;
-        Log.d("debug","new OD is "+basicOD);
-        double ncbdisc = basicOD*(ncb/100);
-        Log.d("debug","ncb discount is "+ncbdisc);
-        basicOD-=ncbdisc;
-        Log.d("debug","new OD is "+basicOD);
-        double oddisc = basicOD*(discount/100);
-        Log.d("debug","od discount is "+oddisc);
-        basicOD-=oddisc;
-        basicOD+=zerodepprem;
-        Log.d("debug","new OD is "+basicOD);
-
-        return  basicOD;
-    }
-
-    //tp premium
-    Double calculateTP()
-    {
-        double basicTP = mrate.getTP(currVehicle,cc);
-        Log.d("debug","basic TP is "+basicTP);
-        basicTP+=patodriver+lltodriver+patounnamedpassenger;
-        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
-        if(yes.isChecked())
-            basicTP = basicTP-50;
-        Log.d("debug","TP after restricted TP option is "+basicTP);
-        return basicTP;
-    }
+//    //od premium
+//    Double calculateOD()
+//    {
+//        Log.d("debug","IDV is "+idv);
+//        Log.d("debug","rate applied is "+rate);
+//        double basicOD = idv*(rate/100);
+//        Log.d("debug","basicOD is "+basicOD);
+//        double zerodepprem = (zerodep/100)*idv;
+////        basicOD+=(zerodep/100)*basicOD;
+//        Log.d("debug","zero dep is "+zerodepprem);
+//        elec=elec*0.04;
+//        nonelec=nonelec*(rate/100);
+//        Log.d("debug","cost of electrical accessories is "+elec);
+//        Log.d("debug","cost of non-electrical accessories is "+nonelec);
+//        basicOD+=elec+nonelec;
+//        Log.d("debug","new OD is "+basicOD);
+//        double ncbdisc = basicOD*(ncb/100);
+//        Log.d("debug","ncb discount is "+ncbdisc);
+//        basicOD-=ncbdisc;
+//        Log.d("debug","new OD is "+basicOD);
+//        double oddisc = basicOD*(discount/100);
+//        Log.d("debug","od discount is "+oddisc);
+//        basicOD-=oddisc;
+//        basicOD+=zerodepprem;
+//        Log.d("debug","new OD is "+basicOD);
+//
+//        return  basicOD;
+//    }
+//
+//    //tp premium
+//    Double calculateTP()
+//    {
+//        Log.d("debug","basic TP is "+basicTP);
+//        basicTP+=patodriver+lltodriver+patounnamedpassenger;
+//        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
+//        if(yes.isChecked())
+//            basicTP = basicTP-50;
+//        Log.d("debug","TP after restricted TP option is "+basicTP);
+//        return basicTP;
+//    }
 }
