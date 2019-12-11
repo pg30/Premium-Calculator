@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".taxilessthan6_breakup">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/taxilessthan6_insurance"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/basic_details_heading"/>
+        <TextView
+            android:id="@+id/basic_details_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basic Details"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading"
+            app:layout_constraintBottom_toTopOf="@id/basic_details_table"/>
+        <TableLayout
+            android:id="@+id/basic_details_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/basic_details_heading"
+            app:layout_constraintBottom_toTopOf="@id/od_premium_heading">
+
+            <TableRow>
+                <TextView
+                    android:text="IDV:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/idv_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0000.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Date of Registration:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/dateofregistration_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="00-00-0000"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Zone:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/zone_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="B"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Cubic Capacity:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/cc_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="No. of Passengers:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/passenger_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/od_premium_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(A) OD Premium Package"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/basic_details_table"
+            app:layout_constraintBottom_toTopOf="@id/od_details_table"/>
+
+        <TableLayout
+            android:id="@+id/od_details_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/od_premium_heading"
+            app:layout_constraintBottom_toTopOf="@id/tp_premium_heading">
+
+            <TableRow>
+                <TextView
+                    android:text="Vehicle Basic Rate:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/rate_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Basic OD for Vehicle:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/basicod_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:text="Electrical Accessories Value(@4%):"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/elec_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nonelecdisplay"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="Non Electrical Accessories Value:" />
+                <TextView
+                    android:id="@+id/nonelec_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/imt23display"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="IMT 23 Value(@15%):" />
+                <TextView
+                    android:id="@+id/imt23_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/oddiscdisplay"
+                    android:text="OD Discount:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/disc_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/ncbdisplay"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="NCB:" />
+                <TextView
+                    android:id="@+id/ncb_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/zerodepdisplay"
+                    android:text="Zero Dep Premium:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/zerodep_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Total A:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/totala_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/tp_premium_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(B) Liability Premium"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/od_details_table"
+            app:layout_constraintBottom_toTopOf="@id/tp_details_table"/>
+
+        <TableLayout
+            android:id="@+id/tp_details_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tp_premium_heading"
+            app:layout_constraintBottom_toTopOf="@id/total_premium_heading">
+
+            <TableRow>
+                <TextView
+                    android:text="Liability Premium(TP):"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/basictp_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Third Party Property Damage(TPPD):"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/tppd_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="PA to Owner Driver:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/ownerpa_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="LL to Paid Driver:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/llpaid_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="PA to Unnamed Passenger:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/paunnamed_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Total B:"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                <TextView
+                    android:id="@+id/totalb_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:text="0.00"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:gravity="right"/>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/total_premium_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(C) Total Premium"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tp_details_table"
+            app:layout_constraintBottom_toTopOf="@id/total_premium_table"/>
+
+        <TableLayout
+            android:id="@+id/total_premium_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_premium_heading">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="Total Package Premium(A+B):" />
+
+                <TextView
+                    android:id="@+id/totalab_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:text="0.00" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="GST(@18%):" />
+
+                <TextView
+                    android:id="@+id/gst_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:text="0.00" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_leftweight"
+                    android:paddingLeft="@dimen/table_cell_leftmargin"
+                    android:text="Final Premium:" />
+
+                <TextView
+                    android:id="@+id/finalpremium_value"
+                    android:layout_width="0dp"
+                    android:layout_weight="@dimen/table_cell_rightweight"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/table_cell_rightmargin"
+                    android:text="0.00" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHARE"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/commission_button"
+            app:layout_constraintTop_toBottomOf="@+id/total_premium_table" />
+
+        <Button
+            android:id="@+id/commission_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Know Your Commision"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_premium_table" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

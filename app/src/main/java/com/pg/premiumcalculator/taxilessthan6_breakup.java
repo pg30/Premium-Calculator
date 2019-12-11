@@ -42,23 +42,23 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class private_car_breakup extends AppCompatActivity {
+public class taxilessthan6_breakup extends AppCompatActivity {
 
     //for premium calcuation
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
+    double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,noofpassenger;
     String dateofregistration;
     Zone zone;
     Rate mrate = new Rate();
-    Vehicle currVehicle = Vehicle.PRIVATECAR;
-    Double finalPremium,odPremium,tpPremium,gst,rate,basicOD;
+    Vehicle currVehicle = Vehicle.TAXILESSTHAN6;
+    double finalPremium,odPremium,tpPremium,tpPassenger,gst,rate,basicOD;
     double basicTP;
-    boolean yes;
+    boolean yes,imt_yes;
     //views values
-    double tempidv,tempbasicOD,tempelec,tempnonelec,tempoddisc,tempncb,tempzerodep;
-    double tempbasicTP,temptppd=100,tempownerpa,templltodriver,temppatounnamed;
+    double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep;
+    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,temppatounnamed;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
     //result views pointers
-    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview;
+    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview,passengerview,imt23view;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     DecimalFormat df = new DecimalFormat("0.00");
@@ -78,38 +78,31 @@ public class private_car_breakup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_private_car_breakup);
+        setContentView(R.layout.activity_taxilessthan6_breakup);
 
         getValuesFromIntent();
+        findViews();
 
+        Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
         rate = mrate.getRate(zone,currVehicle,cc,dateofregistration);
+        tpPassenger = mrate.getPerPassenger(currVehicle,cc);
         basicTP=mrate.getTP(currVehicle,cc);
-
-        tempbasicTP=basicTP;
-
+        tempbasicTP = basicTP;
         odPremium = calculateOD();
-        temptotala=odPremium;
-
+        temptotala = odPremium;
         Log.d("debug","final od premium is "+odPremium);
         tpPremium = calculateTP();
-        temptotalb=tpPremium;
-
+        temptotalb = tpPremium;
         Log.d("debug","final tp premium is "+tpPremium);
         finalPremium = odPremium+tpPremium;
-        temptotalab=finalPremium;
-
+        temptotalab = finalPremium;
         Log.d("debug","final premium without gst is "+finalPremium);
         gst = 0.18*finalPremium;
-        tempgst=gst;
-
+        tempgst = gst;
         Log.d("debug","gst is "+gst);
         finalPremium+=gst;
-        tempfinalpremium=finalPremium;
-
+        tempfinalpremium = finalPremium;
         Log.d("debug","final premium with gst is "+finalPremium);
-        //Toast.makeText(getApplicationContext(),"final premium is "+finalPremium,Toast.LENGTH_LONG).show();
-
-        findViews();
 
         setDisplayData();
 
@@ -120,6 +113,7 @@ public class private_car_breakup extends AppCompatActivity {
             }
         });
     }
+
     void findViews()
     {
         idvview = (TextView) findViewById(R.id.idv_value);
@@ -143,6 +137,8 @@ public class private_car_breakup extends AppCompatActivity {
         totalabview = (TextView) findViewById(R.id.totalab_value);
         gstview = (TextView) findViewById(R.id.gst_value);
         finalview = (TextView) findViewById(R.id.finalpremium_value);
+        passengerview = (TextView) findViewById(R.id.passenger_value);
+        imt23view = (TextView) findViewById(R.id.imt23_value);
 
         nonelecdisplay=(TextView) findViewById(R.id.nonelecdisplay);
         oddiscdisplay=(TextView) findViewById(R.id.oddiscdisplay);
@@ -156,12 +152,13 @@ public class private_car_breakup extends AppCompatActivity {
     void getValuesFromIntent()
     {
         Intent intent = getIntent();
-        Bundle b = intent.getBundleExtra("private_car_breakup_bundle");
+        Bundle b = intent.getBundleExtra("taxilessthan6_breakup_bundle");
         idv = b.getDouble("idv");
         cc = b.getDouble("cc");
         discount = b.getDouble("discount");
         elec = b.getDouble("elec");
         nonelec = b.getDouble("nonelec");
+        noofpassenger = b.getDouble("noofpassenger");
         ncb = b.getDouble("ncb");
         zerodep = b.getDouble("zerodep");
         patodriver = b.getDouble("patodriver");
@@ -169,16 +166,128 @@ public class private_car_breakup extends AppCompatActivity {
         patounnamedpassenger = b.getDouble("patounnamedpassenger");
         dateofregistration = b.getString("dateofregistration");
         yes = b.getBoolean("restrict_tppd");
+        imt_yes = b.getBoolean("imt23");
         zone = (Zone) b.getSerializable("zone");
+    }
+    //od premium
+    Double calculateOD()
+    {
+        Log.d("debug","IDV is "+idv);
+        Log.d("debug","rate applied is "+rate);
+        basicOD = idv*(rate/100);
+        Log.d("debug","basicOD is "+basicOD);
+        tempidv = idv;
+        tempbasicOD = basicOD;
+
+        double zerodepprem = (zerodep/100)*idv;
+        tempzerodep = zerodepprem;
+        Log.d("debug","zero dep is "+zerodepprem);
+        elec=elec*0.04;
+        nonelec=nonelec*(rate/100);
+        tempelec = elec;
+        tempnonelec = nonelec;
+        Log.d("debug","cost of electrical accessories is "+elec);
+        Log.d("debug","cost of non-electrical accessories is "+nonelec);
+        basicOD+=elec+nonelec;
+        Log.d("debug","new OD is "+basicOD);
+        if(imt_yes) {
+            tempimt23 = 0.15 * basicOD;
+            basicOD += 0.15 * basicOD;
+            Log.d("debug", "after imt 23 new od is " + basicOD);
+        }
+        double ncbdisc = basicOD*(ncb/100);
+        tempncb = ncbdisc;
+        Log.d("debug","ncb discount is "+ncbdisc);
+        basicOD-=ncbdisc;
+        Log.d("debug","new OD is "+basicOD);
+        double oddisc = basicOD*(discount/100);
+        tempoddisc = oddisc;
+        Log.d("debug","od discount is "+oddisc);
+        basicOD-=oddisc;
+        basicOD+=zerodepprem;
+        Log.d("debug","new OD is "+basicOD);
+
+        return  basicOD;
+    }
+
+    //tp premium
+    Double calculateTP()
+    {
+        Log.d("debug","basic TP is "+basicTP);
+        basicTP+=(noofpassenger*tpPassenger);
+        Log.d("debug","passenger TP is "+basicTP);
+        basicTP+=patodriver+lltodriver+patounnamedpassenger;
+        tempownerpa = patodriver;
+        templltodriver = lltodriver;
+        temppatounnamed = patounnamedpassenger;
+        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
+        if(yes) {
+            temptppd = 0;
+            basicTP = basicTP - 150;
+        }
+        Log.d("debug","TP after restricted TP option "+basicTP);
+        return basicTP;
+    }
+
+    void setDisplayData()
+    {
+        idvview.setText(""+df.format(tempidv));
+        Log.d("debug",""+tempidv);
+        dateview.setText(""+dateofregistration);
+        Log.d("debug",""+dateofregistration);
+        zoneview.setText(""+zone);
+        Log.d("debug",""+zone);
+        ccview.setText(""+Math.round(cc));
+        Log.d("debug",""+cc);
+        passengerview.setText(""+Math.round(noofpassenger));
+        Log.d("debug",""+noofpassenger);
+        rateview.setText(""+rate);
+        Log.d("debug",""+rate);
+        basicodview.setText(""+df.format(tempbasicOD));
+        Log.d("debug",""+tempbasicOD);
+        elecview.setText(""+df.format(tempelec));
+        Log.d("debug",""+tempelec);
+        nonelecview.setText(""+df.format(tempnonelec));
+        Log.d("debug",""+tempnonelec);
+        imt23view.setText(""+df.format(tempimt23));
+        oddiscview.setText(""+df.format(tempoddisc));
+        Log.d("debug",""+tempoddisc);
+        oddiscdisplay.setText("OD Discount(-"+discount+"%):");
+        ncbview.setText(""+df.format(tempncb));
+        ncbdisplay.setText("NCB(-"+ncb+"%):");
+        Log.d("debug",""+tempncb);
+        zerodepview.setText(""+df.format(tempzerodep));
+        zerodepdisplay.setText("Zero Dep Premium(+"+zerodep+"%):");
+        Log.d("debug",""+tempzerodep);
+        totalaview.setText(""+df.format(temptotala));
+        Log.d("debug",""+df.format(temptotala));
+        basictpview.setText(""+tempbasicTP);
+        Log.d("debug",""+df.format(tempbasicTP));
+        tppdview.setText(""+df.format(temptppd));
+        Log.d("debug",""+temptppd);
+        ownerpaview.setText(""+df.format(tempownerpa));
+        Log.d("debug",""+tempownerpa);
+        lltodriverview.setText(""+df.format(templltodriver));
+        Log.d("debug",""+templltodriver);
+        patounnamedview.setText(""+df.format(temppatounnamed));
+        Log.d("debug",""+temppatounnamed);
+        totalbview.setText(""+df.format(temptotalb));
+        Log.d("debug",""+temptotalb);
+        totalabview.setText(""+df.format(temptotalab));
+        Log.d("debug",""+temptotalab);
+        gstview.setText(""+df.format(tempgst));
+        Log.d("debug",""+df.format(tempgst));
+        finalview.setText(""+df.format(tempfinalpremium));
+        Log.d("debug",""+tempfinalpremium);
     }
 
     void createCompanyBuilder()
     {
-        AlertDialog.Builder company_builder = new AlertDialog.Builder(private_car_breakup.this);
+        AlertDialog.Builder company_builder = new AlertDialog.Builder(taxilessthan6_breakup.this);
         View company_view = getLayoutInflater().inflate(R.layout.company_spinner_dialog,null);
         company_builder.setTitle("Choose Insurer");
         company_spinner = (Spinner) company_view.findViewById(R.id.company_spinner);
-        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(private_car_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(taxilessthan6_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
         company_spinner.setAdapter(company_adapter);
         company_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -188,12 +297,12 @@ public class private_car_breakup extends AppCompatActivity {
                     Log.d("debug","inside"+company_name);
                     dialog.dismiss();
 //                    createFileBuilder();
-                    int fileid = new PrefManager(getApplicationContext()).getPrivateCarId();
-                    pdfname = "PRIVATE_CAR_"+fileid+".pdf";
+                    int fileid = new PrefManager(getApplicationContext()).getTaxilessthan6Id();
+                    pdfname = "TAXILESSTHAN6_"+fileid+".pdf";
                     try {
                         createPdfWrapper();
                         fileid++;
-                        new PrefManager(getApplicationContext()).setPrivateCarId(fileid);
+                        new PrefManager(getApplicationContext()).setTaxilessthan6Id(fileid);
                         shareFile();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -256,7 +365,7 @@ public class private_car_breakup extends AppCompatActivity {
 
 //    void createFileBuilder()
 //    {
-//        AlertDialog.Builder filename_builder = new AlertDialog.Builder(private_car_breakup.this);
+//        AlertDialog.Builder filename_builder = new AlertDialog.Builder(taxilessthan6_breakup.this);
 //        View filename_view = getLayoutInflater().inflate(R.layout.filename_dialog,null);
 //        filename_builder.setTitle("Enter file name");
 //        file_edit = (EditText) filename_view.findViewById(R.id.filename);
@@ -290,119 +399,6 @@ public class private_car_breakup extends AppCompatActivity {
 //        AlertDialog file_dialog = filename_builder.create();
 //        file_dialog.show();
 //    }
-
-    //od premium
-    Double calculateOD()
-    {
-        Log.d("debug","IDV is "+idv);
-        Log.d("debug","rate applied is "+rate);
-        basicOD = idv*(rate/100);
-
-        tempidv=idv;
-        tempbasicOD=basicOD;
-
-        Log.d("debug","basicOD is "+basicOD);
-        double zerodepprem = (zerodep/100)*idv;
-
-        tempzerodep=zerodepprem;
-
-        //        basicOD+=(zerodep/100)*basicOD;
-        Log.d("debug","zero dep is "+zerodepprem);
-        elec=elec*0.04;
-        nonelec=nonelec*(rate/100);
-
-        tempelec=elec;
-        tempnonelec=nonelec;
-
-        Log.d("debug","cost of electrical accessories is "+elec);
-        Log.d("debug","cost of non-electrical accessories is "+nonelec);
-        basicOD+=elec+nonelec;
-        Log.d("debug","new OD is "+basicOD);
-        double ncbdisc = basicOD*(ncb/100);
-        Log.d("debug","ncb discount is "+ncbdisc);
-
-        tempncb=ncbdisc;
-
-        basicOD-=ncbdisc;
-        Log.d("debug","new OD is "+basicOD);
-        double oddisc = basicOD*(discount/100);
-
-        tempoddisc=oddisc;
-
-        Log.d("debug","od discount is "+oddisc);
-        basicOD-=oddisc;
-        basicOD+=zerodepprem;
-        Log.d("debug","new OD is "+basicOD);
-
-        return  basicOD;
-    }
-
-    //tp premium
-    Double calculateTP()
-    {
-        tempownerpa=patodriver;
-        templltodriver=lltodriver;
-        temppatounnamed = patounnamedpassenger;
-
-        Log.d("debug","basic TP is "+basicTP);
-        basicTP+=patodriver+lltodriver+patounnamedpassenger;
-        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
-        if(yes) {
-            basicTP = basicTP - 50;
-            temptppd=0;
-        }
-        Log.d("debug","TP after restricted TP option is "+basicTP);
-        return basicTP;
-    }
-
-    void setDisplayData()
-    {
-        idvview.setText(""+df.format(tempidv));
-        Log.d("debug",""+tempidv);
-        dateview.setText(""+dateofregistration);
-        Log.d("debug",""+dateofregistration);
-        zoneview.setText(""+zone);
-        Log.d("debug",""+zone);
-        ccview.setText(""+Math.round(cc));
-        Log.d("debug",""+cc);
-        rateview.setText(""+rate);
-        Log.d("debug",""+rate);
-        basicodview.setText(""+df.format(tempbasicOD));
-        Log.d("debug",""+tempbasicOD);
-        elecview.setText(""+df.format(tempelec));
-        Log.d("debug",""+tempelec);
-        nonelecview.setText(""+df.format(tempnonelec));
-        Log.d("debug",""+tempnonelec);
-        oddiscview.setText(""+df.format(tempoddisc));
-        Log.d("debug",""+tempoddisc);
-        oddiscdisplay.setText("OD Discount(-"+discount+"%):");
-        ncbview.setText(""+df.format(tempncb));
-        ncbdisplay.setText("NCB(-"+ncb+"%):");
-        Log.d("debug",""+tempncb);
-        zerodepview.setText(""+df.format(tempzerodep));
-        zerodepdisplay.setText("Zero Dep Premium(+"+zerodep+"%):");
-        Log.d("debug",""+tempzerodep);
-        totalaview.setText(""+df.format(temptotala));
-        Log.d("debug",""+df.format(temptotala));
-        basictpview.setText(""+tempbasicTP);
-        Log.d("debug",""+df.format(tempbasicTP));
-        tppdview.setText(""+df.format(temptppd));
-        Log.d("debug",""+temptppd);
-        ownerpaview.setText(""+df.format(tempownerpa));
-        Log.d("debug",""+tempownerpa);
-        lltodriverview.setText(""+df.format(templltodriver));
-        Log.d("debug",""+templltodriver);
-        patounnamedview.setText(""+df.format(temppatounnamed));
-        Log.d("debug",""+temppatounnamed);
-        totalbview.setText(""+df.format(temptotalb));
-        Log.d("debug",""+temptotalb);
-        totalabview.setText(""+df.format(temptotalab));
-        Log.d("debug",""+temptotalab);
-        gstview.setText(""+df.format(tempgst));
-        Log.d("debug",""+df.format(tempgst));
-        finalview.setText(""+df.format(tempfinalpremium));
-        Log.d("debug",""+tempfinalpremium);
-    }
 
     private void createPdfWrapper() throws FileNotFoundException, DocumentException {
 
@@ -493,6 +489,9 @@ public class private_car_breakup extends AppCompatActivity {
                 addCell(dateview.getText().toString(), basictable, normal_font);
                 addCell("Zone", basictable, bold_font);
                 addCell(zoneview.getText().toString(), basictable, normal_font);
+                addCell("No. of Passengers", basictable, bold_font);
+                addCell(passengerview.getText().toString(), basictable, normal_font);
+                addCellWithColSpan(" ",basictable,normal_font,2);
                 basictable.setSpacingAfter(2f);
                 document.add(basictable);
                 document.add(new Paragraph("\n"));
@@ -528,10 +527,15 @@ public class private_car_breakup extends AppCompatActivity {
                 addCell("LL to Paid Driver", premiumtable, normal_font);
                 addCell(lltodriverview.getText().toString(), premiumtable, normal_font);
 
-                addCell("OD Discount(-" + discount + "%)", premiumtable, normal_font);
-                addCell(oddiscview.getText().toString(), premiumtable, normal_font);
+                addCell("IMT 23(+15%)", premiumtable, normal_font);
+                addCell(imt23view.getText().toString(), premiumtable, normal_font);
                 addCell("PA to Unnamed Passenger", premiumtable, normal_font);
                 addCell(patounnamedview.getText().toString(), premiumtable, normal_font);
+
+                addCell("OD Discount(-" + discount + "%)", premiumtable, normal_font);
+                addCell(oddiscview.getText().toString(), premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
 
                 addCell("NCB(-" + ncb + "%)", premiumtable, normal_font);
                 addCell(ncbview.getText().toString(), premiumtable, normal_font);

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".private_car_breakup"></activity>
+        <activity android:name=".taxilessthan6_breakup"></activity>
+        <activity android:name=".private_car_breakup" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

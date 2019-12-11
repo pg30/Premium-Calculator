@@ -30,9 +30,7 @@ public class private_car extends AppCompatActivity implements AdapterView.OnItem
     Zone zone;
 
     Vehicle currVehicle = Vehicle.PRIVATECAR;
-    Double finalPremium,odPremium,tpPremium,gst,rate;
-    double basicTP;
-    RadioButton yes,no;
+    RadioButton yes;
     String dateofregistration;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
@@ -43,6 +41,19 @@ public class private_car extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_private_car);
 
+        findViews();
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getValuesFromEditText();
+                setValuesInIntent();
+            }
+        });
+    }
+
+    void findViews()
+    {
         newCalendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -73,7 +84,6 @@ public class private_car extends AppCompatActivity implements AdapterView.OnItem
         paunnamedpassenger_edit = (EditText) findViewById(R.id.patounnamedpassenger_value);
         calculate = (Button) findViewById(R.id.calculate);
         yes = (RadioButton) findViewById(R.id.yes);
-        no = (RadioButton) findViewById(R.id.no);
 
         zone_spin = (Spinner) findViewById(R.id.zone_value);
         ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,R.array.zone_array,R.layout.support_simple_spinner_dropdown_item);
@@ -84,45 +94,46 @@ public class private_car extends AppCompatActivity implements AdapterView.OnItem
         ArrayAdapter<CharSequence> ncb_adapter =  ArrayAdapter.createFromResource(this,R.array.ncb_array,R.layout.support_simple_spinner_dropdown_item);
         ncb_spin.setAdapter(ncb_adapter);
         ncb_spin.setOnItemSelectedListener(this);
+    }
 
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("debug","button clicked");
-                idv = ParseDouble(idv_edit.getText().toString());
-                cc = ParseDouble(cc_edit.getText().toString());
-                discount = ParseDouble(discount_edit.getText().toString());
-                elec = ParseDouble(elec_edit.getText().toString());
-                nonelec = ParseDouble(nonelec_edit.getText().toString());
-                zerodep = ParseDouble(zerodep_edit.getText().toString());
-                patodriver = ParseDouble(padriver_edit.getText().toString());
-                lltodriver = ParseDouble(lldriver_edit.getText().toString());
-                patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
-                dateofregistration = ParseString(date_edit.getText().toString());
-                Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
+    void setValuesInIntent()
+    {
+        Intent intent = new Intent(getBaseContext(), private_car_breakup.class);
+        Bundle b = new Bundle();
+        b.putDouble("idv",idv);
+        b.putDouble("cc",cc);
+        b.putDouble("discount",discount);
+        b.putDouble("elec",elec);
+        b.putDouble("nonelec",nonelec);
+        b.putDouble("zerodep",zerodep);
+        b.putDouble("patodriver",patodriver);
+        b.putDouble("lltodriver",lltodriver);
+        b.putDouble("patounnamedpassenger",patounnamedpassenger);
+        b.putDouble("ncb",ncb);
+        if(yes.isChecked())
+            b.putBoolean("restrict_tppd",true);
+        else
+            b.putBoolean("restrict_tppd",false);
+        b.putSerializable("zone",zone);
+        b.putString("dateofregistration",dateofregistration);
+        intent.putExtra("private_car_breakup_bundle",b);
+        startActivity(intent);
+    }
 
-                Intent intent = new Intent(getBaseContext(), private_car_breakup.class);
-                Bundle b = new Bundle();
-                b.putDouble("idv",idv);
-                b.putDouble("cc",cc);
-                b.putDouble("discount",discount);
-                b.putDouble("elec",elec);
-                b.putDouble("nonelec",nonelec);
-                b.putDouble("zerodep",zerodep);
-                b.putDouble("patodriver",patodriver);
-                b.putDouble("lltodriver",lltodriver);
-                b.putDouble("patounnamedpassenger",patounnamedpassenger);
-                b.putDouble("ncb",ncb);
-                if(yes.isChecked())
-                    b.putBoolean("restrict_tppd",true);
-                else
-                    b.putBoolean("restrict_tppd",false);
-                b.putSerializable("zone",zone);
-                b.putString("dateofregistration",dateofregistration);
-                intent.putExtra("private_car_breakup_bundle",b);
-                startActivity(intent);
-            }
-        });
+    void getValuesFromEditText()
+    {
+        Log.d("debug","button clicked");
+        idv = ParseDouble(idv_edit.getText().toString());
+        cc = ParseDouble(cc_edit.getText().toString());
+        discount = ParseDouble(discount_edit.getText().toString());
+        elec = ParseDouble(elec_edit.getText().toString());
+        nonelec = ParseDouble(nonelec_edit.getText().toString());
+        zerodep = ParseDouble(zerodep_edit.getText().toString());
+        patodriver = ParseDouble(padriver_edit.getText().toString());
+        lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
+        dateofregistration = ParseString(date_edit.getText().toString());
+        Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
     }
 
     @Override

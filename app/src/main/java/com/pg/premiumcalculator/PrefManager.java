@@ -37,4 +37,16 @@ public class PrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("privatecarid",1);
     }
+    public void setTaxilessthan6Id(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("taxilessthan6id",id);
+        editor.commit();
+    }
+    public int getTaxilessthan6Id()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("taxilessthan6id",1);
+    }
 }
