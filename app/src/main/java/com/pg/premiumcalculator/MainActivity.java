@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Item(R.drawable.pcicon,"Taxi upto 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"Bus more than 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"School Bus"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV - Public"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV - Private"));
+        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV"));
         list.add(new Item(R.drawable.pcicon,"Three Wheeler PCV upto 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"Miscellaneous vehicle"));
         homeView.setAdapter(adapter);
@@ -68,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     case 6:
                     {
                         Intent intent = new Intent(getBaseContext(), taxilessthan6.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 9:
+                    {
+                        Intent intent = new Intent(getBaseContext(), gcv3wheeler.class);
                         startActivity(intent);
                         break;
                     }

@@ -21,6 +21,10 @@
     <string name="restrict_tppd">Restrict TPPD?</string>
     <string name="imt_23">IMT 23?</string>
     <string name="no_of_passengers">No of Passengers</string>
+    <string name="gcv_3_wheeler_insurance">GCV 3 Wheeler Insurance</string>
+    <string name="public_carrier">Public Carrier</string>
+    <string name="private_carrier">Private Carrier</string>
+    <string name="cng_lpg">CNG/LPG</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>
