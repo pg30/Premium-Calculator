@@ -9,345 +9,317 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/heading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/two_wheeler_insurance"
+            android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/idv"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/idv"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:layout_marginBottom="5dp"
-            android:text="@string/last_year_idv"
-            app:layout_constraintBottom_toTopOf="@+id/idv_value"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heading" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading">
 
-
-        <EditText
-            android:id="@+id/idv_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:layout_marginBottom="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintBottom_toTopOf="@+id/yearofmanufacture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idv" />
+            <TableRow>
+                <TextView
+                    android:id="@+id/idv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/last_year_idv" />
 
 
-        <TextView
-            android:id="@+id/yearofmanufacture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/year_of_manufacture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/idv_value"
-            app:layout_constraintBottom_toTopOf="@id/yearofmanufacture_value"/>
+                <EditText
+                    android:id="@+id/idv_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
 
-        <EditText
-            android:id="@+id/yearofmanufacture_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/yearofmanufacture"
-            app:layout_constraintBottom_toTopOf="@id/zone"/>
+            <TableRow>
+                <TextView
+                    android:id="@+id/dateofregistration"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/date_of_registration" />
 
-        <TextView
-            android:id="@+id/zone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/zone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/yearofmanufacture_value"
-            app:layout_constraintBottom_toTopOf="@id/zone_value"/>
+                <EditText
+                    android:id="@+id/dateofregistration_value"
+                    android:layout_width="0dp"
+                    android:focusable="false"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:ems="10"
+                    android:inputType="date" />
+            </TableRow>
 
-        <Spinner
-            android:id="@+id/zone_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zone"
-            app:layout_constraintBottom_toTopOf="@id/cubicapacity"/>
+            <TableRow>
+                <TextView
+                    android:id="@+id/zone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/zone" />
 
-        <TextView
-            android:id="@+id/cubicapacity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/cubic_capacity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zone_value"
-            app:layout_constraintBottom_toTopOf="@id/cubicapacity_value"/>
-        <EditText
-            android:id="@+id/cubicapacity_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cubicapacity"
-            app:layout_constraintBottom_toTopOf="@id/discount"/>
-        <TextView
-            android:id="@+id/discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/discount_on_od"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cubicapacity_value"
-            app:layout_constraintBottom_toTopOf="@id/discount_value"/>
-        <EditText
-            android:id="@+id/discount_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/discount"
-            app:layout_constraintBottom_toTopOf="@id/electrical_accessories"/>
-        <TextView
-            android:id="@+id/electrical_accessories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/electrical_accessories_value"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/discount_value"
-            app:layout_constraintBottom_toTopOf="@id/electrical_accessories_value"/>
-        <EditText
-            android:id="@+id/electrical_accessories_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/electrical_accessories"
-            app:layout_constraintBottom_toTopOf="@id/nonelectrical_accessories"/>
-        <TextView
-            android:id="@+id/nonelectrical_accessories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/nonelectrical_accessories_value"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/electrical_accessories_value"
-            app:layout_constraintBottom_toTopOf="@id/nonelectrical_accessories_value"/>
-        <EditText
-            android:id="@+id/nonelectrical_accessories_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nonelectrical_accessories"
-            app:layout_constraintBottom_toTopOf="@id/ncb"/>
-        <TextView
-            android:id="@+id/ncb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/no_claim_bonus"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nonelectrical_accessories_value"
-            app:layout_constraintBottom_toTopOf="@id/ncb_value"/>
 
-        <Spinner
-            android:id="@+id/ncb_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ncb"
-            app:layout_constraintBottom_toTopOf="@id/zerodep"/>
-        <TextView
-            android:id="@+id/zerodep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/zero_depreciation"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ncb_value"
-            app:layout_constraintBottom_toTopOf="@id/zerodep_value"/>
-        <EditText
-            android:id="@+id/zerodep_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zerodep"
-            app:layout_constraintBottom_toTopOf="@id/patoownerdriver"/>
-        <TextView
-            android:id="@+id/patoownerdriver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/pa_to_owner_driver"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zerodep_value"
-            app:layout_constraintBottom_toTopOf="@id/patoownerdriver_value"/>
-        <EditText
-            android:id="@+id/patoownerdriver_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patoownerdriver"
-            app:layout_constraintBottom_toTopOf="@id/lltopaiddriver"/>
-        <TextView
-            android:id="@+id/lltopaiddriver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/ll_to_paid_driver"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patoownerdriver_value"
-            app:layout_constraintBottom_toTopOf="@id/lltopaiddriver_value"/>
-        <EditText
-            android:id="@+id/lltopaiddriver_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lltopaiddriver"
-            app:layout_constraintBottom_toTopOf="@id/patounnamedpassenger"/>
-        <TextView
-            android:id="@+id/patounnamedpassenger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/pa_to_unnamed_passenger"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lltopaiddriver_value"
-            app:layout_constraintBottom_toTopOf="@id/patounnamedpassenger_value"/>
-        <EditText
-            android:id="@+id/patounnamedpassenger_value"
-            android:layout_width="@dimen/edittext_width"
-            android:layout_height="@dimen/edittext_height"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patounnamedpassenger"
-            app:layout_constraintBottom_toTopOf="@id/restricttppd"/>
-        <TextView
-            android:id="@+id/restricttppd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:text="@string/restrict_tppd"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patounnamedpassenger_value"
-            app:layout_constraintBottom_toTopOf="@id/restricttppd_value"/>
-        <RadioGroup
-            android:id="@+id/restricttppd_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/left_margin"
-            android:layout_marginLeft="@dimen/left_margin"
-            android:layout_marginTop="@dimen/vertical_distance"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/restricttppd"
-            app:layout_constraintBottom_toTopOf="@id/calculate">
-            <RadioButton
-                android:id="@+id/yes"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Yes"></RadioButton>
-            <RadioButton
-                android:id="@+id/no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No"
-                android:checked="true"></RadioButton>
+                <Spinner
+                    android:id="@+id/zone_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"/>
+            </TableRow>
 
-        </RadioGroup>
+            <TableRow>
+                <TextView
+                    android:id="@+id/cubicapacity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/cubic_capacity" />
+
+
+                <EditText
+                    android:id="@+id/cubicapacity_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/discount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/discount_on_od" />
+
+
+                <EditText
+                    android:id="@+id/discount_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/electrical_accessories"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/electrical_accessories_value" />
+
+
+                <EditText
+                    android:id="@+id/electrical_accessories_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/nonelectrical_accessories"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/nonelectrical_accessories_value" />
+
+
+                <EditText
+                    android:id="@+id/nonelectrical_accessories_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/ncb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/no_claim_bonus" />
+
+
+                <Spinner
+                    android:id="@+id/ncb_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/zerodep"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/zero_depreciation" />
+
+
+                <EditText
+                    android:id="@+id/zerodep_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/patoownerdriver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/pa_to_owner_driver" />
+
+
+                <EditText
+                    android:id="@+id/patoownerdriver_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/lltopaiddriver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/ll_to_paid_driver" />
+
+
+                <EditText
+                    android:id="@+id/lltopaiddriver_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/patounnamedpassenger"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/pa_to_unnamed_passenger" />
+
+
+                <EditText
+                    android:id="@+id/patounnamedpassenger_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/restricttppd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/restrict_tppd" />
+
+
+                <RadioGroup
+                    android:id="@+id/restricttppd_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"></RadioButton>
+                    <RadioButton
+                        android:id="@+id/no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:checked="true"></RadioButton>
+                </RadioGroup>
+            </TableRow>
+
+        </TableLayout>
+
         <Button
             android:id="@+id/calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/calculate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/restricttppd_value"
+            app:layout_constraintTop_toBottomOf="@id/table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/vertical_distance"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

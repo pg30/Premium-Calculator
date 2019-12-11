@@ -6,6 +6,7 @@
     <string name="last_year_idv">Last Year IDV</string>
     <string name="depreciation">Depreciation(%)</string>
     <string name="year_of_manufacture">Year of Manufacture</string>
+    <string name="date_of_registration">Date Of Registration</string>
     <string name="zone">Zone</string>
     <string name="cubic_capacity">Cubic Capacity</string>
     <string name="discount_on_od">Discount on OD(%)</string>

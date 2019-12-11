@@ -1,6 +1,13 @@
-package com.example.premiumcalculator;
+package com.pg.premiumcalculator;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 enum Vehicle
 {
@@ -19,17 +26,34 @@ public class Rate {
     private Zone zone;
     private Vehicle vehicle;
     private Carrier carrier;
-    private long year,curryear = Calendar.getInstance().get(Calendar.YEAR);
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+    private String givenDate;
     private double cc;
 
-    //for twowheeler,privatecar and taxilessthan6
-    Double getRate(Zone mzone,Vehicle mvehicle,double mcc,long myear)
+    long getDays(String currentString,String givenString)
     {
+        long days = 0;
+        try {
+            Date date1 = formatter.parse(givenString);
+            Date date2 = formatter.parse(currentString);
+            long diff = date2.getTime() - date1.getTime();
+            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
+            Log.d("debug","days is "+days);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return days<=0?0:days;
+    }
+
+    //for twowheeler,privatecar and taxilessthan6
+    Double getRate(Zone mzone,Vehicle mvehicle,double mcc,String mdate){
         this.zone = mzone;
         this.vehicle = mvehicle;
         this.cc = mcc;
-        this.year = myear;
-        long time = curryear-myear;
+        givenDate = mdate;
+        String currentDate = (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
+        Log.d("debug","given date is "+givenDate+" and current date is "+currentDate);
+        long time = getDays(currentDate,givenDate);
         switch (vehicle)
         {
             case TWOWHEELER:
@@ -40,60 +64,60 @@ public class Rate {
                     {
                         if(cc<=75)
                         {
-                            if(time<=5)
+                            if(time<=(5*365))
                             {
                                 return 1.708;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.793;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.836;
                             }
                         }
                         else if(cc>=76 && cc<=150)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.708;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.793;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.836;
                             }
                         }
                         else if(cc>=151 && cc<=350)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.793;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.883;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.928;
                             }
                         }
                         else if(cc>350)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.879;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.973;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 2.020;
                             }
@@ -105,60 +129,60 @@ public class Rate {
                     {
                         if(cc<=75)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.676;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.760;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.802;
                             }
                         }
                         else if(cc>=76 && cc<=150)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.676;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.760;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.802;
                             }
                         }
                         else if(cc>=151 && cc<=350)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.760;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.848;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.892;
                             }
                         }
                         else if(cc>350)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 1.844;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 1.936;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 1.982;
                             }
@@ -180,45 +204,45 @@ public class Rate {
                     {
                         if(cc<=1000)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.127;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.283;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.362;
                             }
                         }
                         else if(cc>=1001 && cc<=1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.283;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.447;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.529;
                             }
                         }
                         else if(cc>1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.440;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.612;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.698;
                             }
@@ -230,45 +254,45 @@ public class Rate {
                     {
                         if(cc<=1000)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.039;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.191;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.267;
                             }
                         }
                         else if(cc>=1001 && cc<=1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.191;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.351;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.430;
                             }
                         }
                         else if(cc>1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.343;
                             }
-                            else if(time>5 && time<=10)
+                            else if(time>5*365 && time<=10*365)
                             {
                                 return 3.510;
                             }
-                            else if(time>10)
+                            else if(time>10*365)
                             {
                                 return 3.594;
                             }
@@ -290,45 +314,45 @@ public class Rate {
                     {
                         if(cc<=1000)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.284;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.366;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.448;
                             }
                         }
                         else if(cc>=1001 && cc<=1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.448;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.534;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.620;
                             }
                         }
                         else if(cc>1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.612;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.703;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.793;
                             }
@@ -340,45 +364,45 @@ public class Rate {
                     {
                         if(cc<=1000)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.191;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.271;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.351;
                             }
                         }
                         else if(cc>=1001 && cc<=1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.351;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.435;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.519;
                             }
                         }
                         else if(cc>1500)
                         {
-                            if(time<=5)
+                            if(time<=5*365)
                             {
                                 return 3.510;
                             }
-                            else if(time>5 && time<=7)
+                            else if(time>5*365 && time<=7*365)
                             {
                                 return 3.598;
                             }
-                            else if(time>7)
+                            else if(time>7*365)
                             {
                                 return 3.686;
                             }

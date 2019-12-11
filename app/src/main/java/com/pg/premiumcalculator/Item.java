@@ -1,4 +1,4 @@
-package com.example.premiumcalculator;
+package com.pg.premiumcalculator;
 
 
 public class Item {

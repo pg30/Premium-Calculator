@@ -8,4 +8,9 @@
     <dimen name="table_cell_padding">2dp</dimen>
     <dimen name="table_cell_leftmargin">8dp</dimen>
     <dimen name="table_cell_rightmargin">8dp</dimen>
+    <dimen name="table_cell_leftweight">0.7</dimen>
+    <dimen name="table_cell_rightweight">0.3</dimen>
+    <dimen name="table_cell_leftweightfortwowheeler">0.6</dimen>
+    <dimen name="table_cell_rightweightfortwowheeler">0.4</dimen>
+    <dimen name="table_cell_marginfortwowheeler">5dp</dimen>
 </resources>

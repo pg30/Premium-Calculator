@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".two_wheeler_breakup">
+    tools:context=".private_car_breakup">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +14,7 @@
             android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/two_wheeler_insurance"
+            android:text="@string/private_car_insurance"
             android:background="@color/colorPrimary"
             android:gravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
