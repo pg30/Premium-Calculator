@@ -83,22 +83,7 @@ public class two_wheeler_breakup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_wheeler_breakup);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getBundleExtra("two_wheeler_breakup_bundle");
-        idv = b.getDouble("idv");
-        cc = b.getDouble("cc");
-        discount = b.getDouble("discount");
-        elec = b.getDouble("elec");
-        nonelec = b.getDouble("nonelec");
-        ncb = b.getDouble("ncb");
-        zerodep = b.getDouble("zerodep");
-        patodriver = b.getDouble("patodriver");
-        lltodriver = b.getDouble("lltodriver");
-        patounnamedpassenger = b.getDouble("patounnamedpassenger");
-        dateofregistration = b.getString("dateofregistration");
-        yes = b.getBoolean("restrict_tppd");
-        zone = (Zone) b.getSerializable("zone");
-
+        getValuesFromIntent();
         rate = mrate.getRate(zone,currVehicle,cc,dateofregistration);
         basicTP=mrate.getTP(currVehicle,cc);
 
@@ -126,6 +111,19 @@ public class two_wheeler_breakup extends AppCompatActivity {
         Log.d("debug","final premium with gst is "+finalPremium);
         //Toast.makeText(getApplicationContext(),"final premium is "+finalPremium,Toast.LENGTH_LONG).show();
 
+        findViews();
+        setDisplayData();
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createCompanyBuilder();
+            }
+        });
+    }
+
+    void findViews()
+    {
         idvview = (TextView) findViewById(R.id.idv_value);
         dateview = (TextView) findViewById(R.id.dateofregistration_value);
         zoneview = (TextView) findViewById(R.id.zone_value);
@@ -153,17 +151,27 @@ public class two_wheeler_breakup extends AppCompatActivity {
         ncbdisplay=(TextView) findViewById(R.id.ncbdisplay);
         zerodepdisplay=(TextView) findViewById(R.id.zerodepdisplay);
 
-        setDisplayData();
-
         share = (Button) findViewById(R.id.share_button);
         knowyourcommission = (Button) findViewById(R.id.commission_button);
+    }
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createCompanyBuilder();
-            }
-        });
+    void getValuesFromIntent()
+    {
+        Intent intent = getIntent();
+        Bundle b = intent.getBundleExtra("two_wheeler_breakup_bundle");
+        idv = b.getDouble("idv");
+        cc = b.getDouble("cc");
+        discount = b.getDouble("discount");
+        elec = b.getDouble("elec");
+        nonelec = b.getDouble("nonelec");
+        ncb = b.getDouble("ncb");
+        zerodep = b.getDouble("zerodep");
+        patodriver = b.getDouble("patodriver");
+        lltodriver = b.getDouble("lltodriver");
+        patounnamedpassenger = b.getDouble("patounnamedpassenger");
+        dateofregistration = b.getString("dateofregistration");
+        yes = b.getBoolean("restrict_tppd");
+        zone = (Zone) b.getSerializable("zone");
     }
 
     void createCompanyBuilder()
