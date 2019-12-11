@@ -28,6 +28,10 @@
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>
+    </string-array>
+    <string-array name="zone_array_withc">
+        <item>A</item>
+        <item>B</item>
         <item>C</item>
     </string-array>
     <string-array name="ncb_array">

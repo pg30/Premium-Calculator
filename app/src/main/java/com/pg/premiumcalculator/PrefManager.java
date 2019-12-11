@@ -20,11 +20,13 @@ public class PrefManager {
         editor.putInt("twowheelerid",id);
         editor.commit();
     }
+
     public int getTwoWheelerId()
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("twowheelerid",1);
     }
+
     public void setPrivateCarId(int id)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
@@ -32,11 +34,13 @@ public class PrefManager {
         editor.putInt("privatecarid",id);
         editor.commit();
     }
+
     public int getPrivateCarId()
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("privatecarid",1);
     }
+
     public void setTaxilessthan6Id(int id)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
@@ -44,9 +48,25 @@ public class PrefManager {
         editor.putInt("taxilessthan6id",id);
         editor.commit();
     }
+
     public int getTaxilessthan6Id()
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("taxilessthan6id",1);
     }
+
+    public void setGcv3WheelerId(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("gcv3wheelerid",id);
+        editor.commit();
+    }
+
+    public int getGcv3wheeler6Id()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("gcv3wheelerid",1);
+    }
+
 }

@@ -22,14 +22,14 @@ import java.util.Locale;
 
 public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,passenger_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit,extcngkit_edit;
+    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit;
     Spinner zone_spin,ncb_spin;
     Button calculate;
     RadioButton yes,imt_yes,public_carrier,private_carrier;
     CheckBox cng_yes;
 
 
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,noofpassenger,extcngkit;
+    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit;
     Zone zone;
     String dateofregistration;
     Carrier carrier;
@@ -78,11 +78,9 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         b.putDouble("discount",discount);
         b.putDouble("elec",elec);
         b.putDouble("nonelec",nonelec);
-        b.putDouble("noofpassenger",noofpassenger);
         b.putDouble("zerodep",zerodep);
         b.putDouble("patodriver",patodriver);
         b.putDouble("lltodriver",lltodriver);
-        b.putDouble("patounnamedpassenger",patounnamedpassenger);
         b.putDouble("extcngkit",extcngkit);
         b.putDouble("ncb",ncb);
         if(yes.isChecked())
@@ -126,12 +124,10 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         discount_edit = (EditText) findViewById(R.id.discount_value);
         elec_edit = (EditText) findViewById(R.id.electrical_accessories_value);
         nonelec_edit = (EditText) findViewById(R.id.nonelectrical_accessories_value);
-        passenger_edit = (EditText) findViewById(R.id.passenger_value);
         zerodep_edit = (EditText) findViewById(R.id.zerodep_value);
         extcngkit_edit = (EditText) findViewById(R.id.extcng_value);
         padriver_edit = (EditText) findViewById(R.id.patoownerdriver_value);
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
-        paunnamedpassenger_edit = (EditText) findViewById(R.id.patounnamedpassenger_value);
         calculate = (Button) findViewById(R.id.calculate);
         yes = (RadioButton) findViewById(R.id.yes);
         imt_yes = (RadioButton) findViewById(R.id.yes_imt);
@@ -140,7 +136,7 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         private_carrier = (RadioButton) findViewById(R.id.private_yes);
 
         zone_spin = (Spinner) findViewById(R.id.zone_value);
-        ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,R.array.zone_array,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,R.array.zone_array_withc,R.layout.support_simple_spinner_dropdown_item);
         zone_spin.setAdapter(zone_adapter);
         zone_spin.setOnItemSelectedListener(this);
 
@@ -163,12 +159,10 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         discount = ParseDouble(discount_edit.getText().toString());
         elec = ParseDouble(elec_edit.getText().toString());
         nonelec = ParseDouble(nonelec_edit.getText().toString());
-        noofpassenger = ParseDouble(passenger_edit.getText().toString());
         zerodep = ParseDouble(zerodep_edit.getText().toString());
         extcngkit = ParseDouble(extcngkit_edit.getText().toString());
         patodriver = ParseDouble(padriver_edit.getText().toString());
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
-        patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
         dateofregistration = ParseString(date_edit.getText().toString());
         Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
     }

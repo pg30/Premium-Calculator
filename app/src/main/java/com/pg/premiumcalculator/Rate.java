@@ -486,6 +486,7 @@ public class Rate {
         return 0.0;
     }
 
+    //for taxilessthan6
     Double getPerPassenger(Vehicle mvehicle,double mcc)
     {
         this.vehicle = mvehicle;
@@ -503,6 +504,155 @@ public class Rate {
             }
             break;
         }
+        return 0.0;
+    }
+
+    //for goodsvehicle3wheeler
+    Double getRate(Zone mzone,Vehicle mvehicle,String mdate,Carrier mcarrier)
+    {
+        zone = mzone;
+        vehicle = mvehicle;
+        carrier = mcarrier;
+        givenDate = mdate;
+        String currentDate = (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
+        Log.d("debug","given date is "+givenDate+" and current date is "+currentDate);
+        long time = getDays(currentDate,givenDate);
+
+        switch (vehicle)
+        {
+            case GOODSVEHICLE3WHEELER:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.664;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.706;
+                                else if(time>7*365)
+                                    return 1.747;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.165;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.194;
+                                else if(time>7*365)
+                                    return 1.223;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone A ends
+
+                    case B:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.656;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.697;
+                                else if(time>7*365)
+                                    return 1.739;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.159;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.188;
+                                else if(time>7*365)
+                                    return 1.217;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone B ends
+
+                    case C:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.640;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.681;
+                                else if(time>7*365)
+                                    return 1.722;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.148;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.177;
+                                else if(time>7*365)
+                                    return 1.205;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone C ends
+
+                }
+            }
+            break;
+            //GOODSVEHICLE3WHEELER case ends;
+        }
+        //switch vehicle ends
+        return 0.0;
+    }
+
+    //for goodsvehicle3wheeler
+    Double getTP(Vehicle mvehicle,Carrier mcarrier)
+    {
+        vehicle = mvehicle;
+        carrier = mcarrier;
+
+        switch (vehicle)
+        {
+            case GOODSVEHICLE3WHEELER:
+            {
+                if(carrier==Carrier.PRIVATE)
+                {
+                    return 3914.0;
+                }
+                else if(carrier==Carrier.PUBLIC)
+                {
+                    return 4092.0;
+                }
+            }
+            break;
+            //GOODSVEHICLE3WHEELER case ends
+        }
+        //vehicle case ends
+
         return 0.0;
     }
 }
