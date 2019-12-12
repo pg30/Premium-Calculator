@@ -76,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 10:
+                    {
+                        Intent intent = new Intent(getBaseContext(), pcv3wheeler.class);
+                        startActivity(intent);
+                        break;
+                    }
                     default:
                         throw new IllegalStateException("Unexpected value: " + pos);
                 }
