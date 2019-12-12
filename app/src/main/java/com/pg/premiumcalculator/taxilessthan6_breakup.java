@@ -53,17 +53,21 @@ public class taxilessthan6_breakup extends AppCompatActivity {
     double finalPremium,odPremium,tpPremium,tpPassenger,gst,rate,basicOD;
     double basicTP;
     boolean yes,imt_yes;
+
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep;
     double tempbasicTP,temptppd=150,tempownerpa,templltodriver,temppatounnamed;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
+
     //result views pointers
     TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview,passengerview,imt23view;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
-    DecimalFormat df = new DecimalFormat("0.00");
     //buttons
     Button share,knowyourcommission;
+
+    DecimalFormat df = new DecimalFormat("0.00");
+
     //
     Spinner company_spinner;
     //
@@ -84,6 +88,20 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         findViews();
 
         Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
+
+        calculatePremium();
+        setDisplayData();
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createCompanyBuilder();
+            }
+        });
+    }
+
+    void calculatePremium()
+    {
         rate = mrate.getRate(zone,currVehicle,cc,dateofregistration);
         tpPassenger = mrate.getPerPassenger(currVehicle,cc);
         basicTP=mrate.getTP(currVehicle,cc);
@@ -103,15 +121,6 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         finalPremium+=gst;
         tempfinalpremium = finalPremium;
         Log.d("debug","final premium with gst is "+finalPremium);
-
-        setDisplayData();
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createCompanyBuilder();
-            }
-        });
     }
 
     void findViews()
@@ -169,6 +178,7 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         imt_yes = b.getBoolean("imt23");
         zone = (Zone) b.getSerializable("zone");
     }
+
     //od premium
     Double calculateOD()
     {

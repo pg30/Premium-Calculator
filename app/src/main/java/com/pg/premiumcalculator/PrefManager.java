@@ -63,7 +63,7 @@ public class PrefManager {
         editor.commit();
     }
 
-    public int getGcv3wheeler6Id()
+    public int getGcv3wheelerId()
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("gcv3wheelerid",1);

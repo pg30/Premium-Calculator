@@ -91,6 +91,10 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
             b.putBoolean("imt23",true);
         else
             b.putBoolean("imt23",false);
+        if(cng_yes.isChecked())
+            b.putBoolean("cng",true);
+        else
+            b.putBoolean("cng",false);
         b.putSerializable("zone",zone);
         b.putSerializable("carrier",carrier);
         b.putString("dateofregistration",dateofregistration);
