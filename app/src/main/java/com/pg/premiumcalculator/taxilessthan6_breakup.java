@@ -45,7 +45,7 @@ import java.text.DecimalFormat;
 public class taxilessthan6_breakup extends AppCompatActivity {
 
     //for premium calcuation
-    double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,noofpassenger;
+    double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,noofpassenger;
     String dateofregistration;
     Zone zone;
     Rate mrate = new Rate();
@@ -56,11 +56,11 @@ public class taxilessthan6_breakup extends AppCompatActivity {
 
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep;
-    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,temppatounnamed;
+    double tempbasicTP,temptppd=150,tempownerpa,templltodriver;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers
-    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview,passengerview,imt23view;
+    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,totalbview,totalabview,gstview,finalview,passengerview,imt23view;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     //buttons
@@ -141,7 +141,6 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         tppdview = (TextView) findViewById(R.id.tppd_value);
         ownerpaview = (TextView) findViewById(R.id.ownerpa_value);
         lltodriverview = (TextView) findViewById(R.id.llpaid_value);
-        patounnamedview = (TextView) findViewById(R.id.paunnamed_value);
         totalbview = (TextView) findViewById(R.id.totalb_value);
         totalabview = (TextView) findViewById(R.id.totalab_value);
         gstview = (TextView) findViewById(R.id.gst_value);
@@ -172,7 +171,6 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         zerodep = b.getDouble("zerodep");
         patodriver = b.getDouble("patodriver");
         lltodriver = b.getDouble("lltodriver");
-        patounnamedpassenger = b.getDouble("patounnamedpassenger");
         dateofregistration = b.getString("dateofregistration");
         yes = b.getBoolean("restrict_tppd");
         imt_yes = b.getBoolean("imt23");
@@ -226,11 +224,10 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         Log.d("debug","basic TP is "+basicTP);
         basicTP+=(noofpassenger*tpPassenger);
         Log.d("debug","passenger TP is "+basicTP);
-        basicTP+=patodriver+lltodriver+patounnamedpassenger;
+        basicTP+=patodriver+lltodriver;
         tempownerpa = patodriver;
         templltodriver = lltodriver;
-        temppatounnamed = patounnamedpassenger;
-        Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
+        Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
             temptppd = 0;
             basicTP = basicTP - 150;
@@ -279,8 +276,6 @@ public class taxilessthan6_breakup extends AppCompatActivity {
         Log.d("debug",""+tempownerpa);
         lltodriverview.setText(""+df.format(templltodriver));
         Log.d("debug",""+templltodriver);
-        patounnamedview.setText(""+df.format(temppatounnamed));
-        Log.d("debug",""+temppatounnamed);
         totalbview.setText(""+df.format(temptotalb));
         Log.d("debug",""+temptotalb);
         totalabview.setText(""+df.format(temptotalab));
@@ -539,8 +534,8 @@ public class taxilessthan6_breakup extends AppCompatActivity {
 
                 addCell("IMT 23(+15%)", premiumtable, normal_font);
                 addCell(imt23view.getText().toString(), premiumtable, normal_font);
-                addCell("PA to Unnamed Passenger", premiumtable, normal_font);
-                addCell(patounnamedview.getText().toString(), premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
 
                 addCell("OD Discount(-" + discount + "%)", premiumtable, normal_font);
                 addCell(oddiscview.getText().toString(), premiumtable, normal_font);

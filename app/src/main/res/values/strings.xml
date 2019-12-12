@@ -25,6 +25,7 @@
     <string name="public_carrier">Public Carrier</string>
     <string name="private_carrier">Private Carrier</string>
     <string name="cng_lpg">CNG/LPG</string>
+    <string name="pcv_3_wheeler_insurance">PCV 3 Wheeler Insurance</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>

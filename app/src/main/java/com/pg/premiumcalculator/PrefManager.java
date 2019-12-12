@@ -69,4 +69,18 @@ public class PrefManager {
         return sharedPreferences.getInt("gcv3wheelerid",1);
     }
 
+    public void setPcv3WheelerId(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("pcv3wheelerid",id);
+        editor.commit();
+    }
+
+    public int getPcv3wheelerId()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("pcv3wheelerid",1);
+    }
+
 }

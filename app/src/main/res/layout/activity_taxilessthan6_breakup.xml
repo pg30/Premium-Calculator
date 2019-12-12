@@ -364,21 +364,6 @@
 
             <TableRow>
                 <TextView
-                    android:text="PA to Unnamed Passenger:"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_leftweight"
-                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
-                <TextView
-                    android:id="@+id/paunnamed_value"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_rightweight"
-                    android:text="0"
-                    android:paddingRight="@dimen/table_cell_rightmargin"
-                    android:gravity="right"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
                     android:text="Total B:"
                     android:layout_width="0dp"
                     android:layout_weight="@dimen/table_cell_leftweight"

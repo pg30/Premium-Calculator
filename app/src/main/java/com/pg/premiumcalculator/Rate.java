@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 enum Vehicle
 {
-    TWOWHEELER,PRIVATECAR,TAXILESSTHAN6,AUTORICKSHAW,GOODSVEHICLE,GOODSVEHICLE3WHEELER,MAXIORBUSOVER6,MISCVEHICLE;
+    TWOWHEELER,PRIVATECAR,TAXILESSTHAN6,PASSENGERVEHICLE3WHEELER,GOODSVEHICLE,GOODSVEHICLE3WHEELER,MAXIORBUSOVER6,MISCVEHICLE;
 }
 enum Zone
 {
@@ -652,6 +652,240 @@ public class Rate {
             //GOODSVEHICLE3WHEELER case ends
         }
         //vehicle case ends
+
+        return 0.0;
+    }
+
+    //for passengervehicle3wheeler
+    Double getRate(Zone mzone,Vehicle mvehicle,String mdate,double noofpassenger)
+    {
+        zone = mzone;
+        vehicle = mvehicle;
+        givenDate = mdate;
+        String currentDate = (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
+        Log.d("debug","given date is "+givenDate+" and current date is "+currentDate);
+        long time = getDays(currentDate,givenDate);
+
+        switch (vehicle)
+        {
+            case PASSENGERVEHICLE3WHEELER:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        if(noofpassenger<=6)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.278;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.310;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.342;
+                            }
+                        }
+                        else if(noofpassenger>6 && noofpassenger<=17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.785;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.830;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.874;
+                            }
+                        }
+                        else if(noofpassenger>17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.785;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.830;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.874;
+                            }
+                        }
+                    }
+                    break;
+                    //case A ends
+
+                    case B:
+                    {
+                        if(noofpassenger<=6)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.272;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.304;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.336;
+                            }
+                        }
+                        else if(noofpassenger>6 && noofpassenger<=17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.777;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.821;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.866;
+                            }
+                        }
+                        else if(noofpassenger>17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.777;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.821;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.866;
+                            }
+                        }
+                    }
+                    break;
+                    //case B ends
+
+                    case C:
+                    {
+                        if(noofpassenger<=6)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.260;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.292;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.323;
+                            }
+                        }
+                        else if(noofpassenger>6 && noofpassenger<=17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.759;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.803;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.847;
+                            }
+                        }
+                        else if(noofpassenger>17)
+                        {
+                            if(time<=5*365)
+                            {
+                                return 1.759;
+                            }
+                            else if(time>5*365 && time<=7*365)
+                            {
+                                return 1.803;
+                            }
+                            else if(time>7*365)
+                            {
+                                return 1.847;
+                            }
+                        }
+                    }
+                    break;
+                    //case C ends
+                }
+                //zone switch ends
+            }
+            break;
+            //pcv3wheeler ends
+        }
+        //vehicle switch ends
+        return 0.0;
+    }
+
+    //for passengervehicle3wheeler
+    Double getTP(double noofpassenger,Vehicle mvehicle)
+    {
+        switch (vehicle)
+        {
+            case PASSENGERVEHICLE3WHEELER:
+            {
+                if(noofpassenger<=6)
+                {
+                    return 2595.0;
+                }
+                else if(noofpassenger>6 && noofpassenger<=17)
+                {
+                    return 6913.0;
+                }
+                else if(noofpassenger>17)
+                {
+                    return 15845.0;
+                }
+            }
+            break;
+            //passengervehicle3wheeler case ends
+        }
+        //vehicle switch ends
+
+        return 0.0;
+    }
+
+    //for passengervehicle3wheeler
+    Double getPerPassenger(double noofpassenger,Vehicle mvehicle)
+    {
+        switch (vehicle)
+        {
+            case PASSENGERVEHICLE3WHEELER:
+            {
+                if(noofpassenger<=6)
+                {
+                    return 1241.0;
+                }
+                else if(noofpassenger>6 && noofpassenger<=17)
+                {
+                    return 1379.0;
+                }
+                else if(noofpassenger>17)
+                {
+                    return 969.0;
+                }
+            }
+            break;
+            //passengervehicle3wheeler case ends
+        }
+        //vehicle switch ends
 
         return 0.0;
     }

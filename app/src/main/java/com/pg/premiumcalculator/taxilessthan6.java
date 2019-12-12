@@ -23,8 +23,8 @@ import java.util.Locale;
 public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     Spinner zone_spin,ncb_spin;
-    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,passenger_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,noofpassenger;
+    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,passenger_edit,zerodep_edit,padriver_edit,lldriver_edit;
+    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,noofpassenger;
 
     Button calculate;
     Zone zone;
@@ -82,7 +82,6 @@ public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnIt
         zerodep_edit = (EditText) findViewById(R.id.zerodep_value);
         padriver_edit = (EditText) findViewById(R.id.patoownerdriver_value);
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
-        paunnamedpassenger_edit = (EditText) findViewById(R.id.patounnamedpassenger_value);
         calculate = (Button) findViewById(R.id.calculate);
         yes = (RadioButton) findViewById(R.id.yes);
         imt_yes = (RadioButton) findViewById(R.id.yes_imt);
@@ -111,7 +110,6 @@ public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnIt
         b.putDouble("zerodep",zerodep);
         b.putDouble("patodriver",patodriver);
         b.putDouble("lltodriver",lltodriver);
-        b.putDouble("patounnamedpassenger",patounnamedpassenger);
         b.putDouble("ncb",ncb);
         if(yes.isChecked())
             b.putBoolean("restrict_tppd",true);
@@ -139,7 +137,6 @@ public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnIt
         zerodep = ParseDouble(zerodep_edit.getText().toString());
         patodriver = ParseDouble(padriver_edit.getText().toString());
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
-        patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
         dateofregistration = ParseString(date_edit.getText().toString());
         Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
     }
