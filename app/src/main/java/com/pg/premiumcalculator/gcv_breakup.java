@@ -42,26 +42,26 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class gcv3wheeler_breakup extends AppCompatActivity {
+public class gcv_breakup extends AppCompatActivity {
 
     //for premium calculation
-    double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit;
+    double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit,gvw,nfpp;
     String dateofregistration;
     Zone zone;
     Carrier carrier;
     Rate mrate = new Rate();
-    Vehicle currVehicle = Vehicle.GOODSVEHICLE3WHEELER;
+    Vehicle currVehicle = Vehicle.GOODSVEHICLE;
     double finalPremium,odPremium,tpPremium,gst,rate,basicOD,basicTP;
-    boolean yes,imt_yes,cng_yes;
+    boolean yes,imt_yes,cng_yes,geoext_yes;
     DecimalFormat df = new DecimalFormat("0.00");
 
     //views values
-    double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep;
-    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
+    double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep,tempnfpp,tempgeoext;
+    double tempbasicTP,temptppd=200,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers
-    TextView idvview,dateview,zoneview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,totalbview,totalabview,gstview,finalview,imt23view,carrierview,cngview,extcngkitview,cngtpview;
+    TextView idvview,dateview,zoneview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,totalbview,totalabview,gstview,finalview,imt23view,carrierview,cngview,extcngkitview,cngtpview,gvwview,nfppview,geoextview;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     Button share,knowyourcommission;
@@ -80,7 +80,7 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gcv3wheeler_breakup);
+        setContentView(R.layout.activity_gcv_breakup);
 
         getValuesFromIntent();
         findViews();
@@ -92,8 +92,8 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
                 createCompanyBuilder();
             }
         });
-    }
 
+    }
     void findViews()
     {
         idvview = (TextView) findViewById(R.id.idv_value);
@@ -120,6 +120,9 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         cngview = (TextView) findViewById(R.id.cng_value);
         extcngkitview = (TextView) findViewById(R.id.cngkit_value);
         cngtpview = (TextView) findViewById(R.id.cngtp_value);
+        gvwview = (TextView) findViewById(R.id.gvw_value);
+        nfppview = (TextView) findViewById(R.id.nfpp_value);
+        geoextview = (TextView) findViewById(R.id.geoext_value);
 
         nonelecdisplay=(TextView) findViewById(R.id.nonelecdisplay);
         oddiscdisplay=(TextView) findViewById(R.id.oddiscdisplay);
@@ -133,7 +136,7 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
     void getValuesFromIntent()
     {
         Intent intent = getIntent();
-        Bundle b = intent.getBundleExtra("gcv3wheeler_breakup_bundle");
+        Bundle b = intent.getBundleExtra("gcv_breakup_bundle");
         idv = b.getDouble("idv");
         discount = b.getDouble("discount");
         elec = b.getDouble("elec");
@@ -144,6 +147,9 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         lltodriver = b.getDouble("lltodriver");
         dateofregistration = b.getString("dateofregistration");
         extcngkit = b.getDouble("extcngkit");
+        gvw = b.getDouble("gvw");
+        nfpp = b.getDouble("nfpp");
+        geoext_yes = b.getBoolean("geoext");
         yes = b.getBoolean("restrict_tppd");
         imt_yes = b.getBoolean("imt23");
         cng_yes = b.getBoolean("cng");
@@ -184,7 +190,7 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         totalaview.setText(""+df.format(temptotala));
         Log.d("debug",""+df.format(temptotala));
         basictpview.setText(""+tempbasicTP);
-        Log.d("debug",""+df.format(tempbasicTP));
+        Log.d("debug","tppppppppppp"+df.format(tempbasicTP));
         tppdview.setText(""+df.format(temptppd));
         Log.d("debug",""+temptppd);
         ownerpaview.setText(""+df.format(tempownerpa));
@@ -203,12 +209,19 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         Log.d("debug",""+tempextcngkit);
         cngtpview.setText(""+tempcngtp);
         Log.d("debug",""+tempcngtp);
+        gvwview.setText(""+gvw);
+        Log.d("debug",""+gvw);
+        nfppview.setText(""+tempnfpp);
+        Log.d("debug",""+tempnfpp);
+        geoextview.setText(""+tempgeoext);
+        Log.d("debug",""+tempgeoext);
     }
 
     void calculatePremium()
     {
-        rate = mrate.getRate(zone,currVehicle,dateofregistration,carrier);
-        basicTP = mrate.getTP(currVehicle,carrier);
+        rate = mrate.getRate(zone,currVehicle,dateofregistration,carrier,gvw);
+        basicTP = mrate.getTP(currVehicle,carrier,gvw);
+        Log.d("debug","tppp"+currVehicle+ " "+carrier+" "+gvw);
         tempbasicTP = basicTP;
 
         tempextcngkit = 0.04*extcngkit;
@@ -233,6 +246,11 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
     {
         basicOD = idv*(rate)/100;
         tempidv = idv;
+
+        if(gvw-12000>=0)
+        {
+            basicOD+=((gvw-12000)/100)*27;
+        }
 
         if(cng_yes)
         {
@@ -278,6 +296,12 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
             }
         }
 
+        if(geoext_yes)
+        {
+            basicOD+=400;
+            tempgeoext = 400;
+        }
+
         return basicOD;
     }
 
@@ -290,23 +314,25 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         if(yes)
         {
             temptppd = 0;
-            temp-=150;
+            temp-=200;
         }
         if(cng_yes)
         {
             temp+=60;
             tempcngtp = 60;
         }
+        temp+=nfpp*75;
+        tempnfpp = nfpp*75;
         return temp;
     }
 
     void createCompanyBuilder()
     {
-        AlertDialog.Builder company_builder = new AlertDialog.Builder(gcv3wheeler_breakup.this);
+        AlertDialog.Builder company_builder = new AlertDialog.Builder(gcv_breakup.this);
         View company_view = getLayoutInflater().inflate(R.layout.company_spinner_dialog,null);
         company_builder.setTitle("Choose Insurer");
         company_spinner = (Spinner) company_view.findViewById(R.id.company_spinner);
-        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(gcv3wheeler_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(gcv_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
         company_spinner.setAdapter(company_adapter);
         company_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -316,12 +342,12 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
                     Log.d("debug","inside"+company_name);
                     dialog.dismiss();
 //                    createFileBuilder();
-                    int fileid = new PrefManager(getApplicationContext()).getGcv3wheelerId();
-                    pdfname = "GCV3WHEELER_"+fileid+".pdf";
+                    int fileid = new PrefManager(getApplicationContext()).getGcvId();
+                    pdfname = "GCV_"+fileid+".pdf";
                     try {
                         createPdfWrapper();
                         fileid++;
-                        new PrefManager(getApplicationContext()).setGcv3WheelerId(fileid);
+                        new PrefManager(getApplicationContext()).setGcvId(fileid);
                         shareFile();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -473,10 +499,10 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
             try {
                 LineSeparator lineSeparator = new LineSeparator();
                 lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
-                Font h1_font = new Font(Font.FontFamily.TIMES_ROMAN, 23.0f, Font.UNDERLINE, BaseColor.BLACK);
-                Font h2_font = new Font(Font.FontFamily.TIMES_ROMAN, 20.0f, Font.NORMAL, BaseColor.BLACK);
-                Font bold_font = new Font(Font.FontFamily.TIMES_ROMAN, 13.0f, Font.BOLD, BaseColor.BLACK);
-                Font normal_font = new Font(Font.FontFamily.TIMES_ROMAN, 13.0f, Font.NORMAL, BaseColor.BLACK);
+                Font h1_font = new Font(Font.FontFamily.TIMES_ROMAN, 22.0f, Font.UNDERLINE, BaseColor.BLACK);
+                Font h2_font = new Font(Font.FontFamily.TIMES_ROMAN, 19.0f, Font.NORMAL, BaseColor.BLACK);
+                Font bold_font = new Font(Font.FontFamily.TIMES_ROMAN, 12.0f, Font.BOLD, BaseColor.BLACK);
+                Font normal_font = new Font(Font.FontFamily.TIMES_ROMAN, 12.0f, Font.NORMAL, BaseColor.BLACK);
                 document.add(new Chunk(lineSeparator));
 
                 //add heading
@@ -512,8 +538,8 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
 
                 addCell("CNG/LPG", basictable, bold_font);
                 addCell(cngview.getText().toString(), basictable, normal_font);
-                addCell(" ",basictable,bold_font);
-                addCell(" ",basictable,normal_font);
+                addCell("GVW", basictable, bold_font);
+                addCell(gvwview.getText().toString(), basictable, normal_font);
 
                 basictable.setSpacingAfter(2f);
                 document.add(basictable);
@@ -557,6 +583,11 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
 
                 addCell("IMT 23(+15%)", premiumtable, normal_font);
                 addCell(imt23view.getText().toString(), premiumtable, normal_font);
+                addCell("Non Faring Paasenger", premiumtable, normal_font);
+                addCell(nfppview.getText().toString(), premiumtable, normal_font);
+
+                addCell("Geographical Extension", premiumtable, normal_font);
+                addCell(geoextview.getText().toString(), premiumtable, normal_font);
                 addCell("", premiumtable, normal_font);
                 addCell("", premiumtable, normal_font);
 
@@ -575,10 +606,10 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
                 addCell("", premiumtable, normal_font);
                 addCell("", premiumtable, normal_font);
 
-                addCell("Total OD Premium(A)", premiumtable, normal_font);
-                addCell(totalaview.getText().toString(), premiumtable, normal_font);
-                addCell("Total TP Premium(B)", premiumtable, normal_font);
-                addCell(totalbview.getText().toString(), premiumtable, normal_font);
+                addCell("Total OD Premium(A)", premiumtable, bold_font);
+                addCell(totalaview.getText().toString(), premiumtable, bold_font);
+                addCell("Total TP Premium(B)", premiumtable, bold_font);
+                addCell(totalbview.getText().toString(), premiumtable, bold_font);
 
                 addCellWithColSpan("  ", premiumtable, normal_font, 4);
 

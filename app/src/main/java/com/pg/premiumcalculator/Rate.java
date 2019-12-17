@@ -889,4 +889,196 @@ public class Rate {
 
         return 0.0;
     }
+
+    //for goodsvehicle
+    Double getRate(Zone mzone,Vehicle mvehicle,String mdate,Carrier mcarrier,double gvw)
+    {
+        zone = mzone;
+        vehicle = mvehicle;
+        carrier = mcarrier;
+        givenDate = mdate;
+        String currentDate = (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
+        Log.d("debug","given date is "+givenDate+" and current date is "+currentDate);
+        long time = getDays(currentDate,givenDate);
+
+        switch (vehicle)
+        {
+            case GOODSVEHICLE:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.751;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.795;
+                                else if(time>7*365)
+                                    return 1.839;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.226;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.257;
+                                else if(time>7*365)
+                                    return 1.287;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone A ends
+
+                    case B:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.743;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.787;
+                                else if(time>7*365)
+                                    return 1.830;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.220;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.251;
+                                else if(time>7*365)
+                                    return 1.281;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone B ends
+
+                    case C:
+                    {
+                        switch (carrier)
+                        {
+                            case PUBLIC:
+                            {
+                                if(time<=5*365)
+                                    return 1.726;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.770;
+                                else if(time>7*365)
+                                    return 1.812;
+                            }
+                            break;
+                            //carrier public ends
+
+                            case PRIVATE:
+                            {
+                                if(time<=5*365)
+                                    return 1.208;
+                                else if(time>5*365 && time<=7*365)
+                                    return 1.239;
+                                else if(time>7*365)
+                                    return 1.268;
+                            }
+                            break;
+                            //carrier private ends
+                        }
+                    }
+                    break;
+                    //zone C ends
+
+                }
+            }
+            break;
+            //GOODSVEHICLE case ends;
+        }
+        //switch vehicle ends
+        return 0.0;
+    }
+
+    //for goodsvehicle
+    Double getTP(Vehicle mvehicle,Carrier mcarrier,double gvw)
+    {
+        vehicle = mvehicle;
+        carrier = mcarrier;
+
+        switch (vehicle)
+        {
+            case GOODSVEHICLE:
+            {
+                switch (carrier)
+                {
+                    case PUBLIC:
+                    {
+                        if(gvw<=7500)
+                        {
+                            return 15746.0;
+                        }
+                        else if(gvw>7500 && gvw<=12000)
+                        {
+                            return 26935.0;
+                        }
+                        else if(gvw>12000 && gvw<=20000)
+                        {
+                            return 33418.0;
+                        }
+                        else if(gvw>20000 && gvw<=40000)
+                        {
+                            return 43037.0;
+                        }
+                        else if(gvw>40000)
+                        {
+                            return 41561.0;
+                        }
+                    }
+                        break;
+                    case PRIVATE:
+                    {
+                        if(gvw<=7500)
+                        {
+                            return 8438.0;
+                        }
+                        else if(gvw>7500 && gvw<=12000)
+                        {
+                            return 17204.0;
+                        }
+                        else if(gvw>12000 && gvw<=20000)
+                        {
+                            return 10876.0;
+                        }
+                        else if(gvw>20000 && gvw<=40000)
+                        {
+                            return 17476.0;
+                        }
+                        else if(gvw>40000)
+                        {
+                            return 24825.0;
+                        }
+                    }
+                    break;
+                }
+            }
+            break;
+            //GOODSVEHICLE case ends
+        }
+        //vehicle case ends
+
+        return 0.0;
+    }
 }

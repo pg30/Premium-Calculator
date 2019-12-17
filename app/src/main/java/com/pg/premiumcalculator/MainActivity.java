@@ -33,11 +33,8 @@ public class MainActivity extends AppCompatActivity {
         GridAdapter adapter = new GridAdapter(this,R.layout.grid_item_view,list);
 
         list.add(new Item(R.drawable.pcicon,"Two Wheeler"));
-        list.add(new Item(R.drawable.pcicon,"Five year Two Wheeler"));
         list.add(new Item(R.drawable.pcicon,"Private Car"));
-        list.add(new Item(R.drawable.pcicon,"Three Years Private Car"));
-        list.add(new Item(R.drawable.pcicon,"GCV Public"));
-        list.add(new Item(R.drawable.pcicon,"GCV Private"));
+        list.add(new Item(R.drawable.pcicon,"GCV"));
         list.add(new Item(R.drawable.pcicon,"Taxi upto 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"Bus more than 6 passengers"));
         list.add(new Item(R.drawable.pcicon,"School Bus"));
@@ -58,25 +55,31 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
-                    case 2:
+                    case 1:
                     {
                         Intent intent = new Intent(getBaseContext(), private_car.class);
                         startActivity(intent);
                         break;
                     }
-                    case 6:
+                    case 2:
+                    {
+                        Intent intent = new Intent(getBaseContext(), gcv.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 3:
                     {
                         Intent intent = new Intent(getBaseContext(), taxilessthan6.class);
                         startActivity(intent);
                         break;
                     }
-                    case 9:
+                    case 6:
                     {
                         Intent intent = new Intent(getBaseContext(), gcv3wheeler.class);
                         startActivity(intent);
                         break;
                     }
-                    case 10:
+                    case 7:
                     {
                         Intent intent = new Intent(getBaseContext(), pcv3wheeler.class);
                         startActivity(intent);

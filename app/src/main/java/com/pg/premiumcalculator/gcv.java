@@ -20,20 +20,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class gcv extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    EditText idv_edit,date_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit;
+    EditText idv_edit,date_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit,gvw_edit,nfpp_edit;
     Spinner zone_spin,ncb_spin;
     Button calculate;
     RadioButton yes,imt_yes,public_carrier,private_carrier;
-    CheckBox cng_yes;
+    CheckBox cng_yes,geoext_yes;
 
 
-    Double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit;
+    Double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit,gvw,nfpp;
     Zone zone;
     String dateofregistration;
     Carrier carrier;
-    Vehicle currVehicle = Vehicle.GOODSVEHICLE3WHEELER;
+    Vehicle currVehicle = Vehicle.GOODSVEHICLE;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
     Calendar newCalendar;
@@ -41,7 +41,7 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gcv3wheeler);
+        setContentView(R.layout.activity_gcv);
 
         findViews();
         cng_yes.setOnClickListener(new View.OnClickListener() {
@@ -69,38 +69,6 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
-    void setValuesInIntent()
-    {
-        Intent intent = new Intent(getBaseContext(), gcv3wheeler_breakup.class);
-        Bundle b = new Bundle();
-        b.putDouble("idv",idv);
-        b.putDouble("discount",discount);
-        b.putDouble("elec",elec);
-        b.putDouble("nonelec",nonelec);
-        b.putDouble("zerodep",zerodep);
-        b.putDouble("patodriver",patodriver);
-        b.putDouble("lltodriver",lltodriver);
-        b.putDouble("extcngkit",extcngkit);
-        b.putDouble("ncb",ncb);
-        if(yes.isChecked())
-            b.putBoolean("restrict_tppd",true);
-        else
-            b.putBoolean("restrict_tppd",false);
-        if(imt_yes.isChecked())
-            b.putBoolean("imt23",true);
-        else
-            b.putBoolean("imt23",false);
-        if(cng_yes.isChecked())
-            b.putBoolean("cng",true);
-        else
-            b.putBoolean("cng",false);
-        b.putSerializable("zone",zone);
-        b.putSerializable("carrier",carrier);
-        b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("gcv3wheeler_breakup_bundle",b);
-        startActivity(intent);
-    }
-
     void findViews()
     {
         newCalendar = Calendar.getInstance();
@@ -111,7 +79,7 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         date_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePickerDialog = new DatePickerDialog(gcv3wheeler.this,new DatePickerDialog.OnDateSetListener() {
+                datePickerDialog = new DatePickerDialog(gcv.this,new DatePickerDialog.OnDateSetListener() {
 
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar newDate = Calendar.getInstance();
@@ -130,6 +98,9 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         extcngkit_edit = (EditText) findViewById(R.id.extcng_value);
         padriver_edit = (EditText) findViewById(R.id.patoownerdriver_value);
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
+        gvw_edit = (EditText) findViewById(R.id.gvw_value);
+        geoext_yes = (CheckBox) findViewById(R.id.geoext_value);
+        nfpp_edit = (EditText) findViewById(R.id.nfpp_value);
         calculate = (Button) findViewById(R.id.calculate);
         yes = (RadioButton) findViewById(R.id.yes);
         imt_yes = (RadioButton) findViewById(R.id.yes_imt);
@@ -148,6 +119,44 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         ncb_spin.setOnItemSelectedListener(this);
     }
 
+    void setValuesInIntent()
+    {
+        Intent intent = new Intent(getBaseContext(), gcv_breakup.class);
+        Bundle b = new Bundle();
+        b.putDouble("idv",idv);
+        b.putDouble("discount",discount);
+        b.putDouble("elec",elec);
+        b.putDouble("nonelec",nonelec);
+        b.putDouble("zerodep",zerodep);
+        b.putDouble("patodriver",patodriver);
+        b.putDouble("lltodriver",lltodriver);
+        b.putDouble("extcngkit",extcngkit);
+        b.putDouble("gvw",gvw);
+        b.putDouble("nfpp",nfpp);
+        b.putDouble("ncb",ncb);
+        if(yes.isChecked())
+            b.putBoolean("restrict_tppd",true);
+        else
+            b.putBoolean("restrict_tppd",false);
+        if(geoext_yes.isChecked())
+            b.putBoolean("geoext",true);
+        else
+            b.putBoolean("geoext",false);
+        if(imt_yes.isChecked())
+            b.putBoolean("imt23",true);
+        else
+            b.putBoolean("imt23",false);
+        if(cng_yes.isChecked())
+            b.putBoolean("cng",true);
+        else
+            b.putBoolean("cng",false);
+        b.putSerializable("zone",zone);
+        b.putSerializable("carrier",carrier);
+        b.putString("dateofregistration",dateofregistration);
+        intent.putExtra("gcv_breakup_bundle",b);
+        startActivity(intent);
+    }
+
     void getValuesFromEditText()
     {
         Log.d("debug","button clicked");
@@ -164,26 +173,10 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         extcngkit = ParseDouble(extcngkit_edit.getText().toString());
         patodriver = ParseDouble(padriver_edit.getText().toString());
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        gvw = ParseDouble(gvw_edit.getText().toString());
+        nfpp = ParseDouble(nfpp_edit.getText().toString());
         dateofregistration = ParseString(date_edit.getText().toString());
         Log.d("debug",zone+" "+currVehicle+" "+" "+dateofregistration);
-    }
-
-    double ParseDouble(String str)
-    {
-        if(str!=null && str.trim().length()>0)
-        {
-            return Double.parseDouble(str);
-        }
-        else
-            return 0.0;
-    }
-
-    String ParseString(String str)
-    {
-        if(str!=null && str.trim().length()>0)
-            return str;
-        else
-            return (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
     }
 
     @Override
@@ -208,5 +201,23 @@ public class gcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    double ParseDouble(String str)
+    {
+        if(str!=null && str.trim().length()>0)
+        {
+            return Double.parseDouble(str);
+        }
+        else
+            return 0.0;
+    }
+
+    String ParseString(String str)
+    {
+        if(str!=null && str.trim().length()>0)
+            return str;
+        else
+            return (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
     }
 }
