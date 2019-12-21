@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 enum Vehicle
 {
-    TWOWHEELER,PRIVATECAR,TAXILESSTHAN6,PASSENGERVEHICLE3WHEELER,GOODSVEHICLE,GOODSVEHICLE3WHEELER,MAXIORBUSOVER6,MISCVEHICLE;
+    TWOWHEELER,PRIVATECAR,TAXILESSTHAN6,PASSENGERVEHICLE3WHEELER,GOODSVEHICLE,GOODSVEHICLE3WHEELER,BUSOVER6,SCHOOLBUS,MISCVEHICLE;
 }
 enum Zone
 {
@@ -21,7 +21,14 @@ enum Carrier
 {
     PUBLIC,PRIVATE;
 }
-
+enum Type
+{
+    Agricultural,Others;
+}
+enum MiscType
+{
+    TRACTOR,AMBULANCE,DRILLINGRIGS,TRAILER;
+}
 public class Rate {
     private Zone zone;
     private Vehicle vehicle;
@@ -656,7 +663,7 @@ public class Rate {
         return 0.0;
     }
 
-    //for passengervehicle3wheeler
+    //for passengervehicle3wheeler,busover6,schoolbus
     Double getRate(Zone mzone,Vehicle mvehicle,String mdate,double noofpassenger)
     {
         zone = mzone;
@@ -829,14 +836,80 @@ public class Rate {
             }
             break;
             //pcv3wheeler ends
+
+            case BUSOVER6:
+            case SCHOOLBUS:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        if(time<=5*365)
+                        {
+                            return 1.680;
+                        }
+                        else if(time>5*365 && time<=7*365)
+                        {
+                            return 1.722;
+                        }
+                        else if(time>7*365)
+                        {
+                            return 1.764;
+                        }
+                    }
+                    break;
+                    //case A ends
+
+                    case B:
+                    {
+                        if(time<=5*365)
+                        {
+                            return 1.672;
+                        }
+                        else if(time>5*365 && time<=7*365)
+                        {
+                            return 1.714;
+                        }
+                        else if(time>7*365)
+                        {
+                            return 1.756;
+                        }
+                    }
+                    break;
+                    //case B ends
+
+                    case C:
+                    {
+                        if(time<=5*365)
+                        {
+                            return 1.656;
+                        }
+                        else if(time>5*365 && time<=7*365)
+                        {
+                            return 1.697;
+                        }
+                        else if(time>7*365)
+                        {
+                            return 1.739;
+                        }
+                    }
+                    break;
+                    //case C ends
+                }
+                //zone switch ends
+            }
+            break;
+            //busover6,schoolbus ends
+
         }
         //vehicle switch ends
         return 0.0;
     }
 
-    //for passengervehicle3wheeler
+    //for passengervehicle3wheeler,busover6,schoolbus
     Double getTP(double noofpassenger,Vehicle mvehicle)
     {
+        vehicle = mvehicle;
         switch (vehicle)
         {
             case PASSENGERVEHICLE3WHEELER:
@@ -856,15 +929,26 @@ public class Rate {
             }
             break;
             //passengervehicle3wheeler case ends
+
+            case BUSOVER6: {
+                return 14494.0;
+            }
+            //busover6 case ends
+
+            case SCHOOLBUS: {
+                return 13874.0;
+            }
+            //schoolbus case ends
         }
         //vehicle switch ends
 
         return 0.0;
     }
 
-    //for passengervehicle3wheeler
+    //for passengervehicle3wheeler,busover6,schoolbus
     Double getPerPassenger(double noofpassenger,Vehicle mvehicle)
     {
+        vehicle = mvehicle;
         switch (vehicle)
         {
             case PASSENGERVEHICLE3WHEELER:
@@ -884,9 +968,43 @@ public class Rate {
             }
             break;
             //passengervehicle3wheeler case ends
+
+            case BUSOVER6:
+                return 886.0;
+                //busover6 case ends
+
+            case SCHOOLBUS:
+                return 848.0;
+                //schoolbus case ends
         }
         //vehicle switch ends
 
+        return 0.0;
+    }
+
+    //for busover6,schoolbus
+    Double getAdditionalOD(Vehicle mvehicle,double noofpassenger)
+    {
+        vehicle = mvehicle;
+
+        switch (vehicle)
+        {
+            case BUSOVER6:
+            case SCHOOLBUS:
+            {
+                if(noofpassenger>=7 && noofpassenger<=18)
+                    return 350.0;
+                else if(noofpassenger>18 && noofpassenger<=36)
+                    return 450.0;
+                else if(noofpassenger>36 && noofpassenger<=60)
+                    return 550.0;
+                else if(noofpassenger>60)
+                    return 450.0;
+            }
+            break;
+            //busover6, schoolbus case ends
+        }
+        //vehicle switch ends
         return 0.0;
     }
 
@@ -1079,6 +1197,101 @@ public class Rate {
         }
         //vehicle case ends
 
+        return 0.0;
+    }
+
+    //for miscvehicles
+    Double getRate(Vehicle mvehcile,Zone mzone,String mdate)
+    {
+        vehicle = mvehcile;
+        zone = mzone;
+        givenDate = mdate;
+        String currentDate = (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.YEAR));
+        Log.d("debug","given date is "+givenDate+" and current date is "+currentDate);
+        long time = getDays(currentDate,givenDate);
+        switch (vehicle)
+        {
+            case MISCVEHICLE:
+            {
+                switch (zone)
+                {
+                    case A:
+                    {
+                        if(time<=5*365)
+                            return 1.208;
+                        else if(time>5*365 && time<=7*365)
+                            return 1.238;
+                        else if(time>7*365)
+                            return 1.268;
+                    }
+                    break;
+
+                    case B:
+                    {
+                        if(time<=5*365)
+                            return 1.202;
+                        else if(time>5*365 && time<=7*365)
+                            return 1.232;
+                        else if(time>7*365)
+                            return 1.262;
+                    }
+                    break;
+
+                    case C:
+                    {
+                        if(time<=5*365)
+                            return 1.190;
+                        else if(time>5*365 && time<=7*365)
+                            return 1.220;
+                        else if(time>7*365)
+                            return 1.250;
+                    }
+                    break;
+                }
+            }
+            break;
+        }
+        return 0.0;
+    }
+
+    //for misvehicles
+    Double getTP(Vehicle mvehicle,Type type,MiscType miscType)
+    {
+        vehicle = mvehicle;
+        switch (vehicle)
+        {
+            case MISCVEHICLE:
+            {
+                switch (miscType)
+                {
+                    case TRACTOR:
+                    case AMBULANCE:
+                    case DRILLINGRIGS:
+                    {
+                        switch (type)
+                        {
+                            case Agricultural:
+                            case Others:
+                                return 6847.0;
+                        }
+                    }
+                    break;
+
+                    case TRAILER:
+                    {
+                        switch (type)
+                        {
+                            case Others:
+                                return 2341.0;
+                            case Agricultural:
+                                return 857.0;
+                        }
+                    }
+                    break;
+                }
+            }
+            break;
+        }
         return 0.0;
     }
 }

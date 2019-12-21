@@ -73,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 4:
+                    {
+                        Intent intent = new Intent(getBaseContext(), busover6.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 5:
+                    {
+                        Intent intent = new Intent(getBaseContext(), schoolbus.class);
+                        startActivity(intent);
+                        break;
+                    }
                     case 6:
                     {
                         Intent intent = new Intent(getBaseContext(), gcv3wheeler.class);
@@ -82,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
                     case 7:
                     {
                         Intent intent = new Intent(getBaseContext(), pcv3wheeler.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 8:
+                    {
+                        Intent intent = new Intent(getBaseContext(), misc.class);
                         startActivity(intent);
                         break;
                     }

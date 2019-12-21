@@ -42,25 +42,25 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class pcv3wheeler_breakup extends AppCompatActivity {
+public class busover6_breakup extends AppCompatActivity {
 
     //for premium calcuation
     double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,noofpassenger,extcngkit;
     String dateofregistration;
     Zone zone;
     Rate mrate = new Rate();
-    Vehicle currVehicle = Vehicle.PASSENGERVEHICLE3WHEELER;
+    Vehicle currVehicle = Vehicle.BUSOVER6;
     double finalPremium,odPremium,tpPremium,tpPassenger,gst,rate,basicOD;
     double basicTP;
-    boolean yes,imt_yes,cng_yes;
+    boolean yes,imt_yes,cng_yes,geoext_yes;
 
     //views values
-    double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep;
-    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
+    double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep,tempgeoext;
+    double tempbasicTP,temptppd=200,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers
-    TextView idvview,dateview,zoneview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,totalbview,totalabview,gstview,finalview,passengerview,imt23view,cngview,extcngkitview,cngtpview;
+    TextView idvview,dateview,zoneview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,totalbview,totalabview,gstview,finalview,passengerview,imt23view,cngview,extcngkitview,cngtpview,geoextview;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     //buttons
@@ -82,7 +82,7 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pcv3wheeler_breakup);
+        setContentView(R.layout.activity_busover6_breakup);
 
         getValuesFromIntent();
         findViews();
@@ -153,6 +153,7 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
         cngview = (TextView) findViewById(R.id.cng_value);
         extcngkitview = (TextView) findViewById(R.id.cngkit_value);
         cngtpview = (TextView) findViewById(R.id.cngtp_value);
+        geoextview = (TextView) findViewById(R.id.geoext_value);
 
         nonelecdisplay=(TextView) findViewById(R.id.nonelecdisplay);
         oddiscdisplay=(TextView) findViewById(R.id.oddiscdisplay);
@@ -166,7 +167,7 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
     void getValuesFromIntent()
     {
         Intent intent = getIntent();
-        Bundle b = intent.getBundleExtra("pcv3wheeler_breakup_bundle");
+        Bundle b = intent.getBundleExtra("busover6_breakup_bundle");
         idv = b.getDouble("idv");
         discount = b.getDouble("discount");
         elec = b.getDouble("elec");
@@ -182,6 +183,7 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
         imt_yes = b.getBoolean("imt23");
         zone = (Zone) b.getSerializable("zone");
         cng_yes = b.getBoolean("cng");
+        geoext_yes = b.getBoolean("geoext");
     }
 
     //od premium
@@ -198,6 +200,9 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
                 basicOD+=0.05*basicOD;
             }
         }
+        double additionalOD = mrate.getAdditionalOD(currVehicle,noofpassenger);
+        Log.d("debug","additional OD is "+additionalOD);
+        basicOD+=additionalOD;
         Log.d("debug","basicOD is "+basicOD);
         tempidv = idv;
         tempbasicOD = basicOD;
@@ -237,6 +242,11 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
             {
                 basicOD+=0.04*extcngkit;
             }
+        }
+        if(geoext_yes)
+        {
+            basicOD+=400;
+            tempgeoext = 400;
         }
         return  basicOD;
     }
@@ -316,15 +326,17 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
         Log.d("debug",""+tempextcngkit);
         cngtpview.setText(""+tempcngtp);
         Log.d("debug",""+tempcngtp);
+        geoextview.setText(""+tempgeoext);
+        Log.d("debug",""+tempgeoext);
     }
 
     void createCompanyBuilder()
     {
-        AlertDialog.Builder company_builder = new AlertDialog.Builder(pcv3wheeler_breakup.this);
+        AlertDialog.Builder company_builder = new AlertDialog.Builder(busover6_breakup.this);
         View company_view = getLayoutInflater().inflate(R.layout.company_spinner_dialog,null);
         company_builder.setTitle("Choose Insurer");
         company_spinner = (Spinner) company_view.findViewById(R.id.company_spinner);
-        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(pcv3wheeler_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> company_adapter =  ArrayAdapter.createFromResource(busover6_breakup.this,R.array.company_list,R.layout.support_simple_spinner_dropdown_item);
         company_spinner.setAdapter(company_adapter);
         company_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -334,12 +346,12 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
                     Log.d("debug","inside"+company_name);
                     dialog.dismiss();
 //                    createFileBuilder();
-                    int fileid = new PrefManager(getApplicationContext()).getPcv3wheelerId();
-                    pdfname = "PCV3WHEELER_"+fileid+".pdf";
+                    int fileid = new PrefManager(getApplicationContext()).getBusOver6Id();
+                    pdfname = "BUSOVER6_"+fileid+".pdf";
                     try {
                         createPdfWrapper();
                         fileid++;
-                        new PrefManager(getApplicationContext()).setPcv3WheelerId(fileid);
+                        new PrefManager(getApplicationContext()).setBusOver6Id(fileid);
                         shareFile();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -574,6 +586,11 @@ public class pcv3wheeler_breakup extends AppCompatActivity {
 
                 addCell("IMT 23(+15%)", premiumtable, normal_font);
                 addCell(imt23view.getText().toString(), premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
+                addCell("", premiumtable, normal_font);
+
+                addCell("Geographical Extension", premiumtable, normal_font);
+                addCell(geoextview.getText().toString(), premiumtable, normal_font);
                 addCell("", premiumtable, normal_font);
                 addCell("", premiumtable, normal_font);
 

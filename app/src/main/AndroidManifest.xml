@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".gcv_breakup"></activity>
+        <activity android:name=".misc_breakup"></activity>
+        <activity android:name=".misc" />
+        <activity android:name=".schoolbus_breakup" />
+        <activity android:name=".schoolbus" />
+        <activity android:name=".busover6_breakup" />
+        <activity android:name=".busover6" />
+        <activity android:name=".gcv_breakup" />
         <activity android:name=".gcv" />
         <activity android:name=".pcv3wheeler_breakup" />
         <activity android:name=".pcv3wheeler" />

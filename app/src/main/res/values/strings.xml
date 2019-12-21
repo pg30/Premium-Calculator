@@ -30,6 +30,8 @@
     <string name="gross_vehicle_weight_kgs">Gross Vehicle Weight(Kgs)</string>
     <string name="non_faring_passenger_nfpp">Non Faring Passenger(NFPP)</string>
     <string name="geographical_extension">Geographical Extension</string>
+    <string name="bus_more_than_6_passenger">Bus More than 6 Passenger</string>
+    <string name="school_bus">School Bus</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>

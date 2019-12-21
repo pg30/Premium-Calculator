@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".gcv_breakup">
-
+    tools:context=".busover6_breakup">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,7 +14,7 @@
             android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/goods_carrying_vehicle"
+            android:text="@string/bus_more_than_6_passenger"
             android:background="@color/colorPrimary"
             android:gravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,31 +99,18 @@
                     android:paddingRight="@dimen/table_cell_rightmargin"
                     android:gravity="right"/>
             </TableRow>
+
             <TableRow>
                 <TextView
-                    android:text="Carrier:"
+                    android:text="No. of Passengers:"
                     android:layout_width="0dp"
                     android:layout_weight="@dimen/table_cell_leftweight"
                     android:paddingLeft="@dimen/table_cell_leftmargin"/>
                 <TextView
-                    android:id="@+id/carrier_value"
+                    android:id="@+id/passenger_value"
                     android:layout_width="0dp"
                     android:layout_weight="@dimen/table_cell_rightweight"
-                    android:text="PUBLIC"
-                    android:paddingRight="@dimen/table_cell_rightmargin"
-                    android:gravity="right"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="GVW:"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_leftweight"
-                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
-                <TextView
-                    android:id="@+id/gvw_value"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_rightweight"
-                    android:text="0Kgs"
+                    android:text="0"
                     android:paddingRight="@dimen/table_cell_rightmargin"
                     android:gravity="right"/>
             </TableRow>
@@ -423,21 +409,6 @@
 
             <TableRow>
                 <TextView
-                    android:text="Non Faring Passenger:"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_leftweight"
-                    android:paddingLeft="@dimen/table_cell_leftmargin"/>
-                <TextView
-                    android:id="@+id/nfpp_value"
-                    android:layout_width="0dp"
-                    android:layout_weight="@dimen/table_cell_rightweight"
-                    android:text="0.00"
-                    android:paddingRight="@dimen/table_cell_rightmargin"
-                    android:gravity="right"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
                     android:text="Total B:"
                     android:layout_width="0dp"
                     android:layout_weight="@dimen/table_cell_leftweight"
@@ -495,7 +466,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="@dimen/table_cell_leftweight"
                     android:paddingLeft="@dimen/table_cell_leftmargin"
-                    android:text="GST(@18%+12%):" />
+                    android:text="GST(@18%):" />
 
                 <TextView
                     android:id="@+id/gst_value"

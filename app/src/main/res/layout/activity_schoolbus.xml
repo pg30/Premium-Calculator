@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pcv3wheeler">
+    tools:context=".schoolbus">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/pcv_3_wheeler_insurance"
+            android:text="@string/school_bus"
             android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,6 +211,26 @@
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/geoext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:text="@string/geographical_extension" />
+
+
+                <CheckBox
+                    android:id="@+id/geoext_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    android:ems="10"/>
             </TableRow>
 
             <TableRow>

@@ -20,16 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class schoolbus extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner zone_spin,ncb_spin;
     EditText idv_edit,date_edit,discount_edit,elec_edit,nonelec_edit,passenger_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit;
     Button calculate;
     RadioButton yes,imt_yes;
-    CheckBox cng_yes;
+    CheckBox cng_yes,geoext_yes;
 
     Double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,noofpassenger,extcngkit;
-    Vehicle currVehicle = Vehicle.PASSENGERVEHICLE3WHEELER;
+    Vehicle currVehicle = Vehicle.SCHOOLBUS;
     Zone zone;
     String dateofregistration;
     private DatePickerDialog datePickerDialog;
@@ -39,7 +39,7 @@ public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pcv3wheeler);
+        setContentView(R.layout.activity_schoolbus);
 
         findViews();
         cng_yes.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         date_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePickerDialog = new DatePickerDialog(pcv3wheeler.this,new DatePickerDialog.OnDateSetListener() {
+                datePickerDialog = new DatePickerDialog(schoolbus.this,new DatePickerDialog.OnDateSetListener() {
 
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar newDate = Calendar.getInstance();
@@ -96,6 +96,7 @@ public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
         passenger_edit = (EditText) findViewById(R.id.passenger_value);
         extcngkit_edit = (EditText) findViewById(R.id.extcng_value);
         zerodep_edit = (EditText) findViewById(R.id.zerodep_value);
+        geoext_yes = (CheckBox) findViewById(R.id.geoext_value);
         padriver_edit = (EditText) findViewById(R.id.patoownerdriver_value);
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
         calculate = (Button) findViewById(R.id.calculate);
@@ -132,7 +133,7 @@ public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
 
     void setValuesInIntent()
     {
-        Intent intent = new Intent(getBaseContext(), pcv3wheeler_breakup.class);
+        Intent intent = new Intent(getBaseContext(), schoolbus_breakup.class);
         Bundle b = new Bundle();
         b.putDouble("idv",idv);
         b.putDouble("discount",discount);
@@ -156,9 +157,13 @@ public class pcv3wheeler extends AppCompatActivity implements AdapterView.OnItem
             b.putBoolean("cng",true);
         else
             b.putBoolean("cng",false);
+        if(geoext_yes.isChecked())
+            b.putBoolean("geoext",true);
+        else
+            b.putBoolean("geoext",false);
         b.putSerializable("zone",zone);
         b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("pcv3wheeler_breakup_bundle",b);
+        intent.putExtra("schoolbus_breakup_bundle",b);
         startActivity(intent);
     }
 

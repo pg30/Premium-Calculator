@@ -96,4 +96,46 @@ public class PrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
         return sharedPreferences.getInt("gcvid",1);
     }
+
+    public void setBusOver6Id(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("busover6id",id);
+        editor.commit();
+    }
+
+    public int getBusOver6Id()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("busover6id",1);
+    }
+
+    public void setSchoolBusId(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("schoolbusid",id);
+        editor.commit();
+    }
+
+    public int getSchoolBusId()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("schoolbusid",1);
+    }
+
+    public void setMiscId(int id)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("miscid",id);
+        editor.commit();
+    }
+
+    public int getMiscId()
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(INFO,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("miscid",1);
+    }
 }
