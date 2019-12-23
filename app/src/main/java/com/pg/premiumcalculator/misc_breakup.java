@@ -102,8 +102,24 @@ public class misc_breakup extends AppCompatActivity {
                 createCompanyBuilder();
             }
         });
+        knowyourcommission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValuesInIntent();
+            }
+        });
     }
 
+    void setValuesInIntent()
+    {
+        Intent intent = new Intent(getBaseContext(), commission.class);
+        Bundle b = new Bundle();
+        Log.d("debug",temptotala+"......"+temptotalb);
+        b.putDouble("tppremium",temptotalb);
+        b.putDouble("odpremium",temptotala);
+        intent.putExtra("commission_bundle",b);
+        startActivity(intent);
+    }
 
     void calculatePremium()
     {

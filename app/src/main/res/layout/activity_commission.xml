@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".commission">
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/commision"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/commission_table"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TableLayout
+        android:id="@+id/commission_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading">
+
+        <TableRow>
+            <TextView
+                android:text="OD Premium:"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_leftweight"
+                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+            <TextView
+                android:id="@+id/od_value"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_rightweight"
+                android:text="0000.00"
+                android:paddingRight="@dimen/table_cell_rightmargin"
+                android:gravity="right"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="TP Premium:"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_leftweight"
+                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+            <TextView
+                android:id="@+id/tp_value"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_rightweight"
+                android:text="0000.00"
+                android:paddingRight="@dimen/table_cell_rightmargin"
+                android:gravity="right"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Commission on OD(%):"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_leftweight"
+                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+
+            <EditText
+                android:id="@+id/odcommission_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="numberDecimal"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Commission on TP(%):"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:layout_weight="@dimen/table_cell_leftweight"
+                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+            <EditText
+                android:id="@+id/tpcommission_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="numberDecimal"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/commission_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+        app:layout_constraintTop_toBottomOf="@id/commission_table"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/commission_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/commission_button"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

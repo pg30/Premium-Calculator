@@ -3,7 +3,7 @@
     <string name="two_wheeler_insurance">Two Wheeler Insurance</string>
     <string name="private_car_insurance">Private Car Insurance</string>
     <string name="taxilessthan6_insurance">Taxi less than 6 passenger Insurance</string>
-    <string name="last_year_idv">Last Year IDV</string>
+    <string name="last_year_idv">IDV</string>
     <string name="depreciation">Depreciation(%)</string>
     <string name="year_of_manufacture">Year of Manufacture</string>
     <string name="date_of_registration">Date Of Registration</string>
@@ -27,7 +27,7 @@
     <string name="cng_lpg">CNG/LPG</string>
     <string name="pcv_3_wheeler_insurance">PCV 3 Wheeler Insurance</string>
     <string name="goods_carrying_vehicle">Goods Carrying Vehicle</string>
-    <string name="gross_vehicle_weight_kgs">Gross Vehicle Weight(Kgs)</string>
+    <string name="gross_vehicle_weight_kgs">Gross Vehicle Weight(Kgs)(GVW)</string>
     <string name="non_faring_passenger_nfpp">Non Faring Passenger(NFPP)</string>
     <string name="geographical_extension">Geographical Extension</string>
     <string name="bus_more_than_6_passenger">Bus More than 6 Passenger</string>
@@ -35,6 +35,7 @@
     <string name="miscellaneous_vehicle">Miscellaneous Vehicle</string>
     <string name="cover_overturning">Cover Overturning</string>
     <string name="choose_vehicle">Choose Vehicle</string>
+    <string name="commision">Commission</string>
     <string-array name="zone_array">
         <item>A</item>
         <item>B</item>
