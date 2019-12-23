@@ -202,7 +202,8 @@ public class busover6_breakup extends AppCompatActivity {
         }
         double additionalOD = mrate.getAdditionalOD(currVehicle,noofpassenger);
         Log.d("debug","additional OD is "+additionalOD);
-        basicOD+=additionalOD;
+        if(idv>0)
+            basicOD+=additionalOD;
         Log.d("debug","basicOD is "+basicOD);
         tempidv = idv;
         tempbasicOD = basicOD;
@@ -263,7 +264,7 @@ public class busover6_breakup extends AppCompatActivity {
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
             temptppd = 0;
-            basicTP = basicTP - 150;
+            basicTP = basicTP - 200;
         }
         Log.d("debug","TP after restricted TP option "+basicTP);
         if(cng_yes)
