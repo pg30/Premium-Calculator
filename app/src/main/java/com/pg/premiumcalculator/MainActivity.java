@@ -7,6 +7,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setBackgroundDrawable(
+                new ColorDrawable(Color.parseColor("#32afa9")));
+        getSupportActionBar().setTitle("Vehicles Category");
+
         checkPermission();
 
         homeView = findViewById(R.id.homeview);
@@ -34,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
         list.add(new Item(R.drawable.pcicon,"Two Wheeler"));
         list.add(new Item(R.drawable.pcicon,"Private Car"));
-        list.add(new Item(R.drawable.pcicon,"GCV"));
+        list.add(new Item(R.drawable.pcicon,"Goods Carrying Vehicles"));
         list.add(new Item(R.drawable.pcicon,"Taxi upto 6 passengers"));
-        list.add(new Item(R.drawable.pcicon,"Bus more than 6 passengers"));
+        list.add(new Item(R.drawable.pcicon,"Bus"));
         list.add(new Item(R.drawable.pcicon,"School Bus"));
         list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler PCV upto 6 passengers"));
+        list.add(new Item(R.drawable.pcicon,"Three Wheeler PCV"));
         list.add(new Item(R.drawable.pcicon,"Miscellaneous vehicle"));
         homeView.setAdapter(adapter);
         homeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

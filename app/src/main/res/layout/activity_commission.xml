@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".commission">
 
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/commision"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/commission_table"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
     <TableLayout
         android:id="@+id/commission_table"
         android:layout_width="match_parent"
@@ -27,7 +14,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heading">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow>
             <TextView
