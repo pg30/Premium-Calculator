@@ -38,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
         homeView = findViewById(R.id.homeview);
         GridAdapter adapter = new GridAdapter(this,R.layout.grid_item_view,list);
 
-        list.add(new Item(R.drawable.pcicon,"Two Wheeler"));
-        list.add(new Item(R.drawable.pcicon,"Private Car"));
-        list.add(new Item(R.drawable.pcicon,"Goods Carrying Vehicles"));
-        list.add(new Item(R.drawable.pcicon,"Taxi upto 6 passengers"));
-        list.add(new Item(R.drawable.pcicon,"Bus"));
-        list.add(new Item(R.drawable.pcicon,"School Bus"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler GCV"));
-        list.add(new Item(R.drawable.pcicon,"Three Wheeler PCV"));
-        list.add(new Item(R.drawable.pcicon,"Miscellaneous vehicle"));
+        list.add(new Item(R.drawable.motorbike,"Two Wheeler"));
+        list.add(new Item(R.drawable.car,"Private Car"));
+        list.add(new Item(R.drawable.truck,"Goods Carrying Vehicles"));
+        list.add(new Item(R.drawable.taxi,"Taxi upto 6 passengers"));
+        list.add(new Item(R.drawable.bus,"Bus"));
+        list.add(new Item(R.drawable.schoolbus,"School Bus"));
+        list.add(new Item(R.drawable.goods,"Three Wheeler GCV"));
+        list.add(new Item(R.drawable.rickshaw,"Three Wheeler PCV"));
+        list.add(new Item(R.drawable.tractor,"Miscellaneous vehicle"));
         homeView.setAdapter(adapter);
         homeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
