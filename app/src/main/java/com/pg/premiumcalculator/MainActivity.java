@@ -16,9 +16,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends menu {
 
     GridView homeView;
     ArrayList<Item> list = new ArrayList<>();

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-public class commission extends AppCompatActivity {
+public class commission extends menu {
 
     TextView tppremium,odpremium,finalcommission;
     EditText tpcommission,odcommission;

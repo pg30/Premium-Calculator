@@ -2,6 +2,7 @@ package com.pg.premiumcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class taxilessthan6 extends menu implements AdapterView.OnItemSelectedListener{
 
     Spinner zone_spin,ncb_spin;
     EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,passenger_edit,zerodep_edit,padriver_edit,lldriver_edit;
@@ -68,7 +69,7 @@ public class taxilessthan6 extends AppCompatActivity implements AdapterView.OnIt
         date_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePickerDialog = new DatePickerDialog(taxilessthan6.this,new DatePickerDialog.OnDateSetListener() {
+                datePickerDialog = new DatePickerDialog(taxilessthan6.this, AlertDialog.THEME_HOLO_LIGHT,new DatePickerDialog.OnDateSetListener() {
 
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar newDate = Calendar.getInstance();

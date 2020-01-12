@@ -47,7 +47,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class two_wheeler_breakup extends AppCompatActivity {
+public class two_wheeler_breakup extends menu {
     //for premium calcuation
     Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
     String dateofregistration;
@@ -324,7 +324,8 @@ public class two_wheeler_breakup extends AppCompatActivity {
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
         basicOD = idv*(rate/100);
-
+        if(idv==0)
+            return 0.0;
         tempidv=idv;
         tempbasicOD=basicOD;
 
@@ -392,8 +393,8 @@ public class two_wheeler_breakup extends AppCompatActivity {
         Log.d("debug",""+zone);
         ccview.setText(""+Math.round(cc));
         Log.d("debug",""+cc);
-        rateview.setText(""+rate);
-        Log.d("debug",""+rate);
+        rateview.setText(""+(idv>0?rate:0));
+        Log.d("debug",""+(idv>0?rate:0));
         basicodview.setText(""+df.format(tempbasicOD));
         Log.d("debug",""+tempbasicOD);
         elecview.setText(""+df.format(tempelec));

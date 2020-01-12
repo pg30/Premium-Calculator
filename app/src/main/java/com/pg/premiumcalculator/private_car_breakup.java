@@ -44,7 +44,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class private_car_breakup extends AppCompatActivity {
+public class private_car_breakup extends menu {
 
     //for premium calcuation
     Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
@@ -321,6 +321,8 @@ public class private_car_breakup extends AppCompatActivity {
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
         basicOD = idv*(rate/100);
+        if(idv==0)
+            return 0.0;
 
         tempidv=idv;
         tempbasicOD=basicOD;
@@ -389,7 +391,7 @@ public class private_car_breakup extends AppCompatActivity {
         Log.d("debug",""+zone);
         ccview.setText(""+Math.round(cc));
         Log.d("debug",""+cc);
-        rateview.setText(""+rate);
+        rateview.setText(""+(idv>0?rate:0));
         Log.d("debug",""+rate);
         basicodview.setText(""+df.format(tempbasicOD));
         Log.d("debug",""+tempbasicOD);

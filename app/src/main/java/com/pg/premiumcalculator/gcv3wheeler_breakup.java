@@ -44,7 +44,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class gcv3wheeler_breakup extends AppCompatActivity {
+public class gcv3wheeler_breakup extends menu {
 
     //for premium calculation
     double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit;
@@ -182,7 +182,7 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         Log.d("debug",""+dateofregistration);
         zoneview.setText(""+zone);
         Log.d("debug",""+zone);
-        rateview.setText(""+rate);
+        rateview.setText(""+(idv>0?rate:0));
         Log.d("debug",""+rate);
         cngview.setText(cng_yes?"YES":"NO");
         Log.d("debug",""+cng_yes);
@@ -234,8 +234,6 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
         basicTP = mrate.getTP(currVehicle,carrier);
         tempbasicTP = basicTP;
 
-        tempextcngkit = 0.04*extcngkit;
-
         odPremium = calculateOD();
         temptotala = odPremium;
 
@@ -256,6 +254,8 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
     {
         basicOD = idv*(rate)/100;
         tempidv = idv;
+        if(idv==0)
+            return 0.0;
 
         if(cng_yes)
         {
@@ -298,6 +298,7 @@ public class gcv3wheeler_breakup extends AppCompatActivity {
             if(extcngkit>0)
             {
                 basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
             }
         }
 

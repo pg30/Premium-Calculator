@@ -44,7 +44,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class schoolbus_breakup extends AppCompatActivity {
+public class schoolbus_breakup extends menu {
 
     //for premium calcuation
     double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,noofpassenger,extcngkit;
@@ -130,8 +130,6 @@ public class schoolbus_breakup extends AppCompatActivity {
         basicTP=mrate.getTP(noofpassenger,currVehicle);
         tempbasicTP = basicTP;
 
-        tempextcngkit = 0.04*extcngkit;
-
         odPremium = calculateOD();
         temptotala = odPremium;
         Log.d("debug","final od premium is "+odPremium);
@@ -214,6 +212,8 @@ public class schoolbus_breakup extends AppCompatActivity {
         Log.d("debug","IDV is "+idv);
         Log.d("debug","rate applied is "+rate);
         basicOD = idv*(rate/100);
+        if(idv==0)
+            return 0.0;
         if(cng_yes)
         {
             //inbuilt
@@ -264,6 +264,7 @@ public class schoolbus_breakup extends AppCompatActivity {
             if(extcngkit>0)
             {
                 basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
             }
         }
         if(geoext_yes)
@@ -309,8 +310,8 @@ public class schoolbus_breakup extends AppCompatActivity {
         Log.d("debug",""+cng_yes);
         passengerview.setText(""+Math.round(noofpassenger));
         Log.d("debug",""+noofpassenger);
-        rateview.setText(""+rate);
-        Log.d("debug",""+rate);
+        rateview.setText(""+(idv>0?rate:0));
+        Log.d("debug",""+(idv>0?rate:0));
         basicodview.setText(""+df.format(tempbasicOD));
         Log.d("debug",""+tempbasicOD);
         elecview.setText(""+df.format(tempelec));
