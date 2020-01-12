@@ -20,16 +20,13 @@
             <TextView
                 android:text="OD Premium:"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_leftweight"
-                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                android:layout_margin="@dimen/table_cell_margin"
+                style="@style/style_textbox_table_breakup"/>
             <TextView
                 android:id="@+id/od_value"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_rightweight"
                 android:text="0000.00"
-                android:paddingRight="@dimen/table_cell_rightmargin"
+                style="@style/style_textbox_table_breakup"
                 android:gravity="right"/>
         </TableRow>
 
@@ -37,16 +34,13 @@
             <TextView
                 android:text="TP Premium:"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_leftweight"
-                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                android:layout_margin="@dimen/table_cell_margin"
+                style="@style/style_textbox_table_breakup"/>
             <TextView
                 android:id="@+id/tp_value"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_rightweight"
                 android:text="0000.00"
-                android:paddingRight="@dimen/table_cell_rightmargin"
+                style="@style/style_textbox_table_breakup"
                 android:gravity="right"/>
         </TableRow>
 
@@ -54,16 +48,13 @@
             <TextView
                 android:text="Commission on OD(%):"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_leftweight"
-                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                style="@style/style_textbox_table_breakup"/>
 
             <EditText
                 android:id="@+id/odcommission_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                style="@style/style_edittext_table"
                 android:autofillHints=""
                 android:ems="10"
                 android:inputType="numberDecimal"/>
@@ -73,15 +64,12 @@
             <TextView
                 android:text="Commission on TP(%):"
                 android:layout_width="0dp"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
-                android:layout_weight="@dimen/table_cell_leftweight"
-                android:paddingLeft="@dimen/table_cell_leftmargin"/>
+                style="@style/style_textbox_table_breakup"/>
             <EditText
                 android:id="@+id/tpcommission_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                style="@style/style_edittext_table"
                 android:autofillHints=""
                 android:ems="10"
                 android:inputType="numberDecimal"/>
@@ -94,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Calculate"
-        android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+        style="@style/style_button"
         app:layout_constraintTop_toBottomOf="@id/commission_table"
         app:layout_constraintStart_toStartOf="parent"/>
 

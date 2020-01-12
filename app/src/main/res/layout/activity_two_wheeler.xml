@@ -23,8 +23,7 @@
                     android:id="@+id/idv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/last_year_idv" />
 
 
@@ -32,8 +31,7 @@
                     android:id="@+id/idv_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -44,8 +42,7 @@
                     android:id="@+id/dateofregistration"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/date_of_registration" />
 
                 <EditText
@@ -53,7 +50,7 @@
                     android:layout_width="0dp"
                     android:focusable="false"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:ems="10"
                     android:inputType="date" />
             </TableRow>
@@ -63,8 +60,7 @@
                     android:id="@+id/zone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/zone" />
 
 
@@ -72,8 +68,7 @@
                     android:id="@+id/zone_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"/>
+                    style="@style/style_spinner_table"/>
             </TableRow>
 
             <TableRow>
@@ -81,8 +76,7 @@
                     android:id="@+id/cubicapacity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/cubic_capacity" />
 
 
@@ -90,8 +84,7 @@
                     android:id="@+id/cubicapacity_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -102,8 +95,7 @@
                     android:id="@+id/discount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/discount_on_od" />
 
 
@@ -111,8 +103,7 @@
                     android:id="@+id/discount_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -123,8 +114,7 @@
                     android:id="@+id/electrical_accessories"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/electrical_accessories_value" />
 
 
@@ -132,8 +122,7 @@
                     android:id="@+id/electrical_accessories_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -144,8 +133,7 @@
                     android:id="@+id/nonelectrical_accessories"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/nonelectrical_accessories_value" />
 
 
@@ -153,8 +141,7 @@
                     android:id="@+id/nonelectrical_accessories_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -165,8 +152,7 @@
                     android:id="@+id/ncb"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/no_claim_bonus" />
 
 
@@ -174,8 +160,7 @@
                     android:id="@+id/ncb_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_spinner_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -186,8 +171,7 @@
                     android:id="@+id/zerodep"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/zero_depreciation" />
 
 
@@ -195,8 +179,7 @@
                     android:id="@+id/zerodep_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -207,8 +190,7 @@
                     android:id="@+id/patoownerdriver"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/pa_to_owner_driver" />
 
 
@@ -216,8 +198,7 @@
                     android:id="@+id/patoownerdriver_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -228,8 +209,7 @@
                     android:id="@+id/lltopaiddriver"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/ll_to_paid_driver" />
 
 
@@ -237,8 +217,7 @@
                     android:id="@+id/lltopaiddriver_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -249,8 +228,7 @@
                     android:id="@+id/patounnamedpassenger"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/pa_to_unnamed_passenger" />
 
 
@@ -258,8 +236,7 @@
                     android:id="@+id/patounnamedpassenger_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_edittext_table"
                     android:autofillHints=""
                     android:ems="10"
                     android:inputType="numberDecimal"/>
@@ -270,8 +247,7 @@
                     android:id="@+id/restricttppd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_leftweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_textbox_table"
                     android:text="@string/restrict_tppd" />
 
 
@@ -279,20 +255,20 @@
                     android:id="@+id/restricttppd_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/table_cell_rightweightfortwowheeler"
-                    android:layout_margin="@dimen/table_cell_marginfortwowheeler"
+                    style="@style/style_radiogroup_table"
                     android:orientation="horizontal">
                     <RadioButton
                         android:id="@+id/yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yes"></RadioButton>
+                        android:text="Yes"/>
+
                     <RadioButton
                         android:id="@+id/no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No"
-                        android:checked="true"></RadioButton>
+                        android:checked="true"/>
                 </RadioGroup>
             </TableRow>
 
@@ -307,8 +283,7 @@
             app:layout_constraintTop_toBottomOf="@id/table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            style="@style/style_button"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

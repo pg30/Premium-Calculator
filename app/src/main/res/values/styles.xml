@@ -8,4 +8,44 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="style_textbox_table">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+    </style>
+    <style name="style_edittext_table">
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+    </style>
+    <style name="style_spinner_table">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+    </style>
+    <style name="style_radiogroup_table">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+        <item name="android:gravity"> center_horizontal </item>
+    </style>
+    <style name="style_checkbox_table">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+    </style>
+    <style name="style_button">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_margin"> @dimen/button_margin </item>
+    </style>
+
+    <style name="style_textbox_table_breakup">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> @dimen/table_cell_weight </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+    </style>
+
+    <style name="style_textbox_other">
+
+    </style>
+
 </resources>
