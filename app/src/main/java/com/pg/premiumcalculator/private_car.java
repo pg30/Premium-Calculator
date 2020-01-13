@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -26,14 +27,15 @@ import java.util.Locale;
 public class private_car extends menu implements AdapterView.OnItemSelectedListener {
 
     Spinner zone_spin,ncb_spin;
-    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
+    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit,extcngkit_edit;
+    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,extcngkit;
 
     Button calculate;
     Zone zone;
 
     Vehicle currVehicle = Vehicle.PRIVATECAR;
     RadioButton yes;
+    CheckBox cng_yes;
     String dateofregistration;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
@@ -49,6 +51,22 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         getSupportActionBar().setTitle("Private Car");
 
         findViews();
+        cng_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(((CheckBox)v).isChecked() )
+                {
+                    extcngkit_edit.setEnabled(true);
+                }
+                else
+                {
+                    extcngkit_edit.setText("");
+                    extcngkit=0.0;
+                    extcngkit_edit.setEnabled(false);
+                    Log.d("debug","cng kit value is"+extcngkit_edit.getText().toString());
+                }
+            }
+        });
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +105,12 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         nonelec_edit = (EditText) findViewById(R.id.nonelectrical_accessories_value);
         zerodep_edit = (EditText) findViewById(R.id.zerodep_value);
         padriver_edit = (EditText) findViewById(R.id.patoownerdriver_value);
+        extcngkit_edit = (EditText) findViewById(R.id.extcng_value);
         lldriver_edit = (EditText) findViewById(R.id.lltopaiddriver_value);
         paunnamedpassenger_edit = (EditText) findViewById(R.id.patounnamedpassenger_value);
         calculate = (Button) findViewById(R.id.calculate);
         yes = (RadioButton) findViewById(R.id.yes);
+        cng_yes = (CheckBox) findViewById(R.id.yes_cng);
 
         zone_spin = (Spinner) findViewById(R.id.zone_value);
         ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,R.array.zone_array,R.layout.support_simple_spinner_dropdown_item);
@@ -114,6 +134,7 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         b.putDouble("nonelec",nonelec);
         b.putDouble("zerodep",zerodep);
         b.putDouble("patodriver",patodriver);
+        b.putDouble("extcngkit",extcngkit);
         b.putDouble("lltodriver",lltodriver);
         b.putDouble("patounnamedpassenger",patounnamedpassenger);
         b.putDouble("ncb",ncb);
@@ -121,6 +142,10 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
             b.putBoolean("restrict_tppd",true);
         else
             b.putBoolean("restrict_tppd",false);
+        if(cng_yes.isChecked())
+            b.putBoolean("cng",true);
+        else
+            b.putBoolean("cng",false);
         b.putSerializable("zone",zone);
         b.putString("dateofregistration",dateofregistration);
         intent.putExtra("private_car_breakup_bundle",b);
@@ -137,6 +162,7 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         nonelec = ParseDouble(nonelec_edit.getText().toString());
         zerodep = ParseDouble(zerodep_edit.getText().toString());
         patodriver = ParseDouble(padriver_edit.getText().toString());
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
         patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
         dateofregistration = ParseString(date_edit.getText().toString());

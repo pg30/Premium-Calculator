@@ -71,6 +71,19 @@
 
             <TableRow>
                 <TextView
+                    android:text="CNG/LPG:"
+                    android:layout_width="0dp"
+                    style="@style/style_textbox_table_breakup"/>
+                <TextView
+                    android:id="@+id/cng_value"
+                    android:layout_width="0dp"
+                    android:text="NO"
+                    style="@style/style_textbox_table_breakup"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
                     android:text="Cubic Capacity:"
                     android:layout_width="0dp"
                     style="@style/style_textbox_table_breakup"/>
@@ -124,6 +137,19 @@
                     style="@style/style_textbox_table_breakup"/>
                 <TextView
                     android:id="@+id/basicod_value"
+                    android:layout_width="0dp"
+                    android:text="0.00"
+                    style="@style/style_textbox_table_breakup"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="CNG/LPG Kit:"
+                    android:layout_width="0dp"
+                    style="@style/style_textbox_table_breakup"/>
+                <TextView
+                    android:id="@+id/cngkit_value"
                     android:layout_width="0dp"
                     android:text="0.00"
                     style="@style/style_textbox_table_breakup"
@@ -258,6 +284,19 @@
                     android:id="@+id/tppd_value"
                     android:layout_width="0dp"
                     android:text="0.00"
+                    style="@style/style_textbox_table_breakup"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="CNG/LPG-TP:"
+                    android:layout_width="0dp"
+                    style="@style/style_textbox_table_breakup"/>
+                <TextView
+                    android:id="@+id/cngtp_value"
+                    android:layout_width="0dp"
+                    android:text="0"
                     style="@style/style_textbox_table_breakup"
                     android:gravity="right"/>
             </TableRow>

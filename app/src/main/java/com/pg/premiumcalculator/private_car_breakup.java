@@ -47,20 +47,20 @@ import java.text.DecimalFormat;
 public class private_car_breakup extends menu {
 
     //for premium calcuation
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
+    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,extcngkit;
     String dateofregistration;
     Zone zone;
     Rate mrate = new Rate();
     Vehicle currVehicle = Vehicle.PRIVATECAR;
     Double finalPremium,odPremium,tpPremium,gst,rate,basicOD;
     double basicTP;
-    boolean yes;
+    boolean yes,cng_yes;
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempoddisc,tempncb,tempzerodep;
-    double tempbasicTP,temptppd=100,tempownerpa,templltodriver,temppatounnamed;
+    double tempbasicTP,temptppd=100,tempownerpa,templltodriver,temppatounnamed,tempextcngkit,tempcngtp=0;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
     //result views pointers
-    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview;
+    TextView idvview,dateview,zoneview,ccview,rateview,basicodview,elecview,nonelecview,oddiscview,ncbview,zerodepview,totalaview,basictpview,tppdview,ownerpaview,lltodriverview,patounnamedview,totalbview,totalabview,gstview,finalview,cngview,extcngkitview,cngtpview;
     //text views pointers
     TextView nonelecdisplay,oddiscdisplay,ncbdisplay,zerodepdisplay;
     DecimalFormat df = new DecimalFormat("0.00");
@@ -167,6 +167,9 @@ public class private_car_breakup extends menu {
         totalabview = (TextView) findViewById(R.id.totalab_value);
         gstview = (TextView) findViewById(R.id.gst_value);
         finalview = (TextView) findViewById(R.id.finalpremium_value);
+        cngview = (TextView) findViewById(R.id.cng_value);
+        extcngkitview = (TextView) findViewById(R.id.cngkit_value);
+        cngtpview = (TextView) findViewById(R.id.cngtp_value);
 
         nonelecdisplay=(TextView) findViewById(R.id.nonelecdisplay);
         oddiscdisplay=(TextView) findViewById(R.id.oddiscdisplay);
@@ -188,11 +191,13 @@ public class private_car_breakup extends menu {
         nonelec = b.getDouble("nonelec");
         ncb = b.getDouble("ncb");
         zerodep = b.getDouble("zerodep");
+        extcngkit = b.getDouble("extcngkit");
         patodriver = b.getDouble("patodriver");
         lltodriver = b.getDouble("lltodriver");
         patounnamedpassenger = b.getDouble("patounnamedpassenger");
         dateofregistration = b.getString("dateofregistration");
         yes = b.getBoolean("restrict_tppd");
+        cng_yes = b.getBoolean("cng");
         zone = (Zone) b.getSerializable("zone");
     }
 
@@ -325,6 +330,14 @@ public class private_car_breakup extends menu {
             return 0.0;
 
         tempidv=idv;
+        if(cng_yes)
+        {
+            //inbuilt
+            if(extcngkit==0)
+            {
+                basicOD+=0.05*basicOD;
+            }
+        }
         tempbasicOD=basicOD;
 
         Log.d("debug","basicOD is "+basicOD);
@@ -355,6 +368,16 @@ public class private_car_breakup extends menu {
 
         tempoddisc=oddisc;
 
+        if(cng_yes)
+        {
+            //external
+            if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
+        }
+
         Log.d("debug","od discount is "+oddisc);
         basicOD-=oddisc;
         basicOD+=zerodepprem;
@@ -377,6 +400,11 @@ public class private_car_breakup extends menu {
             basicTP = basicTP - 50;
             temptppd=0;
         }
+        if(cng_yes)
+        {
+            basicTP+=60;
+            tempcngtp = 60;
+        }
         Log.d("debug","TP after restricted TP option is "+basicTP);
         return basicTP;
     }
@@ -393,6 +421,8 @@ public class private_car_breakup extends menu {
         Log.d("debug",""+cc);
         rateview.setText(""+(idv>0?rate:0));
         Log.d("debug",""+rate);
+        cngview.setText(cng_yes?"YES":"NO");
+        Log.d("debug",""+cng_yes);
         basicodview.setText(""+df.format(tempbasicOD));
         Log.d("debug",""+tempbasicOD);
         elecview.setText(""+df.format(tempelec));
@@ -424,6 +454,10 @@ public class private_car_breakup extends menu {
         Log.d("debug",""+temptotalb);
         totalabview.setText(""+df.format(temptotalab));
         Log.d("debug",""+temptotalab);
+        extcngkitview.setText(""+df.format(tempextcngkit));
+        Log.d("debug",""+tempextcngkit);
+        cngtpview.setText(""+tempcngtp);
+        Log.d("debug",""+tempcngtp);
         gstview.setText(""+df.format(tempgst));
         Log.d("debug",""+df.format(tempgst));
         finalview.setText(""+df.format(tempfinalpremium));
@@ -515,10 +549,17 @@ public class private_car_breakup extends menu {
                 addCell(idvview.getText().toString(), basictable, normal_font);
                 addCell("Cubic Capacity", basictable, bold_font);
                 addCell(ccview.getText().toString(), basictable, normal_font);
+
                 addCell("Date of Registration", basictable, bold_font);
                 addCell(dateview.getText().toString(), basictable, normal_font);
                 addCell("Zone", basictable, bold_font);
                 addCell(zoneview.getText().toString(), basictable, normal_font);
+
+                addCell("CNG/LPG", basictable, bold_font);
+                addCell(cngview.getText().toString(), basictable, normal_font);
+                addCell("", basictable, normal_font);
+                addCell(" ", basictable, normal_font);
+
                 basictable.setSpacingAfter(2f);
                 document.add(basictable);
                 document.add(new Paragraph("\n"));
@@ -544,15 +585,20 @@ public class private_car_breakup extends menu {
                 addCell("Third Party Property Damage(TPPD)", premiumtable, normal_font);
                 addCell(tppdview.getText().toString(), premiumtable, normal_font);
 
-                addCell("Electrical Accessories (+4%)", premiumtable, normal_font);
-                addCell(elecview.getText().toString(), premiumtable, normal_font);
+                addCell("CNG/LPG Kit", premiumtable, normal_font);
+                addCell(extcngkitview.getText().toString(), premiumtable, normal_font);
                 addCell("PA to Owner Driver", premiumtable, normal_font);
                 addCell(ownerpaview.getText().toString(), premiumtable, normal_font);
 
-                addCell("Non Electrical Accessories Value", premiumtable, normal_font);
-                addCell(nonelecview.getText().toString(), premiumtable, normal_font);
+                addCell("Electrical Accessories (+4%)", premiumtable, normal_font);
+                addCell(elecview.getText().toString(), premiumtable, normal_font);
                 addCell("LL to Paid Driver", premiumtable, normal_font);
                 addCell(lltodriverview.getText().toString(), premiumtable, normal_font);
+
+                addCell("Non Electrical Accessories Value", premiumtable, normal_font);
+                addCell(nonelecview.getText().toString(), premiumtable, normal_font);
+                addCell("CNG/LPG-TP", premiumtable, normal_font);
+                addCell(cngtpview.getText().toString(), premiumtable, normal_font);
 
                 addCell("OD Discount(-" + discount + "%)", premiumtable, normal_font);
                 addCell(oddiscview.getText().toString(), premiumtable, normal_font);
