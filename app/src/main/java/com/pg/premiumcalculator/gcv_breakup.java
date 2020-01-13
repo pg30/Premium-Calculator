@@ -59,7 +59,7 @@ public class gcv_breakup extends menu {
 
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep,tempnfpp,tempgeoext;
-    double tempbasicTP,temptppd=200,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
+    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers

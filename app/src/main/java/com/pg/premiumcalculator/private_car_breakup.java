@@ -397,7 +397,7 @@ public class private_car_breakup extends menu {
         basicTP+=patodriver+lltodriver+patounnamedpassenger;
         Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
         if(yes) {
-            basicTP = basicTP - 50;
+            basicTP = basicTP - temptppd;
             temptppd=0;
         }
         if(cng_yes)

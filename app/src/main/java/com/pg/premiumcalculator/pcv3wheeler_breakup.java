@@ -275,8 +275,8 @@ public class pcv3wheeler_breakup extends menu {
         templltodriver = lltodriver;
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
+            basicTP = basicTP - temptppd;
             temptppd = 0;
-            basicTP = basicTP - 150;
         }
         Log.d("debug","TP after restricted TP option "+basicTP);
         if(cng_yes)

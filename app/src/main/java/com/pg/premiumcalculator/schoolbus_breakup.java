@@ -58,7 +58,7 @@ public class schoolbus_breakup extends menu {
 
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep,tempgeoext;
-    double tempbasicTP,temptppd=200,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
+    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers
@@ -286,8 +286,8 @@ public class schoolbus_breakup extends menu {
         templltodriver = lltodriver;
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
+            basicTP = basicTP - temptppd;
             temptppd = 0;
-            basicTP = basicTP - 200;
         }
         Log.d("debug","TP after restricted TP option "+basicTP);
         if(cng_yes)

@@ -313,8 +313,8 @@ public class gcv3wheeler_breakup extends menu {
 
         if(yes)
         {
+            temp-=temptppd;
             temptppd = 0;
-            temp-=150;
         }
         if(cng_yes)
         {

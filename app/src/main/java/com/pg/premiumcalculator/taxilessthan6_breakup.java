@@ -276,8 +276,8 @@ public class taxilessthan6_breakup extends menu {
         templltodriver = lltodriver;
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
+            basicTP = basicTP - temptppd;
             temptppd = 0;
-            basicTP = basicTP - 150;
         }
         if(cng_yes)
         {
