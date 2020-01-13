@@ -206,6 +206,42 @@
 
             <TableRow>
                 <TextView
+                    android:id="@+id/cng"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/style_textbox_table"
+                    android:text="@string/cng_lpg" />
+
+                <CheckBox
+                    android:id="@+id/yes_cng"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/style_checkbox_table"
+                    android:text="Yes"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/extcng"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/style_textbox_table"
+                    android:text="External CNG/LPG Kit Value" />
+
+
+                <EditText
+                    android:id="@+id/extcng_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/style_edittext_table"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
                     android:id="@+id/patoownerdriver"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
