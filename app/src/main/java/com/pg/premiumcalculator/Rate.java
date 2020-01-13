@@ -40,15 +40,35 @@ public class Rate {
     long getDays(String currentString,String givenString)
     {
         long days = 0;
+        long cd,cm,cy,gd,gm,gy;
         try {
             Date date1 = formatter.parse(givenString);
             Date date2 = formatter.parse(currentString);
-            long diff = date2.getTime() - date1.getTime();
-            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
-            Log.d("debug","days is "+days);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date1);
+            gd = cal.get(Calendar.DAY_OF_MONTH);
+            gm = cal.get(Calendar.MONTH);
+            gm++;
+            gy = cal.get(Calendar.YEAR);
+            cal.setTime(date2);
+            cd = cal.get(Calendar.DAY_OF_MONTH);
+            cm = cal.get(Calendar.MONTH);
+            cm++;
+            cy = cal.get(Calendar.YEAR);
+            Log.d("debug",cd+" "+cy+" "+cm+" "+gd+" "+gm+" "+gy);
+            long monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            long c1 = cy*365+cd;
+            long c2 = gy*365+gd;
+            for(int i=0;i<cm-1;i++)
+                c1+=monthDays[i];
+
+            for(int i=0;i<gm-1;i++)
+                c2+=monthDays[i];
+            days+=c1-c2+1;
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        Log.d("debug","days are "+days);
         return days<=0?0:days;
     }
 
