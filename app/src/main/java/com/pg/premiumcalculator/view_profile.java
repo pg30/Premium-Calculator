@@ -68,7 +68,7 @@ public class view_profile extends AppCompatActivity {
                 if(subscription.equals("NO"))
                 {
                     period_title.setText("Remaining trial period:");
-                    period_value.setText(period+"");
+                    period_value.setText(period+" days");
                 }
                 else
                 {

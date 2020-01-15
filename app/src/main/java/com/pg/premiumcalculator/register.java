@@ -90,7 +90,7 @@ public class register extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d("debug","user profile is created in firestore");
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        startActivity(new Intent(getApplicationContext(),login.class));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
