@@ -221,6 +221,12 @@ public class taxilessthan6_breakup extends menu {
             {
                 basicOD+=0.05*basicOD;
             }
+            //external
+            else if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
         }
         tempidv = idv;
         tempbasicOD = basicOD;
@@ -249,15 +255,15 @@ public class taxilessthan6_breakup extends menu {
         double oddisc = basicOD*(discount/100);
         tempoddisc = oddisc;
         Log.d("debug","od discount is "+oddisc);
-        if(cng_yes)
-        {
-            //external
-            if(extcngkit>0)
-            {
-                basicOD+=0.04*extcngkit;
-                tempextcngkit = 0.04*extcngkit;
-            }
-        }
+//        if(cng_yes)
+//        {
+//            //external
+//            if(extcngkit>0)
+//            {
+//                basicOD+=0.04*extcngkit;
+//                tempextcngkit = 0.04*extcngkit;
+//            }
+//        }
         basicOD-=oddisc;
         basicOD+=zerodepprem;
         Log.d("debug","new OD is "+basicOD);

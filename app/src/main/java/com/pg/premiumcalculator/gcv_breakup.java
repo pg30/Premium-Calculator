@@ -283,6 +283,12 @@ public class gcv_breakup extends menu {
             {
                 basicOD+=0.05*basicOD;
             }
+            //external
+            else if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
         }
         tempbasicOD = basicOD;
 
@@ -311,15 +317,15 @@ public class gcv_breakup extends menu {
 
         basicOD+=zerodepprem;
 
-        if(cng_yes)
-        {
-            //external
-            if(extcngkit>0)
-            {
-                basicOD+=0.04*extcngkit;
-                tempextcngkit = 0.04*extcngkit;
-            }
-        }
+//        if(cng_yes)
+//        {
+//            //external
+//            if(extcngkit>0)
+//            {
+//                basicOD+=0.04*extcngkit;
+//                tempextcngkit = 0.04*extcngkit;
+//            }
+//        }
 
         if(geoext_yes)
         {

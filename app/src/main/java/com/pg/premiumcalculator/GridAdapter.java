@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class GridAdapter extends ArrayAdapter {
 
-    ArrayList<Item> list = new ArrayList<>();
+    ArrayList<Item> list = new ArrayList<Item>();
 
     public GridAdapter(Context context,int textViewResourceID,ArrayList objects)
     {

@@ -219,6 +219,12 @@ public class pcv3wheeler_breakup extends menu {
             {
                 basicOD+=0.05*basicOD;
             }
+            //external
+            else if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
         }
         Log.d("debug","basicOD is "+basicOD);
         tempidv = idv;
@@ -252,15 +258,15 @@ public class pcv3wheeler_breakup extends menu {
         basicOD+=zerodepprem;
         Log.d("debug","new OD is "+basicOD);
 
-        if(cng_yes)
-        {
-            //external
-            if(extcngkit>0)
-            {
-                basicOD+=0.04*extcngkit;
-                tempextcngkit = 0.04*extcngkit;
-            }
-        }
+//        if(cng_yes)
+//        {
+//            //external
+//            if(extcngkit>0)
+//            {
+//                basicOD+=0.04*extcngkit;
+//                tempextcngkit = 0.04*extcngkit;
+//            }
+//        }
         return  basicOD;
     }
 

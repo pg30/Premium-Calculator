@@ -222,6 +222,12 @@ public class busover6_breakup extends menu {
             {
                 basicOD+=0.05*basicOD;
             }
+            //external
+            else if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
         }
         double additionalOD = mrate.getAdditionalOD(currVehicle,noofpassenger);
         Log.d("debug","additional OD is "+additionalOD);
@@ -259,15 +265,15 @@ public class busover6_breakup extends menu {
         basicOD+=zerodepprem;
         Log.d("debug","new OD is "+basicOD);
 
-        if(cng_yes)
-        {
-            //external
-            if(extcngkit>0)
-            {
-                basicOD+=0.04*extcngkit;
-                tempextcngkit = 0.04*extcngkit;
-            }
-        }
+//        if(cng_yes)
+//        {
+//            //external
+//            if(extcngkit>0)
+//            {
+//                basicOD+=0.04*extcngkit;
+//                tempextcngkit = 0.04*extcngkit;
+//            }
+//        }
         if(geoext_yes)
         {
             basicOD+=400;

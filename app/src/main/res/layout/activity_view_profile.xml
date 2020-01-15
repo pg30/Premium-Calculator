@@ -1,9 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".view_profile">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="115dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/user_details_table"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_icon" />
+
+        <TableLayout
+            android:id="@+id/user_details_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:text="Name:" />
+
+                <TextView
+                    android:id="@+id/name_value"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:gravity="right" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:text="Email:" />
+
+                <TextView
+                    android:id="@+id/email_value"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:gravity="right" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:text="Phone no. :" />
+
+                <TextView
+                    android:id="@+id/phone_value"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:gravity="right" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:text="Subscription:" />
+
+                <TextView
+                    android:id="@+id/subscription_value"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:gravity="right" />
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/period_title"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp" />
+
+                <TextView
+                    android:id="@+id/period_value"
+                    style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp"
+                    android:gravity="right" />
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

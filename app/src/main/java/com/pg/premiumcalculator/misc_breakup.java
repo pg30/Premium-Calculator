@@ -228,12 +228,15 @@ public class misc_breakup extends menu {
             {
                 basicOD+=0.05*basicOD;
             }
+            //external
+            else if(extcngkit>0)
+            {
+                basicOD+=0.04*extcngkit;
+                tempextcngkit = 0.04*extcngkit;
+            }
         }
         tempidv = idv;
         tempbasicOD = basicOD;
-
-        tempoverturning = (0.5/100)*idv;
-        basicOD+=tempoverturning;
         Log.d("debug","basicOD is "+basicOD);
 
         double zerodepprem = (zerodep/100)*idv;
@@ -249,8 +252,12 @@ public class misc_breakup extends menu {
         Log.d("debug","new OD is "+basicOD);
         if(imt_yes) {
             tempimt23 = 0.15 * basicOD;
-            basicOD += 0.15 * basicOD;
+                basicOD += 0.15 * basicOD;
             Log.d("debug", "after imt 23 new od is " + basicOD);
+        }
+        if(overturning_yes) {
+            tempoverturning = (0.5 / 100) * idv;
+            basicOD += tempoverturning;
         }
         double ncbdisc = basicOD*(ncb/100);
         tempncb = ncbdisc;
@@ -264,15 +271,15 @@ public class misc_breakup extends menu {
         basicOD+=zerodepprem;
         Log.d("debug","new OD is "+basicOD);
 
-        if(cng_yes)
-        {
-            //external
-            if(extcngkit>0)
-            {
-                basicOD+=0.04*extcngkit;
-                tempextcngkit = 0.04*extcngkit;
-            }
-        }
+//        if(cng_yes)
+//        {
+//            //external
+//            if(extcngkit>0)
+//            {
+//                basicOD+=0.04*extcngkit;
+//                tempextcngkit = 0.04*extcngkit;
+//            }
+//        }
         if(geoext_yes)
         {
             basicOD+=400;

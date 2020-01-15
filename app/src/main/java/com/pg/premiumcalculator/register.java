@@ -14,10 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class register extends AppCompatActivity {
 
@@ -32,6 +43,9 @@ public class register extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     Boolean mAllowNavigation = true;
 
+    FirebaseFirestore fstore;
+    String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +54,7 @@ public class register extends AppCompatActivity {
         getSupportActionBar().hide();
         findViews();
         mFireBaseAuth = FirebaseAuth.getInstance();
+        fstore = FirebaseFirestore.getInstance();
 
         if(mFireBaseAuth.getCurrentUser()!=null)
         {
@@ -62,7 +77,29 @@ public class register extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(register.this,"Account Successfully created",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                userID = mFireBaseAuth.getCurrentUser().getUid();
+                                DocumentReference documentReference = fstore.collection("users").document(userID);
+                                Map<String,Object> user = new HashMap<>();
+                                user.put("name",name);
+                                user.put("email",email);
+                                user.put("phone",phone);
+                                user.put("isSubscribed","NO");
+                                user.put("registrationDate",getCurrentDate());
+
+                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("debug","user profile is created in firestore");
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("debug","on failure method called "+ e.toString());
+                                        Toast.makeText(register.this,"Account not registered. Please try again later "+e.toString(),Toast.LENGTH_SHORT).show();
+                                        mFireBaseAuth.getCurrentUser().delete();
+                                    }
+                                });
                             }
                             else
                             {
@@ -107,6 +144,13 @@ public class register extends AppCompatActivity {
                 // ...
             }
         };
+    }
+    String getCurrentDate()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String currentDate = dateFormat.format(date);
+        return currentDate;
     }
     @Override
     public void onStart() {
@@ -181,10 +225,10 @@ public class register extends AppCompatActivity {
     }
     void getValuesFromEditText()
     {
-        name = name_edit.getText().toString();
-        email = email_edit.getText().toString();
-        phone = phone_edit.getText().toString();
-        password = password_edit.getText().toString();
-        confirm_password = confirmpassword_edit.getText().toString();
+        name = name_edit.getText().toString().trim();
+        email = email_edit.getText().toString().trim();
+        phone = phone_edit.getText().toString().trim();
+        password = password_edit.getText().toString().trim();
+        confirm_password = confirmpassword_edit.getText().toString().trim();
     }
 }
