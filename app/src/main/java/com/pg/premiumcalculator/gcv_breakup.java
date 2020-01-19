@@ -84,8 +84,7 @@ public class gcv_breakup extends menu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gcv_breakup);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Premium Breakup");
 
         getValuesFromIntent();

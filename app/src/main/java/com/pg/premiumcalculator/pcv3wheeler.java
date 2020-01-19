@@ -44,8 +44,7 @@ public class pcv3wheeler extends menu implements AdapterView.OnItemSelectedListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pcv3wheeler);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Three Wheeler PCV");
 
         findViews();

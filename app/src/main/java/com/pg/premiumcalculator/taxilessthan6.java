@@ -46,8 +46,7 @@ public class taxilessthan6 extends menu implements AdapterView.OnItemSelectedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taxilessthan6);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Taxi");
 
         findViews();

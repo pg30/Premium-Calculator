@@ -46,8 +46,7 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_private_car);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Private Car");
 
         findViews();

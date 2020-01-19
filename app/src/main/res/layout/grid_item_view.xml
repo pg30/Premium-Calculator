@@ -27,6 +27,8 @@
         android:layout_marginTop="8dp"
         android:layout_gravity="center"
         android:text="TextView"
+        android:textColor="@color/text_color"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/categoryIcon"

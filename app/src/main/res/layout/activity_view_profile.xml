@@ -34,70 +34,70 @@
             <TableRow>
 
                 <TextView
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_left"
                     android:layout_width="0dp"
                     android:text="Name:" />
 
                 <TextView
                     android:id="@+id/name_value"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_right"
                     android:layout_width="0dp"
-                    android:gravity="right" />
+                    android:gravity="left" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_left"
                     android:layout_width="0dp"
                     android:text="Email:" />
 
                 <TextView
                     android:id="@+id/email_value"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_right"
                     android:layout_width="0dp"
-                    android:gravity="right" />
+                    android:gravity="left" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_left"
                     android:layout_width="0dp"
                     android:text="Phone no. :" />
 
                 <TextView
                     android:id="@+id/phone_value"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_right"
                     android:layout_width="0dp"
-                    android:gravity="right" />
+                    android:gravity="left" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_left"
                     android:layout_width="0dp"
                     android:text="Subscription:" />
 
                 <TextView
                     android:id="@+id/subscription_value"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_right"
                     android:layout_width="0dp"
-                    android:gravity="right" />
+                    android:gravity="left" />
             </TableRow>
             <TableRow>
 
                 <TextView
                     android:id="@+id/period_title"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_left"
                     android:layout_width="0dp" />
 
                 <TextView
                     android:id="@+id/period_value"
-                    style="@style/style_textbox_table_breakup"
+                    style="@style/style_textbox_profile_right"
                     android:layout_width="0dp"
-                    android:gravity="right" />
+                    android:gravity="left" />
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

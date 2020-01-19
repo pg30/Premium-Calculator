@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +33,7 @@ import java.util.Map;
 
 public class register extends AppCompatActivity {
 
-    EditText name_edit,email_edit,phone_edit,password_edit,confirmpassword_edit;
+    TextInputEditText name_edit,email_edit,phone_edit,password_edit,confirmpassword_edit;
     TextView login_txt;
     Button register_btn;
     ProgressBar progressBar;
@@ -214,11 +215,11 @@ public class register extends AppCompatActivity {
     }
     void findViews()
     {
-        name_edit = (EditText) findViewById(R.id.name_edit);
-        email_edit = (EditText) findViewById(R.id.email_edit);
-        phone_edit = (EditText) findViewById(R.id.phone_edit);
-        password_edit = (EditText) findViewById(R.id.password_edit);
-        confirmpassword_edit = (EditText) findViewById(R.id.confirmpassword_edit);
+        name_edit = (TextInputEditText) findViewById(R.id.name);
+        email_edit = (TextInputEditText) findViewById(R.id.email);
+        phone_edit = (TextInputEditText) findViewById(R.id.phone);
+        password_edit = (TextInputEditText) findViewById(R.id.password);
+        confirmpassword_edit = (TextInputEditText) findViewById(R.id.confirmpassword);
         login_txt = (TextView) findViewById(R.id.login_txt);
         register_btn = (Button) findViewById(R.id.register_btn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);

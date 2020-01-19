@@ -28,8 +28,7 @@ public class commission extends menu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commission);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Commission");
 
         getValuesFromIntent();

@@ -44,8 +44,7 @@ public class busover6 extends menu implements AdapterView.OnItemSelectedListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busover6);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Bus");
 
         findViews();

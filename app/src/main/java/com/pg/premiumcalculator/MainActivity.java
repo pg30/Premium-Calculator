@@ -31,8 +31,7 @@ public class MainActivity extends menu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Vehicles Category");
 
         checkPermission();

@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Basic Details"
-            android:gravity="center_horizontal"
-            android:background="@color/headingcolor"
+style="@style/style_textbox_heading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
@@ -114,8 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="(A) OD Premium Package"
-            android:background="@color/headingcolor"
-            android:gravity="center"
+style="@style/style_textbox_heading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/basic_details_table"
@@ -300,8 +298,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="(B) Liability Premium"
-            android:background="@color/headingcolor"
-            android:gravity="center"
+style="@style/style_textbox_heading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/od_details_table"
@@ -400,8 +397,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="(C) Total Premium"
-            android:background="@color/headingcolor"
-            android:gravity="center"
+            style="@style/style_textbox_heading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tp_details_table"
@@ -418,8 +414,7 @@
             <TableRow>
 
                     <TextView
-                    android:layout_width="0dp"
-                        style="@style/style_textbox_table_breakup"
+                    android:layout_width="0dp" style="@style/style_textbox_table_breakup"
                     android:text="Total Package Premium(A+B):" />
 
                 <TextView

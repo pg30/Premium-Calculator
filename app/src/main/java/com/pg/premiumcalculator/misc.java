@@ -46,8 +46,7 @@ public class misc extends menu implements AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misc);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Miscellaneous Vehicle");
 
         findViews();

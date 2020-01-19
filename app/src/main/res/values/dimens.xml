@@ -4,6 +4,7 @@
     <dimen name="table_cell_weight">0.5</dimen>
     <dimen name="table_cell_margin">3dp</dimen>
     <dimen name="button_margin">10dp</dimen>
+    <dimen name="font_size_view_profile">17sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

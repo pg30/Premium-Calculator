@@ -90,8 +90,7 @@ public class misc_breakup extends menu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misc_breakup);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Premium Breakup");
 
         getValuesFromIntent();

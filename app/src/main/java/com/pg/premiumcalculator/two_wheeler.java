@@ -46,8 +46,7 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_wheeler);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Two Wheeler");
 
         findViews();

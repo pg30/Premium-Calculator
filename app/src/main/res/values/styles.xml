@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,12 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/background_color</item>
     </style>
 
     <style name="style_textbox_table">
         <item name="android:padding"> @dimen/table_cell_padding </item>
         <item name="android:layout_weight"> @dimen/table_cell_weight </item>
         <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
     <style name="style_edittext_table">
         <item name="android:layout_weight"> @dimen/table_cell_weight </item>
@@ -42,10 +44,42 @@
         <item name="android:padding"> @dimen/table_cell_padding </item>
         <item name="android:layout_weight"> @dimen/table_cell_weight </item>
         <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
-    <style name="style_textbox_other">
-
+    <style name="style_textbox_heading">
+        <item name="android:textColor">@color/text_heading_color</item>
+        <item name="android:background">@color/headingcolor</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="style_textbox_profile_left">
+        <item name="android:paddingTop"> @dimen/table_cell_padding </item>
+        <item name="android:paddingBottom"> @dimen/table_cell_padding </item>
+        <item name="android:paddingRight"> @dimen/table_cell_padding </item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_weight"> 0.4 </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/font_size_view_profile</item>
+    </style>
+    <style name="style_textbox_profile_right">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:layout_weight"> 0.6 </item>
+        <item name="android:layout_margin"> @dimen/table_cell_margin </item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/font_size_view_profile</item>
+    </style>
+    <style name="hint_text" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="theme" parent="Widget.Design.TextInputLayout">
+        <item name="hintTextAppearance">@style/hint_text</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_login_register</item>
     </style>
 
 </resources>

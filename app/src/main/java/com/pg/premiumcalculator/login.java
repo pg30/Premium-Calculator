@@ -15,13 +15,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class login extends AppCompatActivity {
 
-    EditText email_edit,password_edit;
+    TextInputEditText email_edit,password_edit;
     TextView register_txt;
     Button login_btn;
     ProgressBar progressBar;
@@ -140,8 +141,8 @@ public class login extends AppCompatActivity {
     }
     void findViews()
     {
-        email_edit = (EditText) findViewById(R.id.email_edit);
-        password_edit = (EditText) findViewById(R.id.password_edit);
+        email_edit = (TextInputEditText) findViewById(R.id.email);
+        password_edit = (TextInputEditText) findViewById(R.id.password);
         register_txt = (TextView) findViewById(R.id.login_txt);
         login_btn = (Button) findViewById(R.id.register_btn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);

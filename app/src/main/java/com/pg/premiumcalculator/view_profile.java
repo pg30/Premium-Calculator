@@ -40,8 +40,7 @@ public class view_profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("Premium Breakup");
         findViews();
         firebaseAuth = FirebaseAuth.getInstance();

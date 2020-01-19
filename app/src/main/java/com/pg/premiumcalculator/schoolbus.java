@@ -44,8 +44,7 @@ public class schoolbus extends menu implements AdapterView.OnItemSelectedListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schoolbus);
 
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#32afa9")));
+
         getSupportActionBar().setTitle("School Bus");
 
         findViews();
