@@ -125,16 +125,8 @@ public class login extends AppCompatActivity {
     boolean validate()
     {
         boolean ok = true;
-        if(email.isEmpty())
+        if(email.isEmpty() || password.isEmpty())
         {
-            email_edit.setError("Email is required");
-            email_edit.requestFocus();
-            ok = false;
-        }
-        else if(password.isEmpty())
-        {
-            password_edit.setError("Password is required");
-            password_edit.requestFocus();
             ok = false;
         }
         return ok;
