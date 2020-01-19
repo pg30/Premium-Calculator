@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +38,7 @@ import java.util.Map;
 public class register extends AppCompatActivity {
 
     TextInputEditText name_edit,email_edit,phone_edit,password_edit,confirmpassword_edit;
+    TextInputLayout name_text,email_text,phone_text,password_text,confirmpassword_text;
     TextView login_txt;
     Button register_btn;
     ProgressBar progressBar;
@@ -56,6 +61,92 @@ public class register extends AppCompatActivity {
         findViews();
         mFireBaseAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+
+        name_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(name_text.getError()!=null)
+                    name_text.setError(null);
+            }
+        });
+        email_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(email_text.getError()!=null)
+                    email_text.setError(null);
+            }
+        });
+        phone_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(phone_text.getError()!=null)
+                    phone_text.setError(null);
+            }
+        });
+        password_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(password_text.getError()!=null)
+                    password_text.setError(null);
+            }
+        });
+        confirmpassword_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(confirmpassword_text.getError()!=null)
+                    confirmpassword_text.setError(null);
+            }
+        });
 
         if(mFireBaseAuth.getCurrentUser()!=null)
         {
@@ -171,45 +262,130 @@ public class register extends AppCompatActivity {
         boolean ok = true;
         if(name.isEmpty())
         {
-            name_edit.setError("Name is required");
-            name_edit.requestFocus();
+            name_text.setError("Name is required");
+            name_text.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(email.isEmpty())
+        else
         {
-            email_edit.setError("Email is required");
-            email_edit.requestFocus();
+            if(name_text.getError()!=null)
+                name_text.setError(null);
+            ok = true;
+        }
+        if(email.isEmpty())
+        {
+            email_text.setError("Email is required");
+            email_text.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(phone.isEmpty())
+        else
         {
-            phone_edit.setError("Phone no. is required");
-            phone_edit.requestFocus();
+            if(email_text.getError()!=null)
+                email_text.setError(null);
+            ok = true;
+        }
+        if(!email.isEmpty() && (!email.contains("@") || !email.contains(".com")))
+        {
+            email_text.setError("invalid email-id");
+            email_text.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(password.isEmpty())
+        else
         {
-            password_edit.setError("Password is required");
+            if(email_text.getError()!=null)
+                email_text.setError(null);
+            ok = true;
+        }
+        if(phone.isEmpty())
+        {
+            phone_text.setError("Phone no. is required");
+            phone_text.requestFocus();
+            ok = false;
+            return ok;
+        }
+        else {
+            if(phone_text.getError()!=null)
+                phone_text.setError(null);
+            ok = true;
+        }
+        if(!phone.isEmpty() && phone.contains("+"))
+        {
+            phone_text.setError("Country Code is not required");
+            phone_text.requestFocus();
+            ok = false;
+            return ok;
+        }
+        else {
+            if(phone_text.getError()!=null)
+                phone_text.setError(null);
+            ok = true;
+        }
+        if(!phone.isEmpty() && phone.length()!=10)
+        {
+            phone_text.setError("invalid phone number");
+            phone_text.requestFocus();
+            ok = false;
+            return ok;
+        }
+        else {
+            if(phone_text.getError()!=null)
+                phone_text.setError(null);
+            ok = true;
+        }
+        if(password.isEmpty())
+        {
+            password_text.setError("Password is required");
             password_edit.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(confirm_password.isEmpty())
+        else
         {
-            confirmpassword_edit.setError("Enter Password once again");
+            if(password_text.getError()!=null)
+                password_text.setError(null);
+            ok = true;
+        }
+        if(confirm_password.isEmpty())
+        {
+            confirmpassword_text.setError("Enter Password once again");
             confirmpassword_edit.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(!password.equals(confirm_password))
+        else
         {
-            password_edit.setError("Password and confirm password should be same");
+            if(confirmpassword_text.getError()!=null)
+                confirmpassword_text.setError(null);
+            ok = true;
+        }
+        if(!password.equals(confirm_password))
+        {
+            password_text.setError("Password and confirm password should be same");
             password_edit.requestFocus();
             ok = false;
+            return ok;
         }
-        else if(password.length()<6)
+        else
         {
-            password_edit.setError("Password should be more than 6 character long and alphanumeric");
+            if(password_text.getError()!=null)
+                password_text.setError(null);
+            ok = true;
+        }
+        if(password.length()<6)
+        {
+            password_text.setError("Password should be more than 6 character long and alphanumeric");
             password_edit.requestFocus();
             ok = false;
+            return ok;
+        }
+        else
+        {
+            if(password_text.getError()!=null)
+                password_text.setError(null);
+            ok = true;
         }
         return ok;
     }
@@ -220,6 +396,11 @@ public class register extends AppCompatActivity {
         phone_edit = (TextInputEditText) findViewById(R.id.phone);
         password_edit = (TextInputEditText) findViewById(R.id.password);
         confirmpassword_edit = (TextInputEditText) findViewById(R.id.confirmpassword);
+        confirmpassword_text = (TextInputLayout) findViewById(R.id.confirmpassword_edit);
+        password_text = (TextInputLayout) findViewById(R.id.password_edit);
+        name_text = (TextInputLayout) findViewById(R.id.name_edit);
+        email_text = (TextInputLayout) findViewById(R.id.email_edit);
+        phone_text = (TextInputLayout) findViewById(R.id.phone_edit);
         login_txt = (TextView) findViewById(R.id.login_txt);
         register_btn = (Button) findViewById(R.id.register_btn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
