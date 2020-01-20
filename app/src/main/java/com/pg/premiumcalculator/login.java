@@ -3,6 +3,7 @@ package com.pg.premiumcalculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,12 +61,12 @@ public class login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(login.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                                makeToast(login.this,"Login Successful",Toast.LENGTH_SHORT);
                                 startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                             }
                             else
                             {
-                                Toast.makeText(login.this,"Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                makeToast(login.this,"Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT);
                                 progressBar.setVisibility(View.GONE);
                             }
                         }
@@ -88,6 +89,10 @@ public class login extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+    }
+    void makeToast(Context context, String msg, int length)
+    {
+        Toast.makeText(context,msg,length).show();
     }
     boolean validate()
     {

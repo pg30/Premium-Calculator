@@ -1,14 +1,19 @@
 package com.pg.premiumcalculator;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -41,40 +46,45 @@ public class view_profile extends AppCompatActivity {
         setContentView(R.layout.activity_view_profile);
 
 
-        getSupportActionBar().setTitle("Premium Breakup");
+        getSupportActionBar().setTitle("Profile");
         findViews();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        userID = firebaseAuth.getCurrentUser().getUid();
+        if(firebaseAuth.getCurrentUser()!=null) {
+            userID = firebaseAuth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = firebaseFirestore.collection("users").document(userID);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                name = documentSnapshot.getString("name");
-                name_value.setText(name);
-                email = documentSnapshot.getString("email");
-                email_value.setText(email);
-                phone = documentSnapshot.getString("phone");
-                phone_value.setText(phone);
-                subscription = documentSnapshot.getString("isSubscribed");
-                subscription_value.setText(subscription);
-                registrationDate = documentSnapshot.getString("registrationDate");
-                currentDate = getCurrentDate();
-                Log.d("debug",currentDate+"  "+registrationDate);
-                long period = getDays(currentDate,registrationDate);
-                if(subscription.equals("NO"))
-                {
-                    period_title.setText("Remaining trial period:");
-                    period_value.setText(period+" days");
-                }
-                else
-                {
+            firebaseFirestore.collection("users").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    name = documentSnapshot.getString("name");
+                    name_value.setText(name);
+                    email = documentSnapshot.getString("email");
+                    email_value.setText(email);
+                    phone = documentSnapshot.getString("phone");
+                    phone_value.setText(phone);
+                    subscription = documentSnapshot.getString("isSubscribed");
+                    subscription_value.setText(subscription);
+                    registrationDate = documentSnapshot.getString("registrationDate");
+                    currentDate = getCurrentDate();
+                    Log.d("debug", currentDate + "  " + registrationDate);
+                    long period = getDays(currentDate, registrationDate);
+                    if (subscription.equals("NO")) {
+                        period_title.setText("Remaining trial period:");
+                        period_value.setText(period + " days");
+                    } else {
 
+                    }
                 }
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(view_profile.this,"Error: "+e.getMessage(),Toast.LENGTH_LONG);
+                }
+            });
+        }
+        else
+            startActivity(new Intent(getApplicationContext(),login.class));
     }
 
     long getDays(String currentString,String givenString)

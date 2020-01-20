@@ -3,6 +3,7 @@ package com.pg.premiumcalculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -166,35 +167,37 @@ public class register extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(register.this,"Account Successfully created",Toast.LENGTH_SHORT).show();
-                                userID = mFireBaseAuth.getCurrentUser().getUid();
-                                DocumentReference documentReference = fstore.collection("users").document(userID);
-                                Map<String,Object> user = new HashMap<>();
-                                user.put("name",name);
-                                user.put("email",email);
-                                user.put("phone",phone);
-                                user.put("isSubscribed","NO");
-                                user.put("registrationDate",getCurrentDate());
+                                makeToast(register.this,"Account Successfully created",Toast.LENGTH_SHORT);
+                                if(mFireBaseAuth.getCurrentUser()!=null) {
+                                    userID = mFireBaseAuth.getCurrentUser().getUid();
+                                    DocumentReference documentReference = fstore.collection("users").document(userID);
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("name", name);
+                                    user.put("email", email);
+                                    user.put("phone", phone);
+                                    user.put("isSubscribed", "NO");
+                                    user.put("registrationDate", getCurrentDate());
 
-                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d("debug","user profile is created in firestore");
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d("debug","on failure method called "+ e.toString());
-                                        Toast.makeText(register.this,"Account not registered. Please try again later "+e.toString(),Toast.LENGTH_SHORT).show();
-                                        if(mFireBaseAuth.getCurrentUser()!=null)
-                                            mFireBaseAuth.getCurrentUser().delete();
-                                    }
-                                });
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("debug", "user profile is created in firestore");
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d("debug", "on failure method called " + e.toString());
+                                            makeToast(register.this, "Account not registered. Please try again later " + e.toString(), Toast.LENGTH_SHORT);
+                                            if (mFireBaseAuth.getCurrentUser() != null)
+                                                mFireBaseAuth.getCurrentUser().delete();
+                                        }
+                                    });
+                                }
                             }
                             else
                             {
-                                Toast.makeText(register.this,"Error.! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                makeToast(register.this,"Error.! "+task.getException().getMessage(),Toast.LENGTH_SHORT);
                                 progressBar.setVisibility(View.GONE);
                             }
                         }
@@ -376,5 +379,9 @@ public class register extends AppCompatActivity {
         phone = phone_edit.getText().toString().trim();
         password = password_edit.getText().toString().trim();
         confirm_password = confirmpassword_edit.getText().toString().trim();
+    }
+    void makeToast(Context context,String msg,int length)
+    {
+        Toast.makeText(context,msg,length).show();
     }
 }
