@@ -86,5 +86,8 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="android:textCursorDrawable">@drawable/cursor_login_register</item>
     </style>
+    <style name="progress" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/white</item>
+    </style>
 
 </resources>
