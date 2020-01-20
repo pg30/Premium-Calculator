@@ -46,8 +46,6 @@ public class register extends AppCompatActivity {
     String name,email,phone,password,confirm_password;
 
     FirebaseAuth mFireBaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    Boolean mAllowNavigation = true;
 
     FirebaseFirestore fstore;
     String userID;
@@ -61,6 +59,13 @@ public class register extends AppCompatActivity {
         findViews();
         mFireBaseAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+
+        if(mFireBaseAuth.getCurrentUser()!=null)
+        {
+            Log.d("debug",mFireBaseAuth.getCurrentUser()+"");
+            startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            //finish();
+        }
 
         name_edit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,13 +153,6 @@ public class register extends AppCompatActivity {
             }
         });
 
-        if(mFireBaseAuth.getCurrentUser()!=null)
-        {
-            Log.d("debug",mFireBaseAuth.getCurrentUser()+"");
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
-        }
-
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,14 +180,15 @@ public class register extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d("debug","user profile is created in firestore");
-                                        startActivity(new Intent(getApplicationContext(),login.class));
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Log.d("debug","on failure method called "+ e.toString());
                                         Toast.makeText(register.this,"Account not registered. Please try again later "+e.toString(),Toast.LENGTH_SHORT).show();
-                                        mFireBaseAuth.getCurrentUser().delete();
+                                        if(mFireBaseAuth.getCurrentUser()!=null)
+                                            mFireBaseAuth.getCurrentUser().delete();
                                     }
                                 });
                             }
@@ -206,36 +205,9 @@ public class register extends AppCompatActivity {
         login_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),login.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(),login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d("firebase", "onAuthStateChanged:signed_in:" + user.getUid());
-
-
-                    if (mAllowNavigation) {
-                        mAllowNavigation = false;
-
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                } else {
-                    // User is signed out
-                    Log.d("firebase", "onAuthStateChanged:signed_out");
-
-                }
-                // ...
-            }
-        };
     }
     String getCurrentDate()
     {
@@ -247,16 +219,8 @@ public class register extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mFireBaseAuth.addAuthStateListener(mAuthListener);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mFireBaseAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
     boolean validate()
     {
         boolean ok = true;

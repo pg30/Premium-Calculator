@@ -30,8 +30,6 @@ public class login extends AppCompatActivity {
     String email,password;
 
     FirebaseAuth mFireBaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    Boolean mAllowNavigation = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,8 @@ public class login extends AppCompatActivity {
         if(mFireBaseAuth.getCurrentUser()!=null)
         {
             Log.d("debug",mFireBaseAuth.getCurrentUser()+"");
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            //finish();
         }
 
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +61,11 @@ public class login extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(login.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                             }
                             else
                             {
-                                Toast.makeText(login.this,"Error.! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(login.this,"Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
                         }
@@ -78,49 +76,18 @@ public class login extends AppCompatActivity {
         register_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),register.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(),register.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d("firebase", "onAuthStateChanged:signed_in:" + user.getUid());
-
-
-                    if (mAllowNavigation) {
-                        mAllowNavigation = false;
-
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                } else {
-                    // User is signed out
-                    Log.d("firebase", "onAuthStateChanged:signed_out");
-
-                }
-                // ...
-            }
-        };
     }
     @Override
     public void onStart() {
         super.onStart();
-        mFireBaseAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mFireBaseAuth.removeAuthStateListener(mAuthListener);
-        }
     }
     boolean validate()
     {
