@@ -1,4 +1,0 @@
-package com.pg.premiumcalculator;
-public interface MyCallback {
-    void onCallback(boolean value);
-}
