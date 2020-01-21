@@ -62,7 +62,7 @@ public class misc_breakup extends menu {
 
     //views values
     double tempidv,tempbasicOD,tempelec,tempnonelec,tempimt23=0,tempoddisc,tempncb,tempzerodep,tempgeoext;
-    double tempbasicTP,temptppd=150,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0,tempoverturning;
+    double tempbasicTP,temptppd=200,tempownerpa,templltodriver,tempextcngkit,tempcngtp=0,tempoverturning;
     double temptotala,temptotalb,temptotalab,tempgst,tempfinalpremium;
 
     //result views pointers
