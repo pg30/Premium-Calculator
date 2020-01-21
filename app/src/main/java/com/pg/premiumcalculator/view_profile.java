@@ -30,7 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class view_profile extends AppCompatActivity {
+public class view_profile extends menu {
 
     TextView name_value,phone_value,email_value,subscription_value,period_value,period_title;
     FirebaseAuth firebaseAuth;

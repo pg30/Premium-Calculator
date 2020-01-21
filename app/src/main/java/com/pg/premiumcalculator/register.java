@@ -161,47 +161,8 @@ public class register extends AppCompatActivity {
                 boolean ok = validate();
                 if(ok)
                 {
-                    progressBar.setVisibility(View.VISIBLE);
-                    mFireBaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                                makeToast(register.this,"Account Successfully created",Toast.LENGTH_SHORT);
-                                if(mFireBaseAuth.getCurrentUser()!=null) {
-                                    userID = mFireBaseAuth.getCurrentUser().getUid();
-                                    DocumentReference documentReference = fstore.collection("users").document(userID);
-                                    Map<String, Object> user = new HashMap<>();
-                                    user.put("name", name);
-                                    user.put("email", email);
-                                    user.put("phone", phone);
-                                    user.put("isSubscribed", "NO");
-                                    user.put("registrationDate", getCurrentDate());
-
-                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("debug", "user profile is created in firestore");
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.d("debug", "on failure method called " + e.toString());
-                                            makeToast(register.this, "Account not registered. Please try again later " + e.toString(), Toast.LENGTH_SHORT);
-                                            if (mFireBaseAuth.getCurrentUser() != null)
-                                                mFireBaseAuth.getCurrentUser().delete();
-                                        }
-                                    });
-                                }
-                            }
-                            else
-                            {
-                                makeToast(register.this,"Error.! "+task.getException().getMessage(),Toast.LENGTH_SHORT);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    });
+                    enableProgressBar();
+                    attemptRegistration();
                 }
             }
         });
@@ -212,6 +173,72 @@ public class register extends AppCompatActivity {
             }
         });
     }
+    void addDataToUser(String userID)
+    {
+        DocumentReference documentReference = fstore.collection("users").document(userID);
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", name);
+        user.put("email", email);
+        user.put("phone", phone);
+        user.put("signIn", true);
+        user.put("isSubscribed", "NO");
+        user.put("registrationDate", getCurrentDate());
+
+        documentReference.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    makeToast(getApplicationContext(),"Account Successfully Created.!",Toast.LENGTH_LONG);
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+                else
+                {
+                    logout();
+                    Toast.makeText(getApplicationContext(),"Error: "+task.getException().getMessage(),Toast.LENGTH_LONG);
+                    disableProgressBar();
+                }
+            }
+        });
+    }
+    void attemptRegistration()
+    {
+        mFireBaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    if(mFireBaseAuth.getCurrentUser()!=null) {
+                        userID = mFireBaseAuth.getCurrentUser().getUid();
+                        addDataToUser(userID);
+                    }
+                    else
+                    {
+                        makeToast(register.this,"Error. Please try again later!",Toast.LENGTH_LONG);
+                        disableProgressBar();
+                    }
+                }
+                else
+                {
+                    makeToast(register.this,"Error.! "+task.getException().getMessage(),Toast.LENGTH_LONG);
+                    disableProgressBar();
+                }
+            }
+        });
+    }
+    void logout()
+    {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+    void disableProgressBar()
+    {
+        progressBar.setVisibility(View.GONE);
+    }
+    void enableProgressBar()
+    {
+        progressBar.setVisibility(View.VISIBLE);
+    }
     String getCurrentDate()
     {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -219,17 +246,13 @@ public class register extends AppCompatActivity {
         String currentDate = dateFormat.format(date);
         return currentDate;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     boolean validate()
     {
+        Validation val = new Validation();
         boolean ok = true;
-        if(name.isEmpty())
+        if(val.validateName(name)!=null)
         {
-            name_text.setError("Name is required");
+            name_text.setError(val.validateName(name));
             name_text.requestFocus();
             ok = false;
             return ok;
@@ -240,9 +263,9 @@ public class register extends AppCompatActivity {
                 name_text.setError(null);
             ok = true;
         }
-        if(email.isEmpty())
+        if(val.validateEmail(email)!=null)
         {
-            email_text.setError("Email is required");
+            email_text.setError(val.validateEmail(email));
             email_text.requestFocus();
             ok = false;
             return ok;
@@ -253,22 +276,9 @@ public class register extends AppCompatActivity {
                 email_text.setError(null);
             ok = true;
         }
-        if(!email.isEmpty() && (!email.contains("@") || !email.contains(".com")))
+        if(val.validatePhone(phone)!=null)
         {
-            email_text.setError("invalid email-id");
-            email_text.requestFocus();
-            ok = false;
-            return ok;
-        }
-        else
-        {
-            if(email_text.getError()!=null)
-                email_text.setError(null);
-            ok = true;
-        }
-        if(phone.isEmpty())
-        {
-            phone_text.setError("Phone no. is required");
+            phone_text.setError(val.validatePhone(phone));
             phone_text.requestFocus();
             ok = false;
             return ok;
@@ -278,33 +288,9 @@ public class register extends AppCompatActivity {
                 phone_text.setError(null);
             ok = true;
         }
-        if(!phone.isEmpty() && phone.contains("+"))
+        if(val.validatePassword(password)!=null)
         {
-            phone_text.setError("Country Code is not required");
-            phone_text.requestFocus();
-            ok = false;
-            return ok;
-        }
-        else {
-            if(phone_text.getError()!=null)
-                phone_text.setError(null);
-            ok = true;
-        }
-        if(!phone.isEmpty() && phone.length()!=10)
-        {
-            phone_text.setError("invalid phone number");
-            phone_text.requestFocus();
-            ok = false;
-            return ok;
-        }
-        else {
-            if(phone_text.getError()!=null)
-                phone_text.setError(null);
-            ok = true;
-        }
-        if(password.isEmpty())
-        {
-            password_text.setError("Password is required");
+            password_text.setError(val.validatePassword(password));
             password_edit.requestFocus();
             ok = false;
             return ok;
@@ -315,9 +301,9 @@ public class register extends AppCompatActivity {
                 password_text.setError(null);
             ok = true;
         }
-        if(confirm_password.isEmpty())
+        if(val.validateConfirmPassword(password,confirm_password)!=null)
         {
-            confirmpassword_text.setError("Enter Password once again");
+            confirmpassword_text.setError(val.validateConfirmPassword(password,confirm_password));
             confirmpassword_edit.requestFocus();
             ok = false;
             return ok;
@@ -326,32 +312,6 @@ public class register extends AppCompatActivity {
         {
             if(confirmpassword_text.getError()!=null)
                 confirmpassword_text.setError(null);
-            ok = true;
-        }
-        if(!password.equals(confirm_password))
-        {
-            password_text.setError("Password and confirm password should be same");
-            password_edit.requestFocus();
-            ok = false;
-            return ok;
-        }
-        else
-        {
-            if(password_text.getError()!=null)
-                password_text.setError(null);
-            ok = true;
-        }
-        if(password.length()<6)
-        {
-            password_text.setError("Password should be more than 6 character long and alphanumeric");
-            password_edit.requestFocus();
-            ok = false;
-            return ok;
-        }
-        else
-        {
-            if(password_text.getError()!=null)
-                password_text.setError(null);
             ok = true;
         }
         return ok;

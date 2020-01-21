@@ -15,11 +15,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class login extends AppCompatActivity {
 
@@ -28,9 +36,10 @@ public class login extends AppCompatActivity {
     Button login_btn;
     ProgressBar progressBar;
 
-    String email,password;
+    String email,password,userID = null;
 
     FirebaseAuth mFireBaseAuth;
+    FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +49,11 @@ public class login extends AppCompatActivity {
         getSupportActionBar().hide();
         findViews();
         mFireBaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         if(mFireBaseAuth.getCurrentUser()!=null)
         {
-            Log.d("debug",mFireBaseAuth.getCurrentUser()+"");
+            Log.d("debug",mFireBaseAuth.getCurrentUser()+" user is already logged in");
             startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
             //finish();
         }
@@ -55,22 +65,8 @@ public class login extends AppCompatActivity {
                 boolean ok = validate();
                 if(ok)
                 {
-                    progressBar.setVisibility(View.VISIBLE);
-                    mFireBaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                                makeToast(login.this,"Login Successful",Toast.LENGTH_SHORT);
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                            }
-                            else
-                            {
-                                makeToast(login.this,"Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    });
+                    enableProgressBar();
+                    attemptLogin();
                 }
             }
         });
@@ -81,14 +77,77 @@ public class login extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public void onStart() {
-        super.onStart();
+    void setUserData(String userID)
+    {
+        firebaseFirestore.collection("users").document(userID).update("signIn",true).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    makeToast(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG);
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+                else
+                {
+                    logout();
+                    disableProgressBar();
+                    makeToast(getApplicationContext(),"Error: "+task.getException().getMessage(),Toast.LENGTH_LONG);
+                }
+            }
+        });
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+    void checkUserData(final String userID)
+    {
+        firebaseFirestore.collection("users").document(userID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    boolean status = task.getResult().getBoolean("signIn");
+                    if(status == true)
+                    {
+                        logout();
+                        makeToast(getApplicationContext(),"You are already logged in on other device",Toast.LENGTH_LONG);
+                        disableProgressBar();
+                    }
+                    else
+                    {
+                        setUserData(userID);
+                    }
+                }
+                else
+                {
+                    logout();
+                    makeToast(getApplicationContext(),"Error: "+task.getException().getMessage(),Toast.LENGTH_LONG);
+                    disableProgressBar();
+                }
+            }
+        });
+    }
+    void attemptLogin()
+    {
+        mFireBaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    if(mFireBaseAuth.getCurrentUser()!=null)
+                    {
+                        userID = mFireBaseAuth.getCurrentUser().getUid();
+                        checkUserData(userID);
+                    }
+                }
+                else
+                {
+                    makeToast(getApplicationContext(),"Error: "+task.getException().getMessage(),Toast.LENGTH_LONG);
+                    disableProgressBar();
+                }
+            }
+        });
+    }
+    void logout()
+    {
+        FirebaseAuth.getInstance().signOut();
     }
     void makeToast(Context context, String msg, int length)
     {
@@ -97,10 +156,9 @@ public class login extends AppCompatActivity {
     boolean validate()
     {
         boolean ok = true;
-        if(email.isEmpty() || password.isEmpty())
-        {
+        Validation val = new Validation();
+        if(val.validateEmail(email)!=null || val.validatePassword(password)!=null)
             ok = false;
-        }
         return ok;
     }
     void findViews()
@@ -115,5 +173,13 @@ public class login extends AppCompatActivity {
     {
         email = email_edit.getText().toString();
         password = password_edit.getText().toString();
+    }
+    void disableProgressBar()
+    {
+        progressBar.setVisibility(View.GONE);
+    }
+    void enableProgressBar()
+    {
+        progressBar.setVisibility(View.VISIBLE);
     }
 }
