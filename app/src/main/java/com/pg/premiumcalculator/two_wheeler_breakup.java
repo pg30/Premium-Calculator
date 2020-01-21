@@ -376,8 +376,10 @@ public class two_wheeler_breakup extends menu {
         Log.d("debug","TP after owner PA, lltodriver and patounnamedpassenger is "+basicTP);
         if(yes) {
             basicTP = basicTP - temptppd;
-            temptppd=0;
+            temptppd=-temptppd;
         }
+        else
+            temptppd = 0;
         Log.d("debug","TP after restricted TP option is "+basicTP);
         return basicTP;
     }

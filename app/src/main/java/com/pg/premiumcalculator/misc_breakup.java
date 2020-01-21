@@ -296,9 +296,11 @@ public class misc_breakup extends menu {
         templltodriver = lltodriver;
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
-            temptppd = 0;
-            basicTP = basicTP - 200;
+            basicTP = basicTP - temptppd;
+            temptppd = -temptppd;
         }
+        else
+            temptppd = 0;
         Log.d("debug","TP after restricted TP option "+basicTP);
         if(cng_yes)
         {

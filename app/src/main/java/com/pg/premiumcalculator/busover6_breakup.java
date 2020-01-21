@@ -292,8 +292,10 @@ public class busover6_breakup extends menu {
         Log.d("debug","TP after owner PA, lltodriver "+basicTP);
         if(yes) {
             basicTP = basicTP - temptppd;
-            temptppd = 0;
+            temptppd = -temptppd;
         }
+        else
+            temptppd = 0;
         Log.d("debug","TP after restricted TP option "+basicTP);
         if(cng_yes)
         {
