@@ -15,10 +15,6 @@
                 android:icon="@drawable/profile_icon"
                 android:title="View Profile" />
             <item
-                android:id="@+id/logout"
-                android:icon="@drawable/logout_icon"
-                android:title="Logout" />
-            <item
                 android:id="@+id/about"
                 android:icon="@drawable/about_icon"
                 android:title="About" />
@@ -26,6 +22,14 @@
                 android:id="@+id/share"
                 android:icon="@drawable/share_icon"
                 android:title="Share This App" />
+            <item
+                android:id="@+id/help"
+                android:icon="@drawable/help_icon"
+                android:title="Help and Feedback" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/logout_icon"
+                android:title="Logout" />
         </menu>
     </item>
 </menu>

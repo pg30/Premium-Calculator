@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".helpandsupport"></activity>
         <activity android:name=".splash_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,7 @@
         </activity>
         <activity android:name=".about" />
         <activity android:name=".view_profile" />
-        <activity android:name=".register"/>
+        <activity android:name=".register" />
         <activity android:name=".login" />
         <activity android:name=".commission" />
         <activity android:name=".misc_breakup" />
@@ -54,7 +55,7 @@
         <activity android:name=".taxilessthan6" />
         <activity android:name=".private_car" />
         <activity android:name=".two_wheeler" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

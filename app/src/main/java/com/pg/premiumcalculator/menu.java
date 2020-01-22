@@ -48,9 +48,16 @@ public class menu extends AppCompatActivity {
             case R.id.about:
                 viewAbout();
                 return true;
+            case R.id.help:
+                viewHelp();
+                return true;
                 default:
                     return super.onOptionsItemSelected(item);
         }
+    }
+    void viewHelp()
+    {
+        startActivity(new Intent(getApplicationContext(),helpandsupport.class));
     }
     void logout()
     {
