@@ -104,6 +104,7 @@ public class login extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     boolean status = task.getResult().getBoolean("signIn");
+                    Log.d("Auth",status+"jhblbl");
                     if(status == true)
                     {
                         logout();

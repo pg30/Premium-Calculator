@@ -15,10 +15,6 @@
                 android:icon="@drawable/profile_icon"
                 android:title="View Profile" />
             <item
-                android:id="@+id/about"
-                android:icon="@drawable/about_icon"
-                android:title="About" />
-            <item
                 android:id="@+id/share"
                 android:icon="@drawable/share_icon"
                 android:title="Share This App" />

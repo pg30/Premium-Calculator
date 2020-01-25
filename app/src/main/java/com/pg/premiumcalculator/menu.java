@@ -45,9 +45,6 @@ public class menu extends AppCompatActivity {
             case R.id.profile:
                 viewProfile();
                 return true;
-            case R.id.about:
-                viewAbout();
-                return true;
             case R.id.help:
                 viewHelp();
                 return true;
@@ -61,6 +58,7 @@ public class menu extends AppCompatActivity {
     }
     void logout()
     {
+        makeToast(getApplicationContext(),"Please Wait for a second",Toast.LENGTH_LONG);
         mFirebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         String userID = null;
@@ -95,9 +93,5 @@ public class menu extends AppCompatActivity {
     void viewProfile()
     {
         startActivity(new Intent(getApplicationContext(),view_profile.class));
-    }
-    void viewAbout()
-    {
-        startActivity(new Intent(getApplicationContext(),about.class));
     }
 }

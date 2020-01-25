@@ -10,5 +10,6 @@ public class helpandsupport extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helpandsupport);
+        getSupportActionBar().setTitle("Help & Feedback");
     }
 }

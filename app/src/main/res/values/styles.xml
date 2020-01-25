@@ -10,6 +10,10 @@
         <item name="android:windowBackground">@color/background_color</item>
     </style>
 
+    <style name="general_text">
+        <item name="android:padding"> @dimen/table_cell_padding </item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
     <style name="style_textbox_table">
         <item name="android:padding"> @dimen/table_cell_padding </item>
         <item name="android:layout_weight"> @dimen/table_cell_weight </item>
