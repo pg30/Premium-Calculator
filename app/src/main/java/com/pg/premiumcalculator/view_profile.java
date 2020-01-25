@@ -69,12 +69,6 @@ public class view_profile extends menu {
                     currentDate = getCurrentDate();
                     Log.d("debug", currentDate + "  " + registrationDate);
                     long period = getDays(currentDate, registrationDate);
-                    if (subscription.equals("NO")) {
-                        period_title.setText("Remaining trial period:");
-                        period_value.setText(period + " days");
-                    } else {
-
-                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
