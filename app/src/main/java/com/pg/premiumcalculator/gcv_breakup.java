@@ -343,9 +343,11 @@ public class gcv_breakup extends menu {
 
         if(yes)
         {
-            temptppd = 0;
-            temp-=200;
+            temp-=temptppd;
+            temptppd = -temptppd;
         }
+        else
+            temptppd = 0;
         if(cng_yes)
         {
             temp+=60;
