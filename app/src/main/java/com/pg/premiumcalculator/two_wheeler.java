@@ -126,7 +126,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
 
     void getValuesFromEditText()
     {
-        Log.d("debug","button clicked");
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
@@ -151,7 +150,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
         tpPremium.setPaToUnnamedPassenger(patounnamedpassenger);
         dateofregistration = ParseString(date_edit.getText().toString());
         basicVehicleDetails.setDateOfRegistration(dateofregistration);
-        Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
         if(yes.isChecked())
             tpPremium.setLessTppd(true);
     }
@@ -167,7 +165,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("Debug","spin selected "+parent.getItemAtPosition(position));
         if(parent.getId()==R.id.ncb_value)
         {
             ncb = Double.parseDouble(parent.getItemAtPosition(position).toString());
@@ -183,7 +180,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
                 zone = Zone.C;
             basicVehicleDetails.setZone(zone);
         }
-        Log.d("debug",ncb+" "+zone);
     }
 
     @Override

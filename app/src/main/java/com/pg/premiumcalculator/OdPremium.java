@@ -98,6 +98,7 @@ public class OdPremium implements Serializable {
 
     double calculatePremium()
     {
+        data.clear();
         data.put("Rate",Double.toString(rate));
         basicOD = idv*(rate/100);
         basicOD+=additionalOd;
@@ -130,7 +131,7 @@ public class OdPremium implements Serializable {
         }
         double zerodepprem = idv*(zeroDepRate/100);
         if(zerodepprem>0)
-            data.put("Zerodep",Double.toString(zerodepprem));
+            data.put("Zerodep",df.format(zerodepprem));
         elec = elec*(elecRate/100);
         if(elec>0)
             data.put("Electrical Accessories",df.format(elec));

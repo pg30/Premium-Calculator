@@ -1,14 +1,10 @@
 package com.pg.premiumcalculator;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,15 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 public class MainActivity extends menu {
 
     GridView homeView;
     ArrayList<Item> list = new ArrayList<>();
-    final private int REQUEST_CODE_ASK_PERMISSIONS=111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +116,7 @@ public class MainActivity extends menu {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST_CODE_ASK_PERMISSIONS);
+                       Constants.REQUEST_CODE_ASK_PERMISSIONS);
             }
         }
     }

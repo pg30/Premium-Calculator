@@ -114,6 +114,7 @@ public class TpPremium implements Serializable {
 
     double calculatePremium()
     {
+        data.clear();
         if(basicTp==0)
             return 0;
         data.put("Basic TP",df.format(basicTp));
