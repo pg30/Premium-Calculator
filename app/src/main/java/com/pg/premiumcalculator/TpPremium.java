@@ -1,6 +1,7 @@
 package com.pg.premiumcalculator;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 
 public class TpPremium implements Serializable {
@@ -17,6 +18,8 @@ public class TpPremium implements Serializable {
             tpPerPassenger=0;
     private boolean lessTppd=false,
             isCng=false;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
@@ -113,16 +116,16 @@ public class TpPremium implements Serializable {
     {
         if(basicTp==0)
             return 0;
-        data.put("Basic TP",Double.toString(basicTp));
+        data.put("Basic TP",df.format(basicTp));
         basicTp+=seatingCapacity*tpPerPassenger;
         if(seatingCapacity>0 && tpPerPassenger>0)
-            data.put("TP for seating capacity",Double.toString(seatingCapacity*tpPerPassenger));
+            data.put("TP for seating capacity",df.format(seatingCapacity*tpPerPassenger));
         if(paToDriver>0)
             data.put("PA to driver",Double.toString(paToDriver));
         if(paToUnnamedPassenger>0)
-            data.put("PA to unnamed passenger",Double.toString(paToUnnamedPassenger));
+            data.put("PA to unnamed passenger",df.format(paToUnnamedPassenger));
         if(llToDriver>0)
-            data.put("LL to paid driver",Double.toString(llToDriver));
+            data.put("LL to paid driver",df.format(llToDriver));
         basicTp+=paToDriver+llToDriver+paToUnnamedPassenger;
         if(lessTppd) {
             if(vehicle!=null)
@@ -138,7 +141,7 @@ public class TpPremium implements Serializable {
             basicTp += nfpp * nfppCost;
             data.put("NFPP",Double.toString(nfpp*nfppCost));
         }
-        data.put("Final TP Premium(A)",Double.toString(basicTp));
+        data.put("Final TP Premium(A)",Double.toString(Math.round(basicTp)));
         return basicTp;
     }
     LinkedHashMap<String,String> getMap()

@@ -3,6 +3,7 @@ package com.pg.premiumcalculator;
 import com.google.rpc.Help;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 
 public class Premium implements Serializable {
@@ -11,6 +12,7 @@ public class Premium implements Serializable {
     OdPremium odPremium;
     TpPremium tpPremium;
     BasicVehicleDetails basicVehicleDetails;
+    DecimalFormat df = new DecimalFormat("0.00");
     Premium(OdPremium odPremium,TpPremium tpPremium,BasicVehicleDetails basicVehicleDetails,Vehicle vehicle)
     {
         this.odPremium = odPremium;
@@ -21,14 +23,15 @@ public class Premium implements Serializable {
     LinkedHashMap<String,String> finalData = new LinkedHashMap<>();
     double calculatePremium()
     {
+        finalData.clear();
         double finalTpPremium = tpPremium.calculatePremium(),
                 finalOdPremium = odPremium.calculatePremium();
         finalPremium = finalOdPremium+finalTpPremium;
-        finalData.put("Total Premium without GST",Double.toString(finalPremium));
+        finalData.put("Total Premium without GST",df.format(finalPremium));
         gst = finalPremium*(Constants.gstRate/100);
-        finalData.put("GST",Double.toString(gst));
+        finalData.put("GST",df.format(gst));
         finalPremium+=gst;
-        finalData.put("Total Premium(A+B)",Double.toString(finalPremium));
+        finalData.put("Total Premium(A+B)",Double.toString(Math.round(finalPremium)));
         return finalPremium;
     }
     LinkedHashMap<String,String> getFinalData()

@@ -1,6 +1,7 @@
 package com.pg.premiumcalculator;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 
 public class OdPremium implements Serializable {
@@ -28,6 +29,7 @@ public class OdPremium implements Serializable {
                     wantGeoExt=false,
                     wantOverturning=false;
     private Vehicle vehicle=null;
+    DecimalFormat df = new DecimalFormat("0.00");
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
     public double getNcb() {
@@ -99,10 +101,10 @@ public class OdPremium implements Serializable {
         data.put("Rate",Double.toString(rate));
         basicOD = idv*(rate/100);
         basicOD+=additionalOd;
-        data.put("Basic OD",Double.toString(basicOD));
+        data.put("Basic OD",df.format(basicOD));
         if(idv==0) {
             basicOD=0.0;
-            data.put("Final OD Premium(B)",Double.toString(basicOD));
+            data.put("Final OD Premium(B)",df.format(basicOD));
             return basicOD;
         }
         if(isCng)
@@ -110,13 +112,13 @@ public class OdPremium implements Serializable {
             //inbuilt
             if(extCngKit==0)
             {
-                data.put("Inbuilt CNG",Double.toString((inbuiltCngRate/100)*basicOD));
+                data.put("Inbuilt CNG",df.format(((inbuiltCngRate/100)*basicOD)));
                 basicOD+=(inbuiltCngRate/100)*basicOD;
             }
             //external
             else if(extCngKit>0)
             {
-                data.put("External CNG",Double.toString((externalCngRate/100)*extCngKit));
+                data.put("External CNG",df.format(((externalCngRate/100)*extCngKit)));
                 if(vehicle!=Vehicle.PRIVATECAR)
                     basicOD+=(externalCngRate/100)*extCngKit;
             }
@@ -124,33 +126,33 @@ public class OdPremium implements Serializable {
         if(gvw-12000>0)
         {
             basicOD+=((gvw-12000)/100)*per100Kg;
-            data.put("Extra cost per 100kg",Double.toString(((gvw-12000)/100)*per100Kg));
+            data.put("Extra cost per 100kg",df.format((((gvw-12000)/100)*per100Kg)));
         }
         double zerodepprem = idv*(zeroDepRate/100);
         if(zerodepprem>0)
             data.put("Zerodep",Double.toString(zerodepprem));
         elec = elec*(elecRate/100);
         if(elec>0)
-            data.put("Electrical Accessories",Double.toString(elec));
+            data.put("Electrical Accessories",df.format(elec));
         nonelec = nonelec*(rate/100);
         if(nonelec>0)
-            data.put("Non-Electrical Accessories",Double.toString(nonelec));
+            data.put("Non-Electrical Accessories",df.format(nonelec));
         basicOD+=elec+nonelec;
         if(wantImt23)
         {
-            data.put("IMT-23",Double.toString(basicOD*(imt23Rate/100)));
+            data.put("IMT-23",df.format((basicOD*(imt23Rate/100))));
             basicOD+=basicOD*(imt23Rate/100);
         }
         if(wantOverturning)
         {
-            data.put("Overturning",Double.toString((overturningRate/100)*idv));
+            data.put("Overturning",df.format(((overturningRate/100)*idv)));
             basicOD+=(overturningRate/100)*idv;
         }
         double ncbDiscPrem = basicOD*(ncb/100);
-        data.put("NCB",Double.toString(ncbDiscPrem));
+        data.put("NCB",df.format(ncbDiscPrem));
         basicOD-=ncbDiscPrem;
         double odDiscPrem = basicOD*(odDisc/100);
-        data.put("OD Discount",Double.toString(odDiscPrem));
+        data.put("OD Discount",df.format(odDiscPrem));
         basicOD-=odDiscPrem;
         basicOD+=zerodepprem;
         if(wantGeoExt)
@@ -166,7 +168,7 @@ public class OdPremium implements Serializable {
                 basicOD+=externalCngRate*extCngKit;
             }
         }
-        data.put("Final OD Premium(B)",Double.toString(basicOD));
+        data.put("Final OD Premium(B)",Double.toString(Math.round(basicOD)));
         return basicOD;
     }
     LinkedHashMap<String,String> getMap()
