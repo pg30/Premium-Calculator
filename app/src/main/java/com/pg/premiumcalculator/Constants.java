@@ -1,9 +1,17 @@
 package com.pg.premiumcalculator;
 
 public class Constants {
-    public static int cngCost = 60;
-    public static int nfppCost = 75;
-    public static int getTppd(Vehicle vehicle)
+    public static double cngCost = 60;
+    public static double nfppCost = 75;
+    public static double geoExtCost = 400;
+    public static double per100KgCost = 27;
+    public static double imtRate = 15;
+    public static double elecRate = 4;
+    public static double gstRate = 18;
+    public static double inbuiltCngRate = 5;
+    public static double externalCngRate = 4;
+    public static double overturningRate = 15;
+    public static double getTppd(Vehicle vehicle)
     {
         switch (vehicle)
         {

@@ -1,15 +1,18 @@
 package com.pg.premiumcalculator;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
-public class BasicVehicleDetails {
+public class BasicVehicleDetails implements Serializable {
     private Zone zone=null;
     private String dateOfRegistration=null;
-    private int cubicCapacity=0;
-    private int grossVehicleWeight=0;
+    private double cubicCapacity=0,
+            grossVehicleWeight=0,
+            idv=0,
+            seatingCapacity=0;
     private Vehicle vehicle=null;
-    private int idv=0;
-    private int seatingCapacity=0;
+    private Type vehicleUse=null;
+    private Carrier carrier= null;
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
     public Zone getZone() {
@@ -21,12 +24,28 @@ public class BasicVehicleDetails {
         this.zone = zone;
     }
 
-    public int getSeatingCapacity() {
+    public Carrier getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(Carrier carrier) {
+        this.carrier = carrier;
+    }
+
+    public Type getVehicleUse() {
+        return vehicleUse;
+    }
+
+    public void setVehicleUse(Type vehicleUse) {
+        this.vehicleUse = vehicleUse;
+    }
+
+    public double getSeatingCapacity() {
         return seatingCapacity;
     }
 
-    public void setSeatingCapacity(int seatingCapacity) {
-        data.put("Seating Capacity",Integer.toString(seatingCapacity));
+    public void setSeatingCapacity(double seatingCapacity) {
+        data.put("Seating Capacity",Double.toString(seatingCapacity));
         this.seatingCapacity = seatingCapacity;
     }
 
@@ -35,25 +54,23 @@ public class BasicVehicleDetails {
     }
 
     public void setDateOfRegistration(String dateOfRegistration) {
-        data.put("Date of Registration",dateOfRegistration);
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public int getCubicCapacity() {
+    public double getCubicCapacity() {
         return cubicCapacity;
     }
 
-    public void setCubicCapacity(int cubicCapacity) {
-        data.put("Cubic Capacity", Integer.toString(cubicCapacity));
+    public void setCubicCapacity(double cubicCapacity) {
+        data.put("Cubic Capacity", Double.toString(cubicCapacity));
         this.cubicCapacity = cubicCapacity;
     }
 
-    public int getGrossVehicleWeight() {
+    public double getGrossVehicleWeight() {
         return grossVehicleWeight;
     }
 
-    public void setGrossVehicleWeight(int grossVehicleWeight) {
-        data.put("GVW",Integer.toString(grossVehicleWeight));
+    public void setGrossVehicleWeight(double grossVehicleWeight) {
         this.grossVehicleWeight = grossVehicleWeight;
     }
 
@@ -62,20 +79,43 @@ public class BasicVehicleDetails {
     }
 
     public void setVehicle(Vehicle vehicle) {
-        data.put("Vehicle",vehicle.name());
         this.vehicle = vehicle;
     }
 
-    public int getIdv() {
+    public double getIdv() {
         return idv;
     }
 
-    public void setIdv(int idv) {
-        data.put("IDV",Integer.toString(idv));
+    public void setIdv(double idv) {
         this.idv = idv;
     }
     LinkedHashMap<String,String> getMap()
     {
+        data.clear();
+        data.put("Vehicle",vehicle.name());
+        if(vehicle==Vehicle.MISCVEHICLE)
+        {
+            data.put("Vehicle Use",vehicleUse.name());
+        }
+        if(vehicle==Vehicle.GOODSVEHICLE || vehicle==Vehicle.GOODSVEHICLE3WHEELER)
+        {
+            data.put("Carrier",carrier.name());
+        }
+        data.put("Date of Registration",dateOfRegistration);
+        data.put("Zone",zone.name());
+        if(vehicle==Vehicle.GOODSVEHICLE && grossVehicleWeight>0)
+            data.put("GVW",Double.toString(grossVehicleWeight));
+        data.put("IDV",Double.toString(idv));
+        if(vehicle==Vehicle.TWOWHEELER || vehicle==Vehicle.PRIVATECAR || vehicle==Vehicle.TAXILESSTHAN6)
+        {
+            if(cubicCapacity>0)
+                data.put("Cubic Capacity",Double.toString(cubicCapacity));
+        }
+        if(vehicle==Vehicle.TAXILESSTHAN6 || vehicle==Vehicle.BUSOVER6 || vehicle==Vehicle.SCHOOLBUS || vehicle==Vehicle.PASSENGERVEHICLE3WHEELER)
+        {
+            if(seatingCapacity>0)
+                data.put("Seating Capacity",Double.toString(seatingCapacity));
+        }
         return data;
     }
 }

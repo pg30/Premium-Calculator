@@ -25,16 +25,36 @@ import java.util.Locale;
 
 public class two_wheeler extends menu implements AdapterView.OnItemSelectedListener {
 
-    Spinner zone_spin,ncb_spin;
-    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit;
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger;
+    Spinner zone_spin,
+            ncb_spin;
+    EditText idv_edit,
+            date_edit,
+            cc_edit,
+            discount_edit,
+            elec_edit,
+            nonelec_edit,
+            zerodep_edit,
+            padriver_edit,
+            lldriver_edit,
+            paunnamedpassenger_edit;
+    Double idv,
+            cc,
+            discount,
+            elec,
+            nonelec,
+            ncb,
+            zerodep,
+            patodriver,
+            lltodriver,
+            patounnamedpassenger;
 
     Button calculate;
     Zone zone;
+    OdPremium odPremium = new OdPremium();
+    TpPremium tpPremium = new TpPremium();
+    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
 
     Vehicle currVehicle = Vehicle.TWOWHEELER;
-    Double finalPremium,odPremium,tpPremium,gst,rate;
-    double basicTP;
     RadioButton yes;
     String dateofregistration;
     private DatePickerDialog datePickerDialog;
@@ -107,40 +127,41 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
     void getValuesFromEditText()
     {
         Log.d("debug","button clicked");
+        basicVehicleDetails.setVehicle(currVehicle);
+        tpPremium.setVehicle(currVehicle);
+        odPremium.setVehicle(currVehicle);
         idv = ParseDouble(idv_edit.getText().toString());
+        basicVehicleDetails.setIdv(idv);
+        odPremium.setIdv(idv);
         cc = ParseDouble(cc_edit.getText().toString());
+        basicVehicleDetails.setCubicCapacity(cc);
         discount = ParseDouble(discount_edit.getText().toString());
+        odPremium.setOdDisc(discount);
         elec = ParseDouble(elec_edit.getText().toString());
+        odPremium.setElec(elec);
         nonelec = ParseDouble(nonelec_edit.getText().toString());
+        odPremium.setNonelec(nonelec);
         zerodep = ParseDouble(zerodep_edit.getText().toString());
+        odPremium.setZeroDepRate(zerodep);
         patodriver = ParseDouble(padriver_edit.getText().toString());
+        tpPremium.setPaToDriver(patodriver);
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        tpPremium.setLlToDriver(lltodriver);
         patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
+        tpPremium.setPaToUnnamedPassenger(patounnamedpassenger);
         dateofregistration = ParseString(date_edit.getText().toString());
+        basicVehicleDetails.setDateOfRegistration(dateofregistration);
         Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
+        if(yes.isChecked())
+            tpPremium.setLessTppd(true);
     }
 
     void setValuesInIntent()
     {
         Intent intent = new Intent(getBaseContext(), two_wheeler_breakup.class);
-        Bundle b = new Bundle();
-        b.putDouble("idv",idv);
-        b.putDouble("cc",cc);
-        b.putDouble("discount",discount);
-        b.putDouble("elec",elec);
-        b.putDouble("nonelec",nonelec);
-        b.putDouble("zerodep",zerodep);
-        b.putDouble("patodriver",patodriver);
-        b.putDouble("lltodriver",lltodriver);
-        b.putDouble("patounnamedpassenger",patounnamedpassenger);
-        b.putDouble("ncb",ncb);
-        if(yes.isChecked())
-            b.putBoolean("restrict_tppd",true);
-        else
-            b.putBoolean("restrict_tppd",false);
-        b.putSerializable("zone",zone);
-        b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("two_wheeler_breakup_bundle",b);
+        intent.putExtra("OD Premium",odPremium);
+        intent.putExtra("TP Premium",tpPremium);
+        intent.putExtra("Basic Details",basicVehicleDetails);
         startActivity(intent);
     }
 
@@ -150,6 +171,7 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
         if(parent.getId()==R.id.ncb_value)
         {
             ncb = Double.parseDouble(parent.getItemAtPosition(position).toString());
+            odPremium.setNcb(ncb);
         }
         if(parent.getId()==R.id.zone_value)
         {
@@ -159,6 +181,7 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
                 zone = Zone.B;
             else if(position==2)
                 zone = Zone.C;
+            basicVehicleDetails.setZone(zone);
         }
         Log.d("debug",ncb+" "+zone);
     }

@@ -327,7 +327,6 @@ public class private_car_breakup extends menu {
         basicOD = idv*(rate/100);
         if(idv==0)
             return 0.0;
-
         tempidv=idv;
         if(cng_yes)
         {
