@@ -26,12 +26,36 @@ import java.util.Locale;
 
 public class private_car extends menu implements AdapterView.OnItemSelectedListener {
 
-    Spinner zone_spin,ncb_spin;
-    EditText idv_edit,date_edit,cc_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,paunnamedpassenger_edit,extcngkit_edit;
-    Double idv,cc,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,patounnamedpassenger,extcngkit;
+    Spinner zone_spin,
+            ncb_spin;
+    EditText idv_edit,
+            date_edit,
+            cc_edit,
+            discount_edit,
+            elec_edit,
+            nonelec_edit,
+            zerodep_edit,
+            padriver_edit,
+            lldriver_edit,
+            paunnamedpassenger_edit,
+            extcngkit_edit;
+    Double idv,
+            cc,
+            discount,
+            elec,
+            nonelec,
+            ncb,
+            zerodep,
+            patodriver,
+            lltodriver,
+            patounnamedpassenger,
+            extcngkit;
 
     Button calculate;
     Zone zone;
+    OdPremium odPremium = new OdPremium();
+    TpPremium tpPremium = new TpPremium();
+    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
 
     Vehicle currVehicle = Vehicle.PRIVATECAR;
     RadioButton yes;
@@ -125,47 +149,50 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
     void setValuesInIntent()
     {
         Intent intent = new Intent(getBaseContext(), private_car_breakup.class);
-        Bundle b = new Bundle();
-        b.putDouble("idv",idv);
-        b.putDouble("cc",cc);
-        b.putDouble("discount",discount);
-        b.putDouble("elec",elec);
-        b.putDouble("nonelec",nonelec);
-        b.putDouble("zerodep",zerodep);
-        b.putDouble("patodriver",patodriver);
-        b.putDouble("extcngkit",extcngkit);
-        b.putDouble("lltodriver",lltodriver);
-        b.putDouble("patounnamedpassenger",patounnamedpassenger);
-        b.putDouble("ncb",ncb);
-        if(yes.isChecked())
-            b.putBoolean("restrict_tppd",true);
-        else
-            b.putBoolean("restrict_tppd",false);
-        if(cng_yes.isChecked())
-            b.putBoolean("cng",true);
-        else
-            b.putBoolean("cng",false);
-        b.putSerializable("zone",zone);
-        b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("private_car_breakup_bundle",b);
+        intent.putExtra("OD Premium",odPremium);
+        intent.putExtra("TP Premium",tpPremium);
+        intent.putExtra("Basic Details",basicVehicleDetails);
         startActivity(intent);
     }
 
     void getValuesFromEditText()
     {
-        Log.d("debug","button clicked");
+        basicVehicleDetails.init();
+        odPremium.init();
+        tpPremium.init();
+        basicVehicleDetails.setZone(zone);
+        odPremium.setNcb(ncb);
+        basicVehicleDetails.setVehicle(currVehicle);
+        tpPremium.setVehicle(currVehicle);
+        odPremium.setVehicle(currVehicle);
         idv = ParseDouble(idv_edit.getText().toString());
+        basicVehicleDetails.setIdv(idv);
+        odPremium.setIdv(idv);
         cc = ParseDouble(cc_edit.getText().toString());
+        basicVehicleDetails.setCubicCapacity(cc);
         discount = ParseDouble(discount_edit.getText().toString());
+        odPremium.setOdDisc(discount);
         elec = ParseDouble(elec_edit.getText().toString());
+        odPremium.setElec(elec);
         nonelec = ParseDouble(nonelec_edit.getText().toString());
+        odPremium.setNonelec(nonelec);
         zerodep = ParseDouble(zerodep_edit.getText().toString());
+        odPremium.setZeroDepRate(zerodep);
         patodriver = ParseDouble(padriver_edit.getText().toString());
-        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        tpPremium.setPaToDriver(patodriver);
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        tpPremium.setLlToDriver(lltodriver);
         patounnamedpassenger = ParseDouble(paunnamedpassenger_edit.getText().toString());
+        tpPremium.setPaToUnnamedPassenger(patounnamedpassenger);
         dateofregistration = ParseString(date_edit.getText().toString());
-        Log.d("debug",zone+" "+currVehicle+" "+cc+" "+dateofregistration);
+        basicVehicleDetails.setDateOfRegistration(dateofregistration);
+        if(yes.isChecked())
+            tpPremium.setLessTppd(true);
+        if(cng_yes.isChecked())
+        {
+            odPremium.setCng(true);
+            tpPremium.setCng(true);
+        }
     }
 
     @Override
