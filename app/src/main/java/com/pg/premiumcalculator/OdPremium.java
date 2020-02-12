@@ -103,6 +103,30 @@ public class OdPremium implements Serializable {
         return elec;
     }
 
+    public double getAdditionalOd() {
+        return additionalOd;
+    }
+
+    public void setAdditionalOd(double additionalOd) {
+        this.additionalOd = additionalOd;
+    }
+
+    public boolean isWantGeoExt() {
+        return wantGeoExt;
+    }
+
+    public void setWantGeoExt(boolean wantGeoExt) {
+        this.wantGeoExt = wantGeoExt;
+    }
+
+    public boolean isWantOverturning() {
+        return wantOverturning;
+    }
+
+    public void setWantOverturning(boolean wantOverturning) {
+        this.wantOverturning = wantOverturning;
+    }
+
     public void setElec(double elec) {
         this.elec = elec;
     }

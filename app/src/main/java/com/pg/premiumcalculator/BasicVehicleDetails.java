@@ -123,7 +123,7 @@ public class BasicVehicleDetails implements Serializable {
         }
         if(vehicle==Vehicle.TAXILESSTHAN6 || vehicle==Vehicle.BUSOVER6 || vehicle==Vehicle.SCHOOLBUS || vehicle==Vehicle.PASSENGERVEHICLE3WHEELER)
         {
-            if(seatingCapacity>0)
+            if(seatingCapacity>=0)
                 data.put("Seating Capacity",Double.toString(seatingCapacity));
         }
         return data;
