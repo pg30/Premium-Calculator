@@ -23,6 +23,23 @@ public class TpPremium implements Serializable {
 
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
+    void init()
+    {
+        seatingCapacity=0;
+        paToDriver=0;
+        llToDriver=0;
+        paToUnnamedPassenger=0;
+        tppdCost=0;
+        cngCost=Constants.cngCost;
+        nfpp=0;
+        nfppCost=Constants.nfppCost;
+        basicTp=0;
+        tpPerPassenger=0;
+        lessTppd=false;
+        isCng=false;
+        vehicle = null;
+    }
+
     public double getSeatingCapacity() {
         return seatingCapacity;
     }

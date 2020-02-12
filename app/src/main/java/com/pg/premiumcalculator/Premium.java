@@ -7,7 +7,8 @@ import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 
 public class Premium implements Serializable {
-    private double finalPremium,gst;
+    private double finalPremium=0,
+                    gst=0;
     Vehicle vehicle;
     OdPremium odPremium;
     TpPremium tpPremium;
@@ -19,6 +20,11 @@ public class Premium implements Serializable {
         this.tpPremium = tpPremium;
         this.basicVehicleDetails = basicVehicleDetails;
         this.vehicle = vehicle;
+    }
+    void init()
+    {
+        finalPremium=0;
+        gst=0;
     }
     LinkedHashMap<String,String> finalData = new LinkedHashMap<>();
     double calculatePremium()

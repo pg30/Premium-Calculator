@@ -126,6 +126,11 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
 
     void getValuesFromEditText()
     {
+        basicVehicleDetails.init();
+        odPremium.init();
+        tpPremium.init();
+        basicVehicleDetails.setZone(zone);
+        odPremium.setNcb(ncb);
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
@@ -168,7 +173,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
         if(parent.getId()==R.id.ncb_value)
         {
             ncb = Double.parseDouble(parent.getItemAtPosition(position).toString());
-            odPremium.setNcb(ncb);
         }
         if(parent.getId()==R.id.zone_value)
         {
@@ -178,7 +182,6 @@ public class two_wheeler extends menu implements AdapterView.OnItemSelectedListe
                 zone = Zone.B;
             else if(position==2)
                 zone = Zone.C;
-            basicVehicleDetails.setZone(zone);
         }
     }
 

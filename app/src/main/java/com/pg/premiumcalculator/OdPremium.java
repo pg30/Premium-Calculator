@@ -32,6 +32,33 @@ public class OdPremium implements Serializable {
     DecimalFormat df = new DecimalFormat("0.00");
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
+    void init()
+    {
+        basicOD=0;
+        idv=0;
+        rate=0;
+        extCngKit=0;
+        additionalOd=0;
+        zeroDepRate=0;
+        elec=0;
+        elecRate = Constants.elecRate;
+        nonelec=0;
+        ncb=0;
+        odDisc=0;
+        imt23Rate = Constants.imtRate;
+        geoExt = Constants.geoExtCost;
+        gvw=0;
+        per100Kg = Constants.per100KgCost;
+        overturningRate = Constants.overturningRate;
+        inbuiltCngRate = Constants.inbuiltCngRate;
+        externalCngRate = Constants.externalCngRate;
+        isCng=false;
+        wantImt23=false;
+        wantGeoExt=false;
+        wantOverturning=false;
+        vehicle = null;
+    }
+
     public double getNcb() {
         return ncb;
     }
@@ -46,6 +73,30 @@ public class OdPremium implements Serializable {
 
     public void setOdDisc(double odDisc) {
         this.odDisc = odDisc;
+    }
+
+    public double getExtCngKit() {
+        return extCngKit;
+    }
+
+    public boolean isCng() {
+        return isCng;
+    }
+
+    public void setCng(boolean cng) {
+        isCng = cng;
+    }
+
+    public void setExtCngKit(double extCngKit) {
+        this.extCngKit = extCngKit;
+    }
+
+    public boolean isWantImt23() {
+        return wantImt23;
+    }
+
+    public void setWantImt23(boolean wantImt23) {
+        this.wantImt23 = wantImt23;
     }
 
     public double getElec() {

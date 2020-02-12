@@ -15,12 +15,24 @@ public class BasicVehicleDetails implements Serializable {
     private Carrier carrier= null;
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
+    void init()
+    {
+        zone=null;
+        dateOfRegistration=null;
+        cubicCapacity=0;
+        grossVehicleWeight=0;
+        idv=0;
+        seatingCapacity=0;
+        vehicle = null;
+        vehicleUse = null;
+        carrier = null;
+    }
+
     public Zone getZone() {
         return zone;
     }
 
     public void setZone(Zone zone) {
-        data.put("Zone",zone.name());
         this.zone = zone;
     }
 
@@ -45,7 +57,6 @@ public class BasicVehicleDetails implements Serializable {
     }
 
     public void setSeatingCapacity(double seatingCapacity) {
-        data.put("Seating Capacity",Double.toString(seatingCapacity));
         this.seatingCapacity = seatingCapacity;
     }
 
@@ -62,7 +73,6 @@ public class BasicVehicleDetails implements Serializable {
     }
 
     public void setCubicCapacity(double cubicCapacity) {
-        data.put("Cubic Capacity", Double.toString(cubicCapacity));
         this.cubicCapacity = cubicCapacity;
     }
 
