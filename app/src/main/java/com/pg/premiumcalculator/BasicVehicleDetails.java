@@ -12,6 +12,7 @@ public class BasicVehicleDetails implements Serializable {
             seatingCapacity=0;
     private Vehicle vehicle=null;
     private Type vehicleUse=null;
+    private MiscType vehicleType=null;
     private Carrier carrier= null;
     LinkedHashMap<String,String> data = new LinkedHashMap<>();
 
@@ -36,6 +37,14 @@ public class BasicVehicleDetails implements Serializable {
         this.zone = zone;
     }
 
+    public MiscType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(MiscType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
     public Carrier getCarrier() {
         return carrier;
     }
@@ -43,6 +52,7 @@ public class BasicVehicleDetails implements Serializable {
     public void setCarrier(Carrier carrier) {
         this.carrier = carrier;
     }
+
 
     public Type getVehicleUse() {
         return vehicleUse;
@@ -106,6 +116,7 @@ public class BasicVehicleDetails implements Serializable {
         if(vehicle==Vehicle.MISCVEHICLE)
         {
             data.put("Vehicle Use",vehicleUse.name());
+            data.put("Vehicle Type",vehicleType.name());
         }
         if(vehicle==Vehicle.GOODSVEHICLE || vehicle==Vehicle.GOODSVEHICLE3WHEELER)
         {

@@ -188,7 +188,6 @@ public class taxilessthan6_breakup extends menu {
                     company_name = company_spinner.getSelectedItem().toString();
                     Log.d("debug","inside"+company_name);
                     dialog.dismiss();
-//                    createFileBuilder();
                     int fileid = new PrefManager(getApplicationContext()).getTaxilessthan6Id();
                     pdfname = "TAXILESSTHAN6_"+fileid+".pdf";
                     try {

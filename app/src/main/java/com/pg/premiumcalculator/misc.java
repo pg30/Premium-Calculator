@@ -25,13 +25,35 @@ import java.util.Locale;
 
 public class misc extends menu implements AdapterView.OnItemSelectedListener {
 
-    Spinner zone_spin,ncb_spin,vehcile_spin,vehicleuse_spin;
-    EditText idv_edit,date_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit;
+    Spinner zone_spin,
+            ncb_spin,
+            vehcile_spin,
+            vehicleuse_spin;
+    EditText idv_edit,
+            date_edit,
+            discount_edit,
+            elec_edit,
+            nonelec_edit,
+            zerodep_edit,
+            padriver_edit,
+            lldriver_edit,
+            extcngkit_edit;
     Button calculate;
-    RadioButton yes,imt_yes;
-    CheckBox cng_yes,geoext_yes,overturning_yes;
+    RadioButton yes,
+            imt_yes;
+    CheckBox cng_yes,
+            geoext_yes,
+            overturning_yes;
 
-    Double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit;
+    Double idv,
+            discount,
+            elec,
+            nonelec,
+            ncb,
+            zerodep,
+            patodriver,
+            lltodriver,
+            extcngkit;
     Vehicle currVehicle = Vehicle.MISCVEHICLE;
     Zone zone;
     MiscType miscType;
@@ -40,6 +62,10 @@ public class misc extends menu implements AdapterView.OnItemSelectedListener {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
     Calendar newCalendar;
+
+    OdPremium odPremium = new OdPremium();
+    TpPremium tpPremium = new TpPremium();
+    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,57 +161,60 @@ public class misc extends menu implements AdapterView.OnItemSelectedListener {
 
     void getValuesFromEditText()
     {
-        Log.d("debug","button clicked");
+        basicVehicleDetails.init();
+        odPremium.init();
+        tpPremium.init();
+        basicVehicleDetails.setZone(zone);
+        odPremium.setNcb(ncb);
+        basicVehicleDetails.setVehicle(currVehicle);
+        tpPremium.setVehicle(currVehicle);
+        odPremium.setVehicle(currVehicle);
+        basicVehicleDetails.setVehicleType(miscType);
+        basicVehicleDetails.setVehicleUse(type);
         idv = ParseDouble(idv_edit.getText().toString());
+        basicVehicleDetails.setIdv(idv);
+        odPremium.setIdv(idv);
         discount = ParseDouble(discount_edit.getText().toString());
+        odPremium.setOdDisc(discount);
         elec = ParseDouble(elec_edit.getText().toString());
+        odPremium.setElec(elec);
         nonelec = ParseDouble(nonelec_edit.getText().toString());
+        odPremium.setNonelec(nonelec);
         zerodep = ParseDouble(zerodep_edit.getText().toString());
+        odPremium.setZeroDepRate(zerodep);
         extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         patodriver = ParseDouble(padriver_edit.getText().toString());
+        tpPremium.setPaToDriver(patodriver);
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        tpPremium.setLlToDriver(lltodriver);
         dateofregistration = ParseString(date_edit.getText().toString());
-        Log.d("debug",zone+" "+currVehicle+" "+" "+dateofregistration);
+        basicVehicleDetails.setDateOfRegistration(dateofregistration);
+        if(yes.isChecked())
+            tpPremium.setLessTppd(true);
+        if(imt_yes.isChecked())
+            odPremium.setWantImt23(true);
+        if(cng_yes.isChecked())
+        {
+            odPremium.setCng(true);
+            tpPremium.setCng(true);
+        }
+        if(geoext_yes.isChecked())
+        {
+            odPremium.setWantGeoExt(true);
+        }
+        if(overturning_yes.isChecked())
+        {
+            odPremium.setWantOverturning(true);
+        }
     }
 
     void setValuesInIntent()
     {
         Intent intent = new Intent(getBaseContext(), misc_breakup.class);
-        Bundle b = new Bundle();
-        b.putDouble("idv",idv);
-        b.putDouble("discount",discount);
-        b.putDouble("elec",elec);
-        b.putDouble("nonelec",nonelec);
-        b.putDouble("zerodep",zerodep);
-        b.putDouble("patodriver",patodriver);
-        b.putDouble("lltodriver",lltodriver);
-        b.putDouble("extcngkit",extcngkit);
-        b.putDouble("ncb",ncb);
-        if(yes.isChecked())
-            b.putBoolean("restrict_tppd",true);
-        else
-            b.putBoolean("restrict_tppd",false);
-        if(imt_yes.isChecked())
-            b.putBoolean("imt23",true);
-        else
-            b.putBoolean("imt23",false);
-        if(cng_yes.isChecked())
-            b.putBoolean("cng",true);
-        else
-            b.putBoolean("cng",false);
-        if(geoext_yes.isChecked())
-            b.putBoolean("geoext",true);
-        else
-            b.putBoolean("geoext",false);
-        if(overturning_yes.isChecked())
-            b.putBoolean("overturning",true);
-        else
-            b.putBoolean("overturning",false);
-        b.putSerializable("zone",zone);
-        b.putSerializable("misctype",miscType);
-        b.putSerializable("type",type);
-        b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("misc_breakup_bundle",b);
+        intent.putExtra("OD Premium",odPremium);
+        intent.putExtra("TP Premium",tpPremium);
+        intent.putExtra("Basic Details",basicVehicleDetails);
         startActivity(intent);
     }
 
