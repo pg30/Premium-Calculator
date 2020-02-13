@@ -30,15 +30,33 @@ public class Premium implements Serializable {
     double calculatePremium()
     {
         finalData.clear();
-        double finalTpPremium = tpPremium.calculatePremium(),
-                finalOdPremium = odPremium.calculatePremium();
-        finalPremium = finalOdPremium+finalTpPremium;
-        finalData.put("Total Premium without GST",df.format(finalPremium));
-        gst = finalPremium*(Constants.gstRate/100);
-        finalData.put("GST",df.format(gst));
-        finalPremium+=gst;
-        finalData.put("Total Premium(A+B)",Double.toString(Math.round(finalPremium)));
-        return finalPremium;
+        if(vehicle==Vehicle.GOODSVEHICLE || vehicle==Vehicle.GOODSVEHICLE3WHEELER)
+        {
+            double finalTpPremium = tpPremium.calculatePremium(),
+                    finalOdPremium = odPremium.calculatePremium();
+            finalPremium = finalOdPremium+finalTpPremium;
+            finalData.put("Total Premium without GST",df.format(finalPremium));
+            Rate mrate = new Rate();
+            double basicTP;
+            basicTP=mrate.getTP(basicVehicleDetails.getVehicle(),basicVehicleDetails.getCarrier(),basicVehicleDetails.getGrossVehicleWeight());
+            gst = (finalPremium-basicTP)*(Constants.gstRate/100) + (basicTP)*(Constants.ExtragstRate/100);
+            finalData.put("GST",df.format(gst));
+            finalPremium+=gst;
+            finalData.put("Total Premium(A+B)",Double.toString(Math.round(finalPremium)));
+            return finalPremium;
+        }
+        else
+        {
+            double finalTpPremium = tpPremium.calculatePremium(),
+                    finalOdPremium = odPremium.calculatePremium();
+            finalPremium = finalOdPremium+finalTpPremium;
+            finalData.put("Total Premium without GST",df.format(finalPremium));
+            gst = finalPremium*(Constants.gstRate/100);
+            finalData.put("GST",df.format(gst));
+            finalPremium+=gst;
+            finalData.put("Total Premium(A+B)",Double.toString(Math.round(finalPremium)));
+            return finalPremium;
+        }
     }
     LinkedHashMap<String,String> getFinalData()
     {

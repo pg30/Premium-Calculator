@@ -8,6 +8,7 @@ public class Constants {
     public static double imtRate = 15;
     public static double elecRate = 4;
     public static double gstRate = 18;
+    public static double ExtragstRate = 12;
     public static double inbuiltCngRate = 5;
     public static double externalCngRate = 4;
     public static double overturningRate = 15;

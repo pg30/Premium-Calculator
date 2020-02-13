@@ -25,17 +25,45 @@ import java.util.Locale;
 
 public class gcv extends menu implements AdapterView.OnItemSelectedListener{
 
-    EditText idv_edit,date_edit,discount_edit,elec_edit,nonelec_edit,zerodep_edit,padriver_edit,lldriver_edit,extcngkit_edit,gvw_edit,nfpp_edit;
-    Spinner zone_spin,ncb_spin;
+    Spinner zone_spin,
+            ncb_spin;
+    EditText idv_edit,
+            date_edit,
+            discount_edit,
+            elec_edit,
+            nonelec_edit,
+            zerodep_edit,
+            padriver_edit,
+            lldriver_edit,
+            extcngkit_edit,
+            gvw_edit,
+            nfpp_edit;
+
+    Double idv,
+            discount,
+            elec,
+            nonelec,
+            ncb,
+            zerodep,
+            patodriver,
+            lltodriver,
+            extcngkit,
+            gvw,
+            nfpp;
+
     Button calculate;
-    RadioButton yes,imt_yes,public_carrier,private_carrier;
-    CheckBox cng_yes,geoext_yes;
+    RadioButton yes,
+            imt_yes,
+            public_carrier,
+            private_carrier;
+    CheckBox cng_yes,
+            geoext_yes;
 
-
-    Double idv,discount,elec,nonelec,ncb,zerodep,patodriver,lltodriver,extcngkit,gvw,nfpp;
     Zone zone;
+    OdPremium odPremium = new OdPremium();
+    TpPremium tpPremium = new TpPremium();
+    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
     String dateofregistration;
-    Carrier carrier;
     Vehicle currVehicle = Vehicle.GOODSVEHICLE;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
@@ -128,61 +156,64 @@ public class gcv extends menu implements AdapterView.OnItemSelectedListener{
     void setValuesInIntent()
     {
         Intent intent = new Intent(getBaseContext(), gcv_breakup.class);
-        Bundle b = new Bundle();
-        b.putDouble("idv",idv);
-        b.putDouble("discount",discount);
-        b.putDouble("elec",elec);
-        b.putDouble("nonelec",nonelec);
-        b.putDouble("zerodep",zerodep);
-        b.putDouble("patodriver",patodriver);
-        b.putDouble("lltodriver",lltodriver);
-        b.putDouble("extcngkit",extcngkit);
-        b.putDouble("gvw",gvw);
-        b.putDouble("nfpp",nfpp);
-        b.putDouble("ncb",ncb);
-        if(yes.isChecked())
-            b.putBoolean("restrict_tppd",true);
-        else
-            b.putBoolean("restrict_tppd",false);
-        if(geoext_yes.isChecked())
-            b.putBoolean("geoext",true);
-        else
-            b.putBoolean("geoext",false);
-        if(imt_yes.isChecked())
-            b.putBoolean("imt23",true);
-        else
-            b.putBoolean("imt23",false);
-        if(cng_yes.isChecked())
-            b.putBoolean("cng",true);
-        else
-            b.putBoolean("cng",false);
-        b.putSerializable("zone",zone);
-        b.putSerializable("carrier",carrier);
-        b.putString("dateofregistration",dateofregistration);
-        intent.putExtra("gcv_breakup_bundle",b);
+        intent.putExtra("OD Premium",odPremium);
+        intent.putExtra("TP Premium",tpPremium);
+        intent.putExtra("Basic Details",basicVehicleDetails);
         startActivity(intent);
     }
 
     void getValuesFromEditText()
     {
-        Log.d("debug","button clicked");
+        basicVehicleDetails.init();
+        odPremium.init();
+        tpPremium.init();
+        basicVehicleDetails.setZone(zone);
+        odPremium.setNcb(ncb);
+        basicVehicleDetails.setVehicle(currVehicle);
+        tpPremium.setVehicle(currVehicle);
+        odPremium.setVehicle(currVehicle);
         if(public_carrier.isChecked())
-            carrier = Carrier.PUBLIC;
+            basicVehicleDetails.setCarrier(Carrier.PUBLIC);
         else if(private_carrier.isChecked())
-            carrier = Carrier.PRIVATE;
+            basicVehicleDetails.setCarrier(Carrier.PRIVATE);
 
         idv = ParseDouble(idv_edit.getText().toString());
+        basicVehicleDetails.setIdv(idv);
+        odPremium.setIdv(idv);
         discount = ParseDouble(discount_edit.getText().toString());
+        odPremium.setOdDisc(discount);
         elec = ParseDouble(elec_edit.getText().toString());
+        odPremium.setElec(elec);
         nonelec = ParseDouble(nonelec_edit.getText().toString());
+        odPremium.setNonelec(nonelec);
         zerodep = ParseDouble(zerodep_edit.getText().toString());
+        odPremium.setZeroDepRate(zerodep);
         extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         patodriver = ParseDouble(padriver_edit.getText().toString());
+        tpPremium.setPaToDriver(patodriver);
         lltodriver = ParseDouble(lldriver_edit.getText().toString());
+        tpPremium.setLlToDriver(lltodriver);
         gvw = ParseDouble(gvw_edit.getText().toString());
+        odPremium.setGvw(gvw);
+        basicVehicleDetails.setGrossVehicleWeight(gvw);
         nfpp = ParseDouble(nfpp_edit.getText().toString());
+        tpPremium.setNfpp(nfpp);
         dateofregistration = ParseString(date_edit.getText().toString());
-        Log.d("debug",zone+" "+currVehicle+" "+" "+dateofregistration);
+        basicVehicleDetails.setDateOfRegistration(dateofregistration);
+        if(yes.isChecked())
+            tpPremium.setLessTppd(true);
+        if(imt_yes.isChecked())
+            odPremium.setWantImt23(true);
+        if(cng_yes.isChecked())
+        {
+            odPremium.setCng(true);
+            tpPremium.setCng(true);
+        }
+        if(geoext_yes.isChecked())
+        {
+            odPremium.setWantGeoExt(true);
+        }
     }
 
     @Override

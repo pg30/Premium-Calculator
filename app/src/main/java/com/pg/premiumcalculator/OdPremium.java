@@ -59,6 +59,14 @@ public class OdPremium implements Serializable {
         vehicle = null;
     }
 
+    public double getGvw() {
+        return gvw;
+    }
+
+    public void setGvw(double gvw) {
+        this.gvw = gvw;
+    }
+
     public double getNcb() {
         return ncb;
     }
