@@ -115,5 +115,4 @@ style="@style/style_textbox_heading"
             app:layout_constraintTop_toBottomOf="@+id/total_premium_table" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>
