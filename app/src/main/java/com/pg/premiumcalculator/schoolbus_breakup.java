@@ -122,11 +122,9 @@ public class schoolbus_breakup extends menu {
 
     void calculatePremium()
     {
-        Log.d("school","Hiiii");
         rate = mrate.getRate(basicVehicleDetails.getZone(),basicVehicleDetails.getVehicle(),basicVehicleDetails.getDateOfRegistration(),basicVehicleDetails.getSeatingCapacity());
         tpPassenger = mrate.getPerPassenger(basicVehicleDetails.getSeatingCapacity(),basicVehicleDetails.getVehicle());
         basicTP=mrate.getTP(basicVehicleDetails.getSeatingCapacity(),basicVehicleDetails.getVehicle());
-        Log.d("Taggggg",basicTP+" "+basicVehicleDetails.getSeatingCapacity()+" "+basicVehicleDetails.getVehicle());
         additionalOD = mrate.getAdditionalOD(basicVehicleDetails.getVehicle(),basicVehicleDetails.getSeatingCapacity());
         odPremium.setRate(rate);
         odPremium.setAdditionalOd(additionalOD);

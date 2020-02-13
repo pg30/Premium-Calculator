@@ -40,9 +40,6 @@ public class schoolbus extends menu implements AdapterView.OnItemSelectedListene
     Button calculate;
     RadioButton yes,imt_yes;
     CheckBox cng_yes,geoext_yes;
-    OdPremium odPremium = new OdPremium();
-    TpPremium tpPremium = new TpPremium();
-    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
 
     Double idv,
             discount,
@@ -55,7 +52,10 @@ public class schoolbus extends menu implements AdapterView.OnItemSelectedListene
             noofpassenger,
             extcngkit;
     Vehicle currVehicle = Vehicle.SCHOOLBUS;
-    Zone zone;
+    Zone zone;    OdPremium odPremium = new OdPremium();
+    TpPremium tpPremium = new TpPremium();
+    BasicVehicleDetails basicVehicleDetails = new BasicVehicleDetails();
+
     String dateofregistration;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormat;
@@ -157,6 +157,7 @@ public class schoolbus extends menu implements AdapterView.OnItemSelectedListene
         basicVehicleDetails.setIdv(idv);
         odPremium.setIdv(idv);
         discount = ParseDouble(discount_edit.getText().toString());
+        odPremium.setOdDisc(discount);
         elec = ParseDouble(elec_edit.getText().toString());
         odPremium.setElec(elec);
         nonelec = ParseDouble(nonelec_edit.getText().toString());
