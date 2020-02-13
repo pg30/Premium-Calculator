@@ -134,8 +134,9 @@ public class TpPremium implements Serializable {
         data.clear();
         if(basicTp==0)
             return 0;
-        data.put("Basic TP",df.format(basicTp));
-        basicTp+=seatingCapacity*tpPerPassenger;
+        double tempBasicTp = basicTp;
+        data.put("Basic TP",df.format(tempBasicTp));
+        tempBasicTp+=seatingCapacity*tpPerPassenger;
         if(seatingCapacity>0 && tpPerPassenger>0)
             data.put("TP for seating capacity",df.format(seatingCapacity*tpPerPassenger));
         if(paToDriver>0)
@@ -144,23 +145,23 @@ public class TpPremium implements Serializable {
             data.put("PA to unnamed passenger",df.format(paToUnnamedPassenger));
         if(llToDriver>0)
             data.put("LL to paid driver",df.format(llToDriver));
-        basicTp+=paToDriver+llToDriver+paToUnnamedPassenger;
+        tempBasicTp+=paToDriver+llToDriver+paToUnnamedPassenger;
         if(lessTppd) {
             if(vehicle!=null)
                 tppdCost=Constants.getTppd(vehicle);
             data.put("Restricted tppd",Double.toString(-tppdCost));
-            basicTp -= tppdCost;
+            tempBasicTp -= tppdCost;
         }
         if(isCng) {
             data.put("CNG",Double.toString(cngCost));
-            basicTp -= cngCost;
+            tempBasicTp -= cngCost;
         }
         if(nfpp>0) {
-            basicTp += nfpp * nfppCost;
+            tempBasicTp += nfpp * nfppCost;
             data.put("NFPP",Double.toString(nfpp*nfppCost));
         }
-        data.put("Final TP Premium(A)",Double.toString(Math.round(basicTp)));
-        return basicTp;
+        data.put("Final TP Premium(A)",Double.toString(Math.round(tempBasicTp)));
+        return tempBasicTp;
     }
     LinkedHashMap<String,String> getMap()
     {

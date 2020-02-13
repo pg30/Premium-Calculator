@@ -215,13 +215,15 @@ public class OdPremium implements Serializable {
         double zerodepprem = idv*(zeroDepRate/100);
         if(zerodepprem>0)
             data.put("Zerodep",df.format(zerodepprem));
-        elec = elec*(elecRate/100);
-        if(elec>0)
-            data.put("Electrical Accessories",df.format(elec));
-        nonelec = nonelec*(rate/100);
-        if(nonelec>0)
-            data.put("Non-Electrical Accessories",df.format(nonelec));
-        basicOD+=elec+nonelec;
+        double tempElec=0;
+        tempElec = elec*(elecRate/100);
+        if(tempElec>0)
+            data.put("Electrical Accessories",df.format(tempElec));
+        double tempNonElec=0;
+        tempNonElec = nonelec*(rate/100);
+        if(tempNonElec>0)
+            data.put("Non-Electrical Accessories",df.format(tempNonElec));
+        basicOD+=tempElec+tempNonElec;
         if(wantImt23)
         {
             data.put("IMT-23",df.format((basicOD*(imt23Rate/100))));
