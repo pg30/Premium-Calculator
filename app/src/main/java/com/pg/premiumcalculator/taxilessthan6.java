@@ -166,6 +166,8 @@ public class taxilessthan6 extends menu implements AdapterView.OnItemSelectedLis
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         idv = ParseDouble(idv_edit.getText().toString());
         basicVehicleDetails.setIdv(idv);
         odPremium.setIdv(idv);

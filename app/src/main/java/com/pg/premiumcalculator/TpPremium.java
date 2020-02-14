@@ -154,7 +154,7 @@ public class TpPremium implements Serializable {
         }
         if(isCng) {
             data.put("CNG",Double.toString(cngCost));
-            tempBasicTp -= cngCost;
+            tempBasicTp += cngCost;
         }
         if(nfpp>0) {
             tempBasicTp += nfpp * nfppCost;

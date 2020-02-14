@@ -1,5 +1,7 @@
 package com.pg.premiumcalculator;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
@@ -191,6 +193,7 @@ public class OdPremium implements Serializable {
             data.put("Final OD Premium(B)",df.format(basicOD));
             return basicOD;
         }
+        Log.d("ODPREMIUM",basicOD+"");
         if(isCng)
         {
             //inbuilt
@@ -198,19 +201,23 @@ public class OdPremium implements Serializable {
             {
                 data.put("Inbuilt CNG",df.format(((inbuiltCngRate/100)*basicOD)));
                 basicOD+=(inbuiltCngRate/100)*basicOD;
+                Log.d("ODPREMIUM",basicOD+"");
             }
             //external
             else if(extCngKit>0)
             {
                 data.put("External CNG",df.format(((externalCngRate/100)*extCngKit)));
-                if(vehicle!=Vehicle.PRIVATECAR)
-                    basicOD+=(externalCngRate/100)*extCngKit;
+                if(vehicle!=Vehicle.PRIVATECAR) {
+                    basicOD += (externalCngRate / 100) * extCngKit;
+                    Log.d("ODPREMIUM",basicOD+"");
+                }
             }
         }
         if(gvw-12000>0)
         {
             basicOD+=((gvw-12000)/100)*per100Kg;
             data.put("Extra cost per 100kg",df.format((((gvw-12000)/100)*per100Kg)));
+            Log.d("ODPREMIUM",basicOD+"");
         }
         double zerodepprem = idv*(zeroDepRate/100);
         if(zerodepprem>0)
@@ -224,37 +231,46 @@ public class OdPremium implements Serializable {
         if(tempNonElec>0)
             data.put("Non-Electrical Accessories",df.format(tempNonElec));
         basicOD+=tempElec+tempNonElec;
+        Log.d("ODPREMIUM",basicOD+"");
         if(wantImt23)
         {
             data.put("IMT-23",df.format((basicOD*(imt23Rate/100))));
             basicOD+=basicOD*(imt23Rate/100);
+            Log.d("ODPREMIUM",basicOD+"");
         }
         if(wantOverturning)
         {
             data.put("Overturning",df.format(((overturningRate/100)*idv)));
             basicOD+=(overturningRate/100)*idv;
+            Log.d("ODPREMIUM",basicOD+"");
         }
         double ncbDiscPrem = basicOD*(ncb/100);
         data.put("NCB",df.format(ncbDiscPrem));
         basicOD-=ncbDiscPrem;
+        Log.d("ODPREMIUM",basicOD+"");
         double odDiscPrem = basicOD*(odDisc/100);
         data.put("OD Discount",df.format(odDiscPrem));
         basicOD-=odDiscPrem;
+        Log.d("ODPREMIUM",basicOD+"");
         basicOD+=zerodepprem;
+        Log.d("ODPREMIUM",basicOD+"");
         if(wantGeoExt)
         {
             data.put("Geographical Extension",Double.toString(geoExt));
             basicOD+=geoExt;
+            Log.d("ODPREMIUM",basicOD+"");
         }
         if(isCng)
         {
             //external
             if(extCngKit>0 && vehicle==Vehicle.PRIVATECAR)
             {
-                basicOD+=externalCngRate*extCngKit;
+                basicOD+=(externalCngRate/100)*extCngKit;
+                Log.d("ODPREMIUM",basicOD+"");
             }
         }
         data.put("Final OD Premium(B)",Double.toString(Math.round(basicOD)));
+        Log.d("ODPREMIUM",basicOD+"");
         return basicOD;
     }
     LinkedHashMap<String,String> getMap()

@@ -153,6 +153,8 @@ public class schoolbus extends menu implements AdapterView.OnItemSelectedListene
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         idv = ParseDouble(idv_edit.getText().toString());
         basicVehicleDetails.setIdv(idv);
         odPremium.setIdv(idv);

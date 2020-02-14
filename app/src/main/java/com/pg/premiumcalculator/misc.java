@@ -171,6 +171,8 @@ public class misc extends menu implements AdapterView.OnItemSelectedListener {
         odPremium.setVehicle(currVehicle);
         basicVehicleDetails.setVehicleType(miscType);
         basicVehicleDetails.setVehicleUse(type);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         idv = ParseDouble(idv_edit.getText().toString());
         basicVehicleDetails.setIdv(idv);
         odPremium.setIdv(idv);

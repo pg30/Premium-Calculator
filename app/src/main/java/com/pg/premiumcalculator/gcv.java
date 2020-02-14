@@ -172,6 +172,8 @@ public class gcv extends menu implements AdapterView.OnItemSelectedListener{
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         if(public_carrier.isChecked())
             basicVehicleDetails.setCarrier(Carrier.PUBLIC);
         else if(private_carrier.isChecked())

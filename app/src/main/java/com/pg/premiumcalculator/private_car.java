@@ -162,6 +162,8 @@ public class private_car extends menu implements AdapterView.OnItemSelectedListe
         tpPremium.init();
         basicVehicleDetails.setZone(zone);
         odPremium.setNcb(ncb);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);

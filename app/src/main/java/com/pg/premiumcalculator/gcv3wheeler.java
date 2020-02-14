@@ -165,6 +165,8 @@ public class gcv3wheeler extends menu implements AdapterView.OnItemSelectedListe
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         if(public_carrier.isChecked())
             basicVehicleDetails.setCarrier(Carrier.PUBLIC);
         else if(private_carrier.isChecked())

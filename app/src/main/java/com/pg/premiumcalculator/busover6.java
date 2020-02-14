@@ -155,6 +155,8 @@ public class busover6 extends menu implements AdapterView.OnItemSelectedListener
         basicVehicleDetails.setVehicle(currVehicle);
         tpPremium.setVehicle(currVehicle);
         odPremium.setVehicle(currVehicle);
+        extcngkit = ParseDouble(extcngkit_edit.getText().toString());
+        odPremium.setExtCngKit(extcngkit);
         Log.d("debug","button clicked");
         idv = ParseDouble(idv_edit.getText().toString());
         basicVehicleDetails.setIdv(idv);
