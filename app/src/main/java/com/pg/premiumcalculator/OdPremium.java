@@ -221,7 +221,7 @@ public class OdPremium implements Serializable {
         }
         double zerodepprem = idv*(zeroDepRate/100);
         if(zerodepprem>0)
-            data.put("Zerodep",df.format(zerodepprem));
+            data.put("Zerodep@"+zeroDepRate+"%",df.format(zerodepprem));
         double tempElec=0;
         tempElec = elec*(elecRate/100);
         if(tempElec>0)
@@ -245,11 +245,11 @@ public class OdPremium implements Serializable {
             Log.d("ODPREMIUM",basicOD+"");
         }
         double ncbDiscPrem = basicOD*(ncb/100);
-        data.put("NCB",df.format(ncbDiscPrem));
+        data.put("NCB@"+ncb+"%",df.format(ncbDiscPrem));
         basicOD-=ncbDiscPrem;
         Log.d("ODPREMIUM",basicOD+"");
         double odDiscPrem = basicOD*(odDisc/100);
-        data.put("OD Discount",df.format(odDiscPrem));
+        data.put("OD Discount@"+odDisc+"%",df.format(odDiscPrem));
         basicOD-=odDiscPrem;
         Log.d("ODPREMIUM",basicOD+"");
         basicOD+=zerodepprem;
