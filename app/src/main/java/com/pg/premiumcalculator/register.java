@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -175,12 +176,15 @@ public class register extends AppCompatActivity {
     }
     void addDataToUser(String userID)
     {
+        String android_id;
+        android_id= Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         DocumentReference documentReference = fstore.collection("users").document(userID);
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
         user.put("email", email);
         user.put("phone", phone);
-        user.put("signIn", true);
+        user.put("deviceid",android_id);
         user.put("isSubscribed", "NO");
         user.put("registrationDate", getCurrentDate());
 

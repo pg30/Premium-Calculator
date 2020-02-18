@@ -3,6 +3,9 @@ package com.pg.premiumcalculator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,15 +65,40 @@ public class menu extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         String userID = null;
+        if(!haveNetwork())
+        {
+            makeToast(getApplicationContext(),"Internet Connection not available",1);
+            return;
+        }
         if(mFirebaseAuth.getCurrentUser()!=null) {
             userID = mFirebaseAuth.getCurrentUser().getUid();
             changeSignInStatus(userID);
         }
     }
+    boolean haveNetwork()
+    {
+        boolean have_wifi = false,have_mobile = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+        for(NetworkInfo info:networkInfos)
+        {
+            if(info.getTypeName().equalsIgnoreCase("WIFI"))
+            {
+                if(info.isConnected())
+                    have_wifi = true;
+            }
+            if(info.getTypeName().equalsIgnoreCase("MOBILE"))
+            {
+                if(info.isConnected())
+                    have_mobile = true;
+            }
+        }
+        return (have_mobile||have_wifi);
+    }
     void changeSignInStatus(String userID)
     {
         Log.d("Auth",userID+"");
-        firebaseFirestore.collection("users").document(userID).update("signIn",false).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firebaseFirestore.collection("users").document(userID).update("deviceid",null).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())

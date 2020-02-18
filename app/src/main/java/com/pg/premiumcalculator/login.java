@@ -3,9 +3,11 @@ package com.pg.premiumcalculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +38,10 @@ public class login extends AppCompatActivity {
     Button login_btn;
     ProgressBar progressBar;
 
-    String email,password,userID = null;
+    String email
+            ,password,
+            userID = null,
+            android_id=null;
 
     FirebaseAuth mFireBaseAuth;
     FirebaseFirestore firebaseFirestore;
@@ -79,7 +84,7 @@ public class login extends AppCompatActivity {
     }
     void setUserData(String userID)
     {
-        firebaseFirestore.collection("users").document(userID).update("signIn",true).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firebaseFirestore.collection("users").document(userID).update("deviceid",android_id).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
@@ -103,17 +108,28 @@ public class login extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful())
                 {
-                    boolean status = task.getResult().getBoolean("signIn");
-                    Log.d("Auth",status+"jhblbl");
-                    if(status == true)
+                    android_id= Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+                    String storedAndroidId = task.getResult().getString("deviceid");
+//                    boolean status = task.getResult().getBoolean("signIn");
+                    if(storedAndroidId!=null && !storedAndroidId.equalsIgnoreCase(android_id))
                     {
                         logout();
+                        Log.d("login",storedAndroidId+" "+android_id);
                         makeToast(getApplicationContext(),"You are already logged in on other device",Toast.LENGTH_LONG);
                         disableProgressBar();
                     }
                     else
                     {
-                        setUserData(userID);
+                        if(storedAndroidId!=null && storedAndroidId.equalsIgnoreCase(android_id))
+                        {
+                            makeToast(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG);
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        }
+                        else if(storedAndroidId==null)
+                        {
+                            setUserData(userID);
+                        }
                     }
                 }
                 else

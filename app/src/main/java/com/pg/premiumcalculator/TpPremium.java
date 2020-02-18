@@ -160,7 +160,7 @@ public class TpPremium implements Serializable {
             tempBasicTp += nfpp * nfppCost;
             data.put("NFPP",Double.toString(nfpp*nfppCost));
         }
-        data.put("Final TP Premium(A)",Double.toString(Math.round(tempBasicTp)));
+        data.put("Final TP Premium(B)",Double.toString(Math.round(tempBasicTp)));
         return tempBasicTp;
     }
     LinkedHashMap<String,String> getMap()

@@ -269,7 +269,7 @@ public class OdPremium implements Serializable {
                 Log.d("ODPREMIUM",basicOD+"");
             }
         }
-        data.put("Final OD Premium(B)",Double.toString(Math.round(basicOD)));
+        data.put("Final OD Premium(A)",Double.toString(Math.round(basicOD)));
         Log.d("ODPREMIUM",basicOD+"");
         return basicOD;
     }

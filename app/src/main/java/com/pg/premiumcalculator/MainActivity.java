@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class MainActivity extends menu {
@@ -24,7 +26,6 @@ public class MainActivity extends menu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         getSupportActionBar().setTitle("Vehicles Category");
 
         checkPermission();
@@ -34,13 +35,13 @@ public class MainActivity extends menu {
 
         list.add(new Item(R.drawable.motorbike,"Two Wheeler"));
         list.add(new Item(R.drawable.car,"Private Car"));
-        list.add(new Item(R.drawable.truck,"Goods Carrying Vehicles"));
-        list.add(new Item(R.drawable.taxi,"Taxi upto 6 passengers"));
+        list.add(new Item(R.drawable.truck,"Goods Carrying"));
+        list.add(new Item(R.drawable.taxi,"Taxi upto 6 pass."));
         list.add(new Item(R.drawable.bus,"Bus"));
         list.add(new Item(R.drawable.schoolbus,"School Bus"));
         list.add(new Item(R.drawable.goods,"Three Wheeler GCV"));
         list.add(new Item(R.drawable.rickshaw,"Three Wheeler PCV"));
-        list.add(new Item(R.drawable.tractor,"Miscellaneous vehicle"));
+        list.add(new Item(R.drawable.tractor,"Miscellaneous"));
         homeView.setAdapter(adapter);
         homeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
