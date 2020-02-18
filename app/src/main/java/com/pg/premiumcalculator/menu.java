@@ -51,6 +51,9 @@ public class menu extends AppCompatActivity {
             case R.id.help:
                 viewHelp();
                 return true;
+            case R.id.share:
+                shareApp();
+                return true;
                 default:
                     return super.onOptionsItemSelected(item);
         }
@@ -58,6 +61,10 @@ public class menu extends AppCompatActivity {
     void viewHelp()
     {
         startActivity(new Intent(getApplicationContext(),helpandsupport.class));
+    }
+    void shareApp()
+    {
+        new Share().shareApp(getApplicationContext(),this);
     }
     void logout()
     {

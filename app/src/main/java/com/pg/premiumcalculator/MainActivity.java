@@ -27,7 +27,6 @@ public class MainActivity extends menu {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle("Vehicles Category");
-
         checkPermission();
 
         homeView = findViewById(R.id.homeview);
