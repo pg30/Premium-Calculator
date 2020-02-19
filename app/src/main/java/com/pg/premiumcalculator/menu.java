@@ -110,6 +110,10 @@ public class menu extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
+                    new PrefManager(getApplicationContext()).setName("Not Available");
+                    new PrefManager(getApplicationContext()).setEmail("Not Available");
+                    new PrefManager(getApplicationContext()).setPhone("Not Available");
+
                     makeToast(getApplicationContext(),"Logout Successfull.!",Toast.LENGTH_LONG);
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(getApplicationContext(),login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));

@@ -193,6 +193,10 @@ public class register extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
+                    new PrefManager(getApplicationContext()).setName(name);
+                    new PrefManager(getApplicationContext()).setEmail(email);
+                    new PrefManager(getApplicationContext()).setPhone(phone);
+
                     makeToast(getApplicationContext(),"Account Successfully Created.!",Toast.LENGTH_LONG);
                     startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 }

@@ -38,8 +38,10 @@ public class login extends AppCompatActivity {
     Button login_btn;
     ProgressBar progressBar;
 
-    String email
-            ,password,
+    String email,
+            name,
+            phone,
+            password,
             userID = null,
             android_id=null;
 
@@ -89,6 +91,9 @@ public class login extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
+                    new PrefManager(getApplicationContext()).setName(name);
+                    new PrefManager(getApplicationContext()).setEmail(email);
+                    new PrefManager(getApplicationContext()).setPhone(phone);
                     makeToast(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG);
                     startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
@@ -108,10 +113,11 @@ public class login extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful())
                 {
+                    name = task.getResult().getString("name");
+                    phone = task.getResult().getString("phone");
                     android_id= Settings.Secure.getString(getApplicationContext().getContentResolver(),
                             Settings.Secure.ANDROID_ID);
                     String storedAndroidId = task.getResult().getString("deviceid");
-//                    boolean status = task.getResult().getBoolean("signIn");
                     if(storedAndroidId!=null && !storedAndroidId.equalsIgnoreCase(android_id))
                     {
                         logout();
@@ -123,6 +129,9 @@ public class login extends AppCompatActivity {
                     {
                         if(storedAndroidId!=null && storedAndroidId.equalsIgnoreCase(android_id))
                         {
+                            new PrefManager(getApplicationContext()).setName(name);
+                            new PrefManager(getApplicationContext()).setEmail(email);
+                            new PrefManager(getApplicationContext()).setPhone(phone);
                             makeToast(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG);
                             startActivity(new Intent(getApplicationContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                         }

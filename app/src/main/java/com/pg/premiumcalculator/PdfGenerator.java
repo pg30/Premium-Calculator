@@ -39,7 +39,10 @@ public class PdfGenerator {
     String companyName="";
     private File pdfFile;
     private File docsFolder;
-    String pdfname="";
+    String pdfname="",
+            name,
+            email,
+            phone;
 
     public PdfGenerator(String companyName, String pdfname) {
         this.companyName = companyName;
@@ -63,6 +66,9 @@ public class PdfGenerator {
         }
         else
         {
+            name = new PrefManager(context).getName();
+            email = new PrefManager(context).getEmail();
+            phone = new PrefManager(context).getPhone();
             createPdf(basic,od,tp,total);
             new Share().shareFile(pdfFile,context,activity);
         }
@@ -98,10 +104,10 @@ public class PdfGenerator {
             try {
                 LineSeparator lineSeparator = new LineSeparator();
                 lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
-                Font h1_font = new Font(Font.FontFamily.TIMES_ROMAN, 23.0f, Font.UNDERLINE, BaseColor.BLACK);
-                Font h2_font = new Font(Font.FontFamily.TIMES_ROMAN, 20.0f, Font.NORMAL, BaseColor.BLACK);
-                Font bold_font = new Font(Font.FontFamily.TIMES_ROMAN, 13.0f, Font.BOLD, BaseColor.BLACK);
-                Font normal_font = new Font(Font.FontFamily.TIMES_ROMAN, 13.0f, Font.NORMAL, BaseColor.BLACK);
+                Font h1_font = new Font(Font.FontFamily.TIMES_ROMAN, 22.0f, Font.UNDERLINE, BaseColor.BLACK);
+                Font h2_font = new Font(Font.FontFamily.TIMES_ROMAN, 19.0f, Font.NORMAL, BaseColor.BLACK);
+                Font bold_font = new Font(Font.FontFamily.TIMES_ROMAN, 12.0f, Font.BOLD, BaseColor.BLACK);
+                Font normal_font = new Font(Font.FontFamily.TIMES_ROMAN, 12.0f, Font.NORMAL, BaseColor.BLACK);
                 document.add(new Chunk(lineSeparator));
 
                 //add heading
@@ -202,7 +208,6 @@ public class PdfGenerator {
 
                 premiumtable.setSpacingAfter(2f);
                 document.add(premiumtable);
-                document.add(new Paragraph("\n"));
 
                 Paragraph p1 = new Paragraph("Kindly pay Cheque/DD in favor of "+companyName, bold_font);
                 document.add(p1);
@@ -227,6 +232,11 @@ public class PdfGenerator {
 
                 Paragraph p3 = new Paragraph("Note: In case of any claim, NCB will be revised and hence Quotation is subject to change.", bold_font);
                 document.add(p3);
+                document.add(new Paragraph("\n"));
+
+                document.add(new Paragraph("Name: "+name));
+                document.add(new Paragraph("Email: "+email));
+                document.add(new Paragraph("Phone: "+phone));
             }
             catch (DocumentException de)
             {
@@ -244,6 +254,7 @@ public class PdfGenerator {
 
     void addCell(String str, PdfPTable table, Font f)
     {
+        Log.d("pdf",str);
         Phrase para = new Phrase(str,f);
         PdfPCell cell = new PdfPCell();
         cell.addElement(para);
