@@ -48,10 +48,10 @@ public class Share {
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Hey.! Checkout this awesome app");
             String shareMessage= "\nHey.!\n" +
-                    "This latest app enables you to calculate the insurance premium of every vehicle in real-time with updated rates and calculations along with your remuneration and the pdf format of quotation.\nDownload this app by clicking on the link below.\n";
-            shareMessage = shareMessage + Constants.appLink;
+                    "Checkout this new that app enables you to calculate the insurance premium of every vehicle in real-time with updated rates and calculations along with your remuneration and the pdf format of quotation.\n\nDownload this app by clicking on the link below.\n"+ Constants.appLink+"\n\nAlso do share it if you like it.!";
+//            shareMessage = shareMessage + Constants.appLink;
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-            activity.startActivity(Intent.createChooser(shareIntent, "choose one"));
+            activity.startActivity(Intent.createChooser(shareIntent, "Share App"));
         } catch(Exception e) {
             //e.toString();
         }
