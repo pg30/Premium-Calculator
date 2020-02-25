@@ -131,13 +131,15 @@ public class PdfGenerator {
                 basictable.setWidthPercentage(100);
                 float[] relativeWidths = new float[]{11f, 9f, 11f, 5f};
                 basictable.setWidths(relativeWidths);
-                Set<String> keys = basic.keySet();
-                for(String k:keys)
+                Set<String> keyss = basic.keySet();
+                for(String k:keyss)
                 {
                     String a=k,b=basic.get(k);
+                    Log.d("pdf basic",a+" "+b);
                     addCell(a, basictable, bold_font);
                     addCell(b, basictable, normal_font);
                 }
+                basictable.completeRow();
                 basictable.setSpacingAfter(2f);
                 document.add(basictable);
                 document.add(new Paragraph("\n"));
@@ -199,13 +201,13 @@ public class PdfGenerator {
 
                 addCellWithColSpan("  ", premiumtable, normal_font, 4);
 
-                keys = total.keySet();
-                for(String k:keys)
+                keyss = total.keySet();
+                for(String k:keyss)
                 {
                     addCellWithColSpan(k, premiumtable, bold_font, 2);
                     addCellWithColSpan(total.get(k), premiumtable, bold_font, 2);
                 }
-
+                premiumtable.completeRow();
                 premiumtable.setSpacingAfter(2f);
                 document.add(premiumtable);
 
@@ -227,6 +229,7 @@ public class PdfGenerator {
                 addCell("Previous Policy copy", doctable, normal_font);
                 addCell("2.", doctable, bold_font);
                 addCell("RC Copy", doctable, normal_font);
+                doctable.completeRow();
                 doctable.setSpacingAfter(2f);
                 document.add(doctable);
 
