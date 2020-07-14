@@ -85,6 +85,7 @@ public class PdfGenerator {
                 return false;
             }
         }
+        Log.d("debug","permission checked");
             return true;
     }
 
@@ -93,8 +94,12 @@ public class PdfGenerator {
         Document document = new Document(PageSize.A4);
         try {
             docsFolder = new File(Environment.getExternalStorageDirectory() + "/Premium Quotations");
+            Log.d("debug",docsFolder.getAbsolutePath());
+            Log.d("debug",docsFolder.exists()+" "+docsFolder.canRead());
             if (!docsFolder.exists()) {
+                Log.d("debug","folder made");
                 docsFolder.mkdir();
+                Log.d("debug",docsFolder.exists()+" "+docsFolder.canRead());
             }
             pdfFile = new File(docsFolder.getAbsolutePath(), pdfname);
             OutputStream output = new FileOutputStream(pdfFile);

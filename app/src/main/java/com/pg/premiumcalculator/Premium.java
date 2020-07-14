@@ -40,7 +40,7 @@ public class Premium implements Serializable {
             double basicTP;
 //            basicTP=mrate.getTP(basicVehicleDetails.getVehicle(),basicVehicleDetails.getCarrier(),basicVehicleDetails.getGrossVehicleWeight());
             basicTP = tpPremium.getBasicTp();
-            gst = (finalPremium-basicTP)*(Constants.gstRate/100) + (basicTP)*(Constants.ExtragstRate/100);
+            gst = (finalPremium-basicTP+tpPremium.getTppdCost())*(Constants.gstRate/100) + (basicTP-tpPremium.getTppdCost())*(Constants.ExtragstRate/100);
             finalData.put("GST",df.format(gst));
             finalPremium+=gst;
             finalData.put("Total Premium(A+B)",Double.toString(Math.round(finalPremium)));

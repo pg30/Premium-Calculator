@@ -11,7 +11,7 @@ public class Constants {
     public static double ExtragstRate = 12;
     public static double inbuiltCngRate = 5;
     public static double externalCngRate = 4;
-    public static double overturningRate = 15;
+    public static double overturningRate = 0.5;
     public static String appLink = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
     public static int REQUEST_CODE_ASK_PERMISSIONS=111;
     public static double getTppd(Vehicle vehicle)

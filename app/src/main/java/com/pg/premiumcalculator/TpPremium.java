@@ -56,6 +56,10 @@ public class TpPremium implements Serializable {
         this.vehicle = vehicle;
     }
 
+    public double getTppdCost() {
+        return tppdCost;
+    }
+
     public boolean isLessTppd() {
         return lessTppd;
     }

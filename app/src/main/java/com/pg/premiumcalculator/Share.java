@@ -16,12 +16,14 @@ public class Share {
             mailText="Dear Sir/Madam,\n\n"+"As per our conversation, Please find the attachment of Quotation for vehicle. Kindly give us an appoinment for your further queries and kindly get back to us at the below mentioned contact.\n\n"+"Thanks,";
     void shareFile(File pdfFile, Context context,Activity activity)
     {
+        Log.d("debug","inside share file");
         Uri fileUri;
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         try {
             fileUri = FileProvider.getUriForFile(context, "com.pg.premiumcalculator.fileprovider", pdfFile);
             if(fileUri!=null)
             {
+                Log.d("debug","file Uri");
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 shareIntent.setType("application/pdf");
                 shareIntent.putExtra(Intent.EXTRA_STREAM,fileUri);

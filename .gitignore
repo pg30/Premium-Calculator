@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+firebase.json
+firestore.indexes.json
+firestore.rules
+user_data.json

@@ -232,16 +232,16 @@ public class OdPremium implements Serializable {
             data.put("Non-Electrical Accessories",df.format(tempNonElec));
         basicOD+=tempElec+tempNonElec;
         Log.d("ODPREMIUM",basicOD+"");
-        if(wantImt23)
-        {
-            data.put("IMT-23",df.format((basicOD*(imt23Rate/100))));
-            basicOD+=basicOD*(imt23Rate/100);
-            Log.d("ODPREMIUM",basicOD+"");
-        }
         if(wantOverturning)
         {
             data.put("Overturning",df.format(((overturningRate/100)*idv)));
             basicOD+=(overturningRate/100)*idv;
+            Log.d("ODPREMIUM",basicOD+"");
+        }
+        if(wantImt23)
+        {
+            data.put("IMT-23",df.format((basicOD*(imt23Rate/100))));
+            basicOD+=basicOD*(imt23Rate/100);
             Log.d("ODPREMIUM",basicOD+"");
         }
         double ncbDiscPrem = basicOD*(ncb/100);
