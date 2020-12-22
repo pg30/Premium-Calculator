@@ -1,10 +1,12 @@
 package com.pg.premiumcalculator;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -34,11 +36,11 @@ import java.util.Map;
 public class login extends AppCompatActivity {
 
     TextInputEditText email_edit,password_edit;
-    TextView register_txt;
+    TextView register_txt,password_txt;
     Button login_btn;
     ProgressBar progressBar;
 
-    String email,
+    String  email,
             name,
             phone,
             password,
@@ -69,18 +71,59 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getValuesFromEditText();
-                boolean ok = validate();
-                if(ok)
+                String ok = validate();
+                if(ok==null)
                 {
                     enableProgressBar();
                     attemptLogin();
                 }
-            }
+                else
+                    Toast.makeText(getApplicationContext(), ok, Toast.LENGTH_LONG).show();
+                }
         });
+
         register_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),register.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+
+        password_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText reset_mail = new EditText(v.getContext());
+                final AlertDialog.Builder password_reset_dialog = new AlertDialog.Builder(v.getContext());
+                password_reset_dialog.setTitle("Reset Password");
+                password_reset_dialog.setMessage("Enter your email to recieve reset password link");
+                password_reset_dialog.setView(reset_mail);
+
+                password_reset_dialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //extract the email and send reset link
+                        String email = reset_mail.getText().toString();
+                        mFireBaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(),"Reset Link sent to your email", Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),"Reset Link not sent. Error :"+e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+                password_reset_dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //close the dialog
+                    }
+                });
+                password_reset_dialog.show();
             }
         });
     }
@@ -179,12 +222,16 @@ public class login extends AppCompatActivity {
     {
         Toast.makeText(context,msg,length).show();
     }
-    boolean validate()
+    String validate()
     {
-        boolean ok = true;
+        String ok = "";
         Validation val = new Validation();
-        if(val.validateEmail(email)!=null || val.validatePassword(password)!=null)
-            ok = false;
+        if(val.validateEmail(email)!=null)
+            ok += val.validateEmail(email);
+        if(val.validatePassword(password)!=null)
+            ok += val.validatePassword(password);
+        if(ok.isEmpty())
+            return  null;
         return ok;
     }
     void findViews()
@@ -192,6 +239,7 @@ public class login extends AppCompatActivity {
         email_edit = (TextInputEditText) findViewById(R.id.email);
         password_edit = (TextInputEditText) findViewById(R.id.password);
         register_txt = (TextView) findViewById(R.id.login_txt);
+        password_txt = (TextView) findViewById(R.id.password_txt);
         login_btn = (Button) findViewById(R.id.register_btn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
